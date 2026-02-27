@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rminstr.instruments.communications &#8212; Rocky Mountain Instruments 0.6.6a3.dev2+ga2c84b576.d20260227 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../../_static/documentation_options.js?v=5f1640f5"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="rminstr.instruments.measurement_functionalities" href="../measurement_functionalities/index.html" />
+    <link rel="prev" title="rminstr.instruments.RS_ZVA67" href="../RS_ZVA67/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rminstr.instruments.communications">
+<span id="rminstr-instruments-communications"></span><h1>rminstr.instruments.communications<a class="headerlink" href="#module-rminstr.instruments.communications" title="Link to this heading">¶</a></h1>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.communications.InstrumentError" title="rminstr.instruments.communications.InstrumentError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InstrumentError</span></code></a></p></td>
+<td><p>InstrumentErrors are raised when an instrument is in an error state.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.communications.SettingError" title="rminstr.instruments.communications.SettingError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SettingError</span></code></a></p></td>
+<td><p>InstrumentErrors are raised when a bad seeting is passed.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.communications.Instrument" title="rminstr.instruments.communications.Instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Instrument</span></code></a></p></td>
+<td><p>Wrapper for pyvisa Resource objects. This class exists to standardize the interface of derived instruments.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.communications.TSPRunner" title="rminstr.instruments.communications.TSPRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TSPRunner</span></code></a></p></td>
+<td><p>Protocols for interacting with TSP enabled instruments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.communications.GPIBInterface" title="rminstr.instruments.communications.GPIBInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GPIBInterface</span></code></a></p></td>
+<td><p>Calorimeter-python GPIB Interface for group triggering.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.communications.get_bit" title="rminstr.instruments.communications.get_bit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_bit</span></code></a>(x, bit)</p></td>
+<td><p>Return a specific bit in x. Intended to make the status byte easier to read.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.communications.do_after_group_trigger" title="rminstr.instruments.communications.do_after_group_trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">do_after_group_trigger</span></code></a>(*instruments)</p></td>
+<td><p>Call to have instruments perform post triggering commands.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.communications.ext_trigger" title="rminstr.instruments.communications.ext_trigger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ext_trigger</span></code></a>(self, *instruments)</p></td>
+<td><p>Call when an external trigger occurs so that the state model and other things can be updated.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">Instrument</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_resource</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Wrapper for pyvisa Resource objects. This class exists to standardize the interface of derived instruments.</p>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>visa_resource<span class="classifier">visa.Resource</span></dt><dd><p>Pyvisa resource object of the connected instrument.</p>
+</dd>
+<dt>time_zero<span class="classifier">float</span></dt><dd><p>Absolute time for relative timestamps.</p>
+</dd>
+</dl>
+<p>Initiate the instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>visa_resource</strong><span class="classifier">visa.Resources</span></dt><dd><p>The pyvisa resource.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.visa_resource">
+<span class="sig-name descname"><span class="pre">visa_resource</span></span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.visa_resource" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.instruments.communications.Instrument.time_zero" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.write" title="Link to this definition">¶</a></dt>
+<dd><p>Shortened version of self.visa_resource.write(txt).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>txt</strong><span class="classifier">str</span></dt><dd><p>Text to write.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.read_stb">
+<span class="sig-name descname"><span class="pre">read_stb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_attempts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.read_stb" title="Link to this definition">¶</a></dt>
+<dd><p>Shortened version of self.visa_resource.read_stb().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>num_attempts</strong><span class="classifier">int, optional</span></dt><dd><p>Number of attempts for reading the status bit if there is an error.
+The default is 3.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>The status_byte.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.read" title="Link to this definition">¶</a></dt>
+<dd><p>Shortened version of self.visa_resource.read().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Result of self.visa_resource.read().</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.query">
+<span class="sig-name descname"><span class="pre">query</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.query" title="Link to this definition">¶</a></dt>
+<dd><p>Shortened version of self.visa_resource.query().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>txt</strong><span class="classifier">str</span></dt><dd><p>The text to query.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Result of self.visa_resource.query().</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.read_bytes">
+<span class="sig-name descname"><span class="pre">read_bytes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.read_bytes" title="Link to this definition">¶</a></dt>
+<dd><p>Shortened version of self.visa_resource.read_bytes(n).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>Number of bytes to read</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Result of self.visa_resource.read_bytes(n)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.set_time_zero">
+<span class="sig-name descname"><span class="pre">set_time_zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_zero</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.set_time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>Set time zero for relative timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_zero</strong><span class="classifier">float, optional</span></dt><dd><p>Time zero for relative timestamps
+if None, use the result of time.time().
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.clear_output">
+<span class="sig-name descname"><span class="pre">clear_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.clear_output" title="Link to this definition">¶</a></dt>
+<dd><p>Clear the output buffer on the instrument connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.get_relative_time">
+<span class="sig-name descname"><span class="pre">get_relative_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.get_relative_time" title="Link to this definition">¶</a></dt>
+<dd><p>Get the relataive time since instantiation.</p>
+<p>Use for making timestamps. Returns the result of
+time.time() - time_zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>float</dt><dd><p>Time relative to self.time_zero</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get instrument metadata you may want to keep track of.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict</dt><dd><p>Keys: ex. “GPIB address”
+Values: ex. 11</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.raise_errors">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">raise_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.raise_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Query the instrument status.</p>
+<p>Query the status of the instrument. If there are errors, raise them as Python errors.
+Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.Instrument.get_errors">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.Instrument.get_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Query the instrument errors.</p>
+<p>Query the status of the instrument. Returns errors as a string.
+Abstract method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.get_bit">
+<span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">get_bit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.get_bit" title="Link to this definition">¶</a></dt>
+<dd><p>Return a specific bit in x. Intended to make the status byte easier to read.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">int</span></dt><dd><p>Value to get bit from</p>
+</dd>
+<dt><strong>bit</strong><span class="classifier">int</span></dt><dd><p>A power of 2: 1, 2, 4, 8, 16, 32, 64, 128
+I.E. the 5th bit would be 2^5 = 32</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>True if the bit is 1, False otherwise</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.InstrumentError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">InstrumentError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.InstrumentError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>InstrumentErrors are raised when an instrument is in an error state.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.SettingError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">SettingError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.SettingError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>InstrumentErrors are raised when a bad seeting is passed.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">TSPRunner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_resource</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.instruments.communications.Instrument" title="rminstr.instruments.communications.Instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.communications.Instrument</span></code></a></p>
+<p>Protocols for interacting with TSP enabled instruments.</p>
+<p>The TSPRunner is a communication class that inherits from instrument, the more
+fundemental communication object. It is design to handle communication over pyvisa
+with instruments that are tsp enabled, and expect tsp langauage commands (Lua).</p>
+<section id="id1">
+<h3>Attributes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>timeout<span class="classifier">float</span></dt><dd><p>Seconds for timeout when trying to read off data.</p>
+</dd>
+<dt>stb_reg<span class="classifier">dict</span></dt><dd><p>Dictionary of status byte bit places.</p>
+</dd>
+<dt>termination_str<span class="classifier">str</span></dt><dd><p>Termination string that is sent at the end of run scripts to signal its end.</p>
+</dd>
+<dt>busy<span class="classifier">bool</span></dt><dd><p>If True, it means that the instrument is running a tsp script, trying to command
+it at that moment will raise an error.</p>
+</dd>
+<dt>busy_count<span class="classifier">int</span></dt><dd><p>Counter for busy checks, used in some methods for debugging.</p>
+</dd>
+<dt>logs<span class="classifier">bool</span></dt><dd><p>When True, the class will print logs of commands, states, and other
+debugging information to the console.</p>
+</dd>
+<dt>last_scr<span class="classifier">str</span></dt><dd><p>String of the last tsp script that was commmanded to run through run_script.</p>
+</dd>
+</dl>
+<p>Initialize a tsp instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>visa_resource</strong><span class="classifier">visa.Resource</span></dt><dd><p>Pyvisa resource that is the tsp enabled instrument.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.info_dict">
+<span class="sig-name descname"><span class="pre">info_dict</span></span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.info_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.timeout">
+<span class="sig-name descname"><span class="pre">timeout</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.timeout" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.stb_reg">
+<span class="sig-name descname"><span class="pre">stb_reg</span></span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.stb_reg" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.termination_str">
+<span class="sig-name descname"><span class="pre">termination_str</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'script_complete'</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.termination_str" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.busy">
+<span class="sig-name descname"><span class="pre">busy</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.busy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.busy_count">
+<span class="sig-name descname"><span class="pre">busy_count</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.busy_count" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.logs">
+<span class="sig-name descname"><span class="pre">logs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.logs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.last_scr">
+<span class="sig-name descname"><span class="pre">last_scr</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.last_scr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.get_info">
+<span class="sig-name descname"><span class="pre">get_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.get_info" title="Link to this definition">¶</a></dt>
+<dd><p>Get machine info.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict</dt><dd><p>instrument information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.raise_errors">
+<span class="sig-name descname"><span class="pre">raise_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.raise_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Raise an error if error bit is high on instrument.</p>
+<p>Needs to be reworked to actually get the error message,
+TSP scripts block sending commands for error information, need to work
+out a protocl that accounts for this. Currently, this will just raise
+an error, telling you to check the instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Error if the error bit is high.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.get_output_bit">
+<span class="sig-name descname"><span class="pre">get_output_bit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.get_output_bit" title="Link to this definition">¶</a></dt>
+<dd><p>Check a bit in the status byte register.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bit</strong><span class="classifier">int</span></dt><dd><p>Bit placement you want to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>Returns True if bit is high. False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.tsp_trace">
+<span class="sig-name descname"><span class="pre">tsp_trace</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.tsp_trace" title="Link to this definition">¶</a></dt>
+<dd><p>Print the status of the TSPRunner instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.check_busy">
+<span class="sig-name descname"><span class="pre">check_busy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">showGarbage</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.check_busy" title="Link to this definition">¶</a></dt>
+<dd><p>Check if the instrument is busy running a TSP script.</p>
+<p>Checks if the instrument is busy by checking for termination strings,
+and applying a zero order hold where the termination string sets the status False,
+not busy, and sending a run script command sets the status True, busy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>showGarbage</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, logs information about the method. The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>True if busy, False if not.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.check_error_bit">
+<span class="sig-name descname"><span class="pre">check_error_bit</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.check_error_bit" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a status byte error if the error bit is high.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>StatusByteError</dt><dd><p>Error if the error bit in the status byte is high.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.wait">
+<span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.wait" title="Link to this definition">¶</a></dt>
+<dd><p>Wait until not busy, raise error if takes longer than timeout seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timeout</strong><span class="classifier">float</span></dt><dd><p>Time to wait before raising an error.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>SMUTimeoutError</dt><dd><p>Error if the SMU is busy for longer than the timeout amount.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.flush_readout">
+<span class="sig-name descname"><span class="pre">flush_readout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.flush_readout" title="Link to this definition">¶</a></dt>
+<dd><p>Flushes the output buffer of the tsp enabled instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.get_errors">
+<span class="sig-name descname"><span class="pre">get_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.get_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Either prints outs instrument events or raises and error if the event is an error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Exception</dt><dd><p>Error if the SMU shows an error in its events.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.assign">
+<span class="sig-name descname"><span class="pre">assign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">varname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.assign" title="Link to this definition">¶</a></dt>
+<dd><p>Assign a variable to the TSP instruments global variable space.</p>
+<p>Assigns a variable to the global namespace of the instrument. val is cast
+as str(variable). If the tsp namespace variable is being assign a string,
+enclose in quationtion marks. eg. val = “‘string’”. This is not the best
+and could be reworked to account for more data types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>varname</strong><span class="classifier">str</span></dt><dd><p>Name of the variable that will be used in the tsp instruments namespace.</p>
+</dd>
+<dt><strong>val</strong><span class="classifier">float or int</span></dt><dd><p>The value to assign.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.print_number">
+<span class="sig-name descname"><span class="pre">print_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">varname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.print_number" title="Link to this definition">¶</a></dt>
+<dd><p>Command the TSP instument to print a number from its namespace.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>varname</strong><span class="classifier">str</span></dt><dd><p>String of tsp namespace variable.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.query_print">
+<span class="sig-name descname"><span class="pre">query_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.query_print" title="Link to this definition">¶</a></dt>
+<dd><p>Query the instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>msg</strong><span class="classifier">str</span></dt><dd><p>String of message type to have it print.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>str</dt><dd><p>Message query.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.run_script">
+<span class="sig-name descname"><span class="pre">run_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scriptVar</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.run_script" title="Link to this definition">¶</a></dt>
+<dd><p>Run a TSP script stored on the instruments memory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>scriptVar</strong><span class="classifier">str</span></dt><dd><p>String of script name on instruments non-volatile memory.</p>
+</dd>
+<dt><strong>force</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, will by-pass the busy checks. The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>BusyError</dt><dd><p>If force is False and instrument is busy while trying to be commanded,
+this will be raised.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.read_buffer">
+<span class="sig-name descname"><span class="pre">read_buffer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deleteBuffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.read_buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Read data from a data buffer of the TSP instrument.</p>
+<p>This is the general purpose function for reading data off the instruments
+memory buffer. This could be better generalized to usable for buffers with different names,
+and for getting different types of data from the buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>deleteBuffer</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, read buffer will deallocate the buffer from the instruments
+memory after the data has been read. The default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary of values from instrument. They are ‘time’, ‘measure’, ‘source.’</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>BusyError</dt><dd><p>If instrument is busy when asking for data.</p>
+</dd>
+<dt>SMUTimeoutError</dt><dd><p>If instrument isn’t busy, but a timeout occured while trying to download the data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.TSPRunner.load_script">
+<span class="sig-name descname"><span class="pre">load_script</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">script_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.TSPRunner.load_script" title="Link to this definition">¶</a></dt>
+<dd><p>Load a tsp project saved in the package’s TSP directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>project_name</strong><span class="classifier">str</span></dt><dd><p>The name of the project, directory name in instruments//TSP.</p>
+</dd>
+<dt><strong>script_name</strong><span class="classifier">str</span></dt><dd><p>The name to save the script as on the tsp instrument memory.</p>
+</dd>
+<dt><strong>file_names</strong><span class="classifier">list [str]</span></dt><dd><p>List of files in the project, in order to be loaded onto the tsp
+instrument.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.do_after_group_trigger">
+<span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">do_after_group_trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.do_after_group_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Call to have instruments perform post triggering commands.</p>
+<p>Will call each instruments do_after_group_trigger() method,
+as well as reset measurement start time, if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*instruments</strong><span class="classifier">instruments.communications.instrument</span></dt><dd><p>List of instruments to perform the post triggering commands on.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>Trigger time, from time.time() at the beginning of this method.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.ext_trigger">
+<span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">ext_trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.ext_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Call when an external trigger occurs so that the state model and other things can be updated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*instruments</strong></dt><dd><p>List of instruments to perform the external trigger on.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.GPIBInterface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.communications.</span></span><span class="sig-name descname"><span class="pre">GPIBInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.GPIBInterface" title="Link to this definition">¶</a></dt>
+<dd><p>Calorimeter-python GPIB Interface for group triggering.</p>
+<p>This is a wrapper for the pyvisa interface, and handles state model
+management within calorimeter-python objects.</p>
+<section id="id2">
+<h3>Attributes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>interface<span class="classifier">visa.Resource</span></dt><dd><p>GPIB pyvisa resource</p>
+</dd>
+</dl>
+<p>Initialize the interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>interface_address</strong><span class="classifier">str</span></dt><dd><p>GPIB interface of form “GPIBX::INTFC”.</p>
+</dd>
+<dt><strong>resource_manager</strong><span class="classifier">_visa.ResourceManager, optional</span></dt><dd><p>Resource manager to instantiate interface with. If none provided,
+a manager will be instantiated. The default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.GPIBInterface.interface">
+<span class="sig-name descname"><span class="pre">interface</span></span><a class="headerlink" href="#rminstr.instruments.communications.GPIBInterface.interface" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.GPIBInterface.group_trigger">
+<span class="sig-name descname"><span class="pre">group_trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rminstr.instruments.communications.Instrument" title="rminstr.instruments.communications.Instrument"><span class="pre">rminstr.instruments.communications.Instrument</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.GPIBInterface.group_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Send a group-execute-trigger (GET) signal to all instruments.</p>
+<p>Instruments being triggered should all be positional arguments. Non
+GPIB instruments will have their visa_resource.assert_trigger() method
+called immediately following the GET command, and a warning will be
+raised to the user.</p>
+<p>Instrument classes that require additional commands/logic to manage
+their state models following a group_trigger command are expected to
+have a “do_after_group_trigger()” class instance
+method that takes no arguments. Any
+instrument class with this method will have it called immediately
+following the GET.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*instruments</strong><span class="classifier">instruments.communications.instrument</span></dt><dd><p>Positional arguments all calorimeter-python instrument objects.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>Clock time at do_after_group_trigger() time. Should be very close to GET signal.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.communications.GPIBInterface.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.communications.GPIBInterface.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close the instrument.</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">rminstr</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../data_structures/index.html">rminstr.data_structures</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">rminstr.instruments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utilities/index.html">rminstr.utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/rminstr/instruments/communications/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="index.html">v0.6.5</a></li>
+  <li><a href="../../../../../development/index.html">development</a></li>
+  <li><a href="../../../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/rminstr/instruments/communications/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

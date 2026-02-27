@@ -1,0 +1,1145 @@
+rminstr.instruments.measurement_functionalities
+===============================================
+
+.. py:module:: rminstr.instruments.measurement_functionalities
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/rminstr/instruments/measurement_functionalities/common_behaviours/index
+   /autoapi/rminstr/instruments/measurement_functionalities/state_models/index
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   rminstr.instruments.measurement_functionalities.VNAParamError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.measurement_functionalities.SetupOnly
+   rminstr.instruments.measurement_functionalities.Triggerable
+   rminstr.instruments.measurement_functionalities.ABC_Ammeter
+   rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter
+   rminstr.instruments.measurement_functionalities.ABC_SignalGenerator
+   rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator
+   rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep
+   rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator
+   rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator
+   rminstr.instruments.measurement_functionalities.ABC_Voltmeter
+   rminstr.instruments.measurement_functionalities.ABC_TemperatureController
+   rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger
+   rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter
+   rminstr.instruments.measurement_functionalities.ABC_VNA
+
+
+Package Contents
+----------------
+
+.. py:class:: SetupOnly(log_path: str = None)
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   
+   A state model of an instrument that can only call setup commands.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **states** : list(str)
+           List of possible states for the machine to be in.
+
+       **state** : str
+           Current state of the machine.
+
+       **default_setup_settings** : dict
+           Dictionary of the default setup values. Only runs in the initial_setup function.
+           This is defined in each child class.
+
+       **initial_setup_settings** : dict
+           Dictionary of most recent initial_setup arguments.
+
+       **setup_settings** : dict
+           Dictionary of most recent setup arguments.
+
+       **info_dict** : dict
+           Dictionary of information about the instrument.
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: states
+      :value: ('uninit', 'init', 'unarmed')
+
+
+
+   .. py:attribute:: default_setup_settings
+      :value: None
+
+
+
+   .. py:attribute:: initial_setup_settings
+
+
+   .. py:attribute:: setup_settings
+
+
+   .. py:property:: state
+
+      
+      State attribute, reflects current position in state model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:method:: close()
+
+      
+      Close the instrument.
+
+      Good to call if the kernel will continue running after use.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: initial_setup(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Run the initial setup of the instrument.
+
+      This function is defined in the child classes.
+      Keyword arguments passed in that are not part of the header are passed to the instrument
+      as a raw command.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the instrument should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Run the setup function of the instrument.
+
+      Defined mainly in the child classes.
+      Keyword arguments passed in that are not part of the header are passed to the instrument
+      as a raw command.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the instrument should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Triggerable(log_path: str = None)
+
+   Bases: :py:obj:`SetupOnly`, :py:obj:`abc.ABC`
+
+
+   
+   A state model of an instrument that can be armed and triggered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **arm_settings: dict**
+           Dictionary of most recent arm arguments
+
+       **trigger_settings: dict**
+           Dictionary of most recent trigger arguments
+
+       **fetch_data_settings: dict**
+           Dictionary of most recent fetch_data arguments
+
+       **meas_start_time: float**
+           Absolute time used for calculating measurement start times
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: states
+
+
+   .. py:attribute:: arm_settings
+
+
+   .. py:attribute:: trigger_settings
+
+
+   .. py:attribute:: fetch_data_settings
+
+
+   .. py:attribute:: meas_start_time
+      :value: 0
+
+
+
+   .. py:method:: wait_until_data_available(timeout: float = None)
+
+      
+      Wait until the state attribute is data_available.
+
+      Raise an error after a timeout number of seconds if data_available
+      is not detected.
+
+      :Parameters:
+
+          **timeout** : float, optional
+              Seconds to wait before raising an error. If None, check
+              settings for "timeout". If timeout is not in settings,
+              default to 2 seconds.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              If timeout occurs waiting for data.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that define the arming of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the arm function should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that define the triggering of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the arm trigger should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that definef fetching_data of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the fetch_data function should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Perform operations immediatley after a grouptrigger is called.
+
+      This function should take not arguments. Don't override if nothing is
+      required for the specific instrument.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ABC_Ammeter(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a ammeter as a state machine.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:class:: ABC_DCSubPowerMeter(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a DC Substituted Power Meter as a state machine.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:method:: close()
+
+      
+      Close a dcsub power meter safely, should turn off the source.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ABC_SignalGenerator(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.SetupOnly`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a signal generator as a SetupOnly state machine.
+
+   The class tracks state of instrument, and automatically stores settings
+   when initialized and when setup is called.
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:method:: close()
+
+      
+      Turn of a SignalGenerator on close.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ABC_ArmedSignalGenerator(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of an signal generator as a Triggerable state machine.
+
+   The class tracks state of instrument, and automatically stores settings
+   when initialized and when setup is called.
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:class:: ABC_SMUSourceSweep(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of an SMU that can sweep between a list of source values.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **wiring_congfigurations: tuple(str)**
+           Possible wiring options expected of an SMU. Use these as naming conventions for establishing
+           the wiring setup on initializtion
+
+       **source_measure_configurations: tuple(str)**
+           Possible source-measure configurations, use these as naming conventions for establishing
+           the source-measure configurations on initialization
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: wiring_configurations
+      :value: ('2W', '4W')
+
+
+
+   .. py:attribute:: source_measure_configurations
+      :value: ('SVMV', 'SVMI', 'SIMI', 'SIMV')
+
+
+
+.. py:class:: ABC_VoltageGenerator(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.SetupOnly`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a voltage generator as a state machine.
+
+   A voltage generator just outputs voltage. It does not measure anything.
+   More complex behaviors should be modeled by another functionality.
+
+   The class tracks state of instrument, and automatically stores settings
+   when initialized and when setup is called.
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:method:: close()
+
+      
+      Turn off a VoltageGenerator on close.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ABC_CurrentGenerator(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a current generator as a state machine.
+
+   A current generator just outputs current. It does not measure anything.
+
+   The class tracks state of instrument, and automatically stores settings
+   when initialized and when setup is called.
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:method:: close()
+
+      
+      Turn off a current-generator on close.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ABC_Voltmeter(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a Voltmeter measurement functionality.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:class:: ABC_TemperatureController(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.SetupOnly`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a temperature controller.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:class:: ABC_EnvironmentLogger(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of an environment temperature/humidity logger.
+
+   An environment logger records ambient humidity and temperature, and has
+   fetchable data.
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:class:: ABC_RFPowerMeter(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of an rf powermeter measurement functionality.
+
+
+   :Parameters:
+
+       **log_path** : str, optional
+           Path to save log of arguments passed to state model methods. No log if
+           none saved. The default is None.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+.. py:exception:: VNAParamError(message)
+
+   Bases: :py:obj:`ValueError`
+
+
+   Error raised when bad VNA parameters are passed.
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: message
+
+
+.. py:class:: ABC_VNA(log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.state_models.Triggerable`, :py:obj:`abc.ABC`
+
+
+   
+   Abstraction of a Vector Network Analyzer (VNA) measurement functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: valid_first
+      :value: ['a', 'b', 'S']
+
+
+
+   .. py:method:: w2p_params(vna_port1: int, vna_port2: int) -> list[str]
+
+      
+      Generate 2-port wave parameter strings.
+
+
+      :Parameters:
+
+          **port1** : int
+              VNA port number connected to device port 1.
+
+          **port2** : int
+              VNA port number connected to device port 2..
+
+      :Returns:
+
+          list[str]
+              List of parameters.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: validate_param(param: str)
+
+      
+      Check a VNA parameter matches expectations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

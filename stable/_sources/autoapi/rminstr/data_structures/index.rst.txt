@@ -1,0 +1,2461 @@
+rminstr.data_structures
+=======================
+
+.. py:module:: rminstr.data_structures
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   rminstr.data_structures.ExptParametersReadError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.data_structures.DataRecord
+   rminstr.data_structures.TimeSeries
+   rminstr.data_structures.ExistingRecord
+   rminstr.data_structures.ActiveRecord
+   rminstr.data_structures.LegacyRecord
+   rminstr.data_structures.ExptParameters
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.data_structures.kendall_p
+   rminstr.data_structures.runs_statistic
+   rminstr.data_structures.get_config_as_dictionary
+   rminstr.data_structures.save_dictionary_as_config
+
+
+Package Contents
+----------------
+
+.. py:class:: DataRecord(columns: list[str], maxlen: int, output_dir: str, minlen: int, auto_timestamps: bool = True, sep: str = ',', repo_path: str = None)
+
+   The DataRecord class records experimental data from long measurements.
+
+   There are two derived classes: ActiveRecord and ExistingRecord.
+   ActiveRecord is intended to store data from experiments in progress.
+   ExistingRecord is intended to read data files
+
+   Comments:
+
+   * A DataRecord object will keep track of an arbitrary number of scalar
+     variables ("columns").
+
+   * Data are stored in fixed-length deques, so that the ammount of
+     memory required does not increase over time during long measurements.
+
+   * Data and metadata are automatically written out at regular intervals
+     so that if the measurement is interrupted, minimal data is lost. Data
+     files are automatically named to avoid overwriting data.
+
+   * Each measurement is associated with an auto-generated timestamp.
+     The auto_generated timestamp can be overriden by calling self.update
+     with the timestamp argument. Timestamps can also be disabled by
+     initializing with auto_timestamps = False.
+
+   * The [] operator is overloaded, and allows access to the most recent
+     measurement
+
+
+
+   Initialize a DataRecord object.
+
+
+   :Parameters:
+
+       **columns** : list[str]
+           Names of variables tracked by the DataRecord object.
+           list of strings.
+
+       **maxlen** : int
+           Maximum length of the data record in samples.
+
+       **output_dir** : str
+           Directory where data are stored.
+
+       **minlen** : int
+           Minimum length of data record. Used to ensure recent history is
+           available to measurement program.
+
+       **auto_timestamps** : bool, optional
+           If True, automatically assign timestamps to data points when
+           update() is called. The default is True.
+
+       **sep** : str, optional
+           Delimiter for output CSV files. The default is ","
+
+       **repo_path: str, optional**
+           path to the git repository. If none, use default path.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: columns
+
+      
+      list[str]: List of colum names.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: output_dir
+
+      
+      str: Directory where data are stored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: sep
+      :value: ','
+
+
+      
+      str: delimiter for output CSV files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: repo_path
+      :value: None
+
+
+      
+      str: path to git repository.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: time_zero
+      :value: None
+
+
+      
+      float: Timestamp corresponding to the start of the experiment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: auto_timestamps
+      :value: True
+
+
+      
+      bool: If True, automatically assign timestamps to data points when
+      update() is called.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: maxlen
+
+      
+      int: Maximum length of the data record in samples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: minlen
+
+      
+      int: Minimum length of data record. Used to ensure recent history is
+      available to measurement program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: current_index
+      :value: 0
+
+
+      
+      int: Index of current measurement.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: timestamps
+
+      
+      dict[str, deque[float]]: Keys correspond to "columns" attribute.
+      Each entry is a deque of timestamps associated with measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: counters
+
+      
+      dict[str, deque[int]]: Keys correspond to "columns" attribute.
+      Each entry is a deque of indices associated with measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: record
+
+      
+      dict[str, deque[float]]: Keys correspond to "columns" attribute.
+      Each entry is a deque of values associated with measurements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: indices
+
+      
+      deque[int]: contains indices of all measuerments
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: file_counter
+      :value: 0
+
+
+      
+      int: Counts the number of files that have been written.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: update_queue
+
+
+   .. py:method:: update(column: str, value: float, timestamp: float = None)
+
+      
+      Record measurement data.
+
+      Appends data to specified column, writes data to file when the record
+      reaches a length of self.maxlen.
+
+      :Parameters:
+
+          **column** : str
+              Name of column to append data to.
+
+          **value** : float
+              data to append to column.
+
+          **timestamp** : float, optional
+              If None, use result of self.get_time(). Caution: when using this
+              argument, the user is responsible for ensuring that these
+              timestamps are ordered. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: array_update(column: str, values: iter, timestamps: iter)
+
+      
+      Update a data column with an array.
+
+
+      :Parameters:
+
+          **column** : str
+              Column to add to.
+
+          **values** : iter
+              Data values to add to.
+
+          **timestamps** : iter
+              Timestamps of values.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: output(write_recent_data: bool = False)
+
+      
+      Manage length of the internal data structures.
+
+      This version of output does not save data to a file. It only maintains
+      the length of the record while also maintaining the invariants.
+
+      Please overload this method if you want to actually save data.
+
+      :Parameters:
+
+          **write_recent_data** : bool, optional
+              If False, the most recent self.minlen samples are retained in the
+              record and not written to file.
+              
+              If True, all data in the record are written to file, so that the
+              record is empty after this method is called.
+              
+              The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: stage_update(column: str, values: numpy.ndarray, timestamps: numpy.ndarray)
+
+      
+      Add a timeseries to the batch update queue.
+
+
+      :Parameters:
+
+          **column** : str
+              Name of column to append data to.
+
+          **values** : np.ndarray
+              list of values to append
+
+          **timestamps** : float, optional
+              Timestamps associated with values.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: batch_update()
+
+      
+      Clear batch update queue.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_time_series(column: str, t_min: float = None, t_max: float = None, delta_t: float = None) -> tuple
+
+      
+      Make timeseries data for a given variable.
+
+
+      :Parameters:
+
+          **column** : str
+              the column that you want to convert to timeseries data
+
+          **t_min** : float, optional
+              Only return data that was measured later than this time.
+              If None, use the earliest available time.
+              The default is None.
+
+          **t_max** : float, optional
+              Only return data that was measured earlier than this time.
+              If None, use the latest available time.
+              The default is None.
+
+          **delta_t** : float, optional
+              If not None, resample data with time interval delta_t. The function
+              does not interpolate, but rather uses the most recent past value.
+              The default is None.
+
+      :Returns:
+
+          tuple[DataArray, DataArray]
+              (times, values)
+              
+              times : numpy array of floats
+                  timestamps of samples
+              
+              values : numpy array of floats
+                  values from column
+
+
+
+
+      :Raises:
+
+          record_empty
+              Raised if an index error occurs when self.timestamps[column][0]
+              is accessed.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_conditional_data(columns: list, condition: collections.abc.Callable[[Index, DataArray, DataArray], bool]) -> tuple[IndexArray, DataArray, DataArray]
+
+      
+      Return the rows that satisfy a given condition.
+
+      * Each row is evaluated independently
+      * Missing values are populated with NaN
+
+      :Parameters:
+
+          **columns** : list of str
+              Specifies which colums to export.
+
+          **condition** : Callable[[Index, DataArray, DataArray], bool]
+              If True, append data to output.
+
+      :Returns:
+
+          tuple[IndexArray, DataArray, DataArray]
+              (indicies, times, values)
+              
+              indices : numpy array of ints
+                  indices of the samples.
+              
+              times : dict of numpy arrays of floats
+                  timestamps of samples, indexed by column
+              
+              values : dict of numpy array of floats
+                  values from column, indexed by column
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: TimeSeries
+
+   Bases: :py:obj:`NamedTuple`
+
+
+   
+   Class for oraganizing 1D timeseries data, output by DataRecords.
+
+   NamedTuple like object. Can be indexed or iterated like a tuple where
+   index 0 is the t attribute and index 1 is the values. Has additional
+   functionality usefil for time series data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **t** : np.ndarray
+           Absolute time stamps in seconds of timeseries, from when data was
+           taken.
+
+       **values: str**
+           Values of timeseries data.
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: t
+      :type:  numpy.ndarray
+
+
+   .. py:attribute:: values
+      :type:  numpy.ndarray
+
+
+   .. py:method:: trel() -> numpy.ndarray
+
+      
+      Get the relative time of.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ExistingRecord(file_path: str, output_dir: str = None, maxlen: int = None, minlen: int = None)
+
+   Bases: :py:obj:`DataRecord`
+
+
+   ExistingRecord is derived from DataRecord.
+
+   An ExistingRecord object reads files created by ActiveRecord.
+
+
+   Initialize ExistingRecord object.
+
+
+   :Parameters:
+
+       **file_path** : str
+           Full path to metadata file.
+
+       **output_dir** : str, optional
+           Directory where data is stored. If None, determine from metadata
+           file. The default is None.
+
+       **maxlen** : int, optional
+           Maximum length of record. If None, infer from metadata file.
+           The default is None.
+
+       **minlen** : int, optional
+           Minimum length of record. If None, set to maxlen.
+           The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: time_zero
+      :value: None
+
+
+      
+      float: Timestamp corresponding to the start of the experiment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: auto_timestamps
+      :value: None
+
+
+      
+      bool: If True, automatically assign timestamps to data points when
+      update() is called.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: maxlen
+      :value: None
+
+
+      
+      int: Maximum length of the data record in samples.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: current_file
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+
+
+   .. py:attribute:: metadata_filepath
+
+
+   .. py:attribute:: file_index
+      :value: 0
+
+
+
+   .. py:attribute:: file
+
+
+   .. py:method:: read_header()
+
+      
+      Read the header of the current file and enumerate columns.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read_next_line() -> bool
+
+      
+      Read one line of data from the input file, and adds it to record.
+
+
+
+      :Returns:
+
+          bool
+              True if the line was successfully read.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: batch_read(columns_list: list[str] = None) -> dict[str, tuple]
+
+      
+      Read the entirety of DataRecord at once.
+
+      The output is a in a dictionary of tupled timeseries. This method uses
+      pandas as backend for reading and parsing files. So, it has no effect
+      on the state of the object.
+
+      :Parameters:
+
+          **columns_list** : list[str], optional
+              either None (returns every column in record) or list of strings of
+              columns to return. The default is None.
+
+      :Returns:
+
+          dict[str, tuple]
+              {column: (timestamp,value)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: ActiveRecord(columns: list[str], maxlen: int, output_dir: str, minlen: str = 0, auto_timestamps: bool = True, sep: str = ',', meas_name: str = None, instruments: dict = None, stage_everything: bool = False)
+
+   Bases: :py:obj:`DataRecord`
+
+
+   ActiveRecord is derived from DataRecord.
+
+   An ActiveRecord stores and continually saves experimental data from
+   measurements in progress.
+
+   Additional Comments about of ActiveRecord:
+
+   * Data files are automatically written. When the data is written to
+     a file, it is automatically converted to a CSV format, where each
+     column is a variable, each row is a measurement, and the rows are
+     strictly time-ordered. It is not necessary to have the same number
+     of entries for each column. Missing data is automatically populated
+     with NaN.
+
+   * A specified number of recent samples (self.minlen) are kept in memory
+     for flow control. These samples can be written to a file and deleted
+     from memory by calling self.output with write_recent_data = True.
+
+
+
+   Initialize an ActiveRecord object.
+
+
+   :Parameters:
+
+       **columns** : list[str]
+           Names of variables that will be recorded.
+
+       **maxlen** : int
+           Maximum number of samples to retain in memory.
+
+       **output_dir** : str
+           Directory where output data is written. Ends in "\\".
+
+       **minlen** : str, optional
+           Number of samples to be retained in memory after writing data to a
+           file. The default is 0.
+
+       **auto_timestamps** : bool, optional
+           If True, maintain a list of timestamps for each column.The default
+           is True.
+
+       **sep** : str, optional
+           Delimeter in output file. The default is ",".
+
+       **meas_name** : str, optional
+           If specified, output files will be named meas_name_x_y.csv,
+           where x is a number (1,2,3,...) that is appended if neccessary
+           to avoid overwriting existing data, and y is the index of the
+           data file.
+           
+           If not specied (None): the meas_name will default to the date
+           in YYYYMMDD format.
+           
+           The default is None.
+
+       **instruments: dict, optional**
+           dictionary w/ columns as keys and instruments as values. Each
+           instrument is expected to have an info_dict attribute. If not None,
+           will connect those column keys to instrument vaues in the metadata.
+           
+           The default is None.
+
+       **stage_everything** : bool, optional
+           If True, the setitem method adds updates to the update queue rather
+           than directly updating the record. This behavior can be used to
+           ensure updates are time-ordered in the output file. If True,
+           batch_update must be called to update the record.
+           
+           The default is False.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: local_backups
+      :value: None
+
+
+
+   .. py:attribute:: session_str
+      :value: None
+
+
+
+   .. py:attribute:: metadata
+
+
+   .. py:attribute:: time_zero
+      :value: None
+
+
+      
+      float: Timestamp corresponding to the start of the experiment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: auto_timestamps
+      :value: True
+
+
+      
+      bool: If True, automatically assign timestamps to data points when
+      update() is called.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: minlen
+      :value: 0
+
+
+      
+      int: Minimum length of data record. Used to ensure recent history is
+      available to measurement program.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: file_counter
+      :value: 0
+
+
+      
+      int: Counts the number of files that have been written.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: stage_everything
+      :value: False
+
+
+
+   .. py:attribute:: metadata_file_name
+
+
+   .. py:method:: output(write_recent_data: bool = False)
+
+      
+      Write data to a file. Also writes metadata.
+
+
+      :Parameters:
+
+          **write_recent_data** : bool, optional
+              If False, the most recent self.minlen samples are retained in the
+              record and not written to file.
+              
+              If True, all data in the record are written to file, so that the
+              record is empty after this method is called.
+              
+              The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_time()
+
+      
+      Get relative time.
+
+
+
+      :Returns:
+
+          float
+              current relative time
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: init_timer(time_zero: float = None)
+
+      
+      Set time = 0 for relative timestamps.
+
+
+      :Parameters:
+
+          **time_zero** : float, optional
+              Timestamp of time = 0. If None, use result of time.time().
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: init_metadata(meas_name: str = None)
+
+      
+      Populate self.metadata with the default metadata.
+
+
+      :Parameters:
+
+          **meas_name** : str, optional
+              If specified, output files will be named meas_name_x_y.csv,
+              where x is a number (1,2,3,...) that is appended if neccessary
+              to avoid overwriting existing data, and y is the index of the
+              data file.
+              
+              If not specied (None): the meas_name will default to the date
+              in YYYYMMDD format.
+              
+              The default is None
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_instruments(instr: dict)
+
+      
+      Add instruments to metadata.
+
+
+      :Parameters:
+
+          **instruments :dict**
+              dictionairy containing instruments with info_dict attribute
+              expected to be a dictionairy with columns as keys, and instruments
+              as values. Each instrument is expected to have 'info_dict' as an
+              attribute. If a 'range' is not in info dict, it will not be saved.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_file()
+
+      
+      Increments file counter and maintains metadata.
+
+      Determines name of next output file and adds the file to self.metadata
+      with key "file_x", where x is the current value of file_counter.
+
+
+      :Returns:
+
+          **file_name** : str
+              name of next output file.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: output_metadata(use_backup: bool = False)
+
+      
+      Write metadata to a file.
+
+
+      :Parameters:
+
+          **use_backup** : bool, optional
+              If True, saves to local backup (~/rminstr/self.session_str).
+              The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: check_missing_files() -> list[pathlib.Path]
+
+      
+      Check if any files are missing from the target directory.
+
+
+
+      :Returns:
+
+          list[Path]
+              List of paths expected to be in target directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clean_backups()
+
+      
+      Clean up backups at the end of an experiment.
+
+      Combines the backup directory with the target directory.
+      If it cant, adds a noe to the metadata that this step failed, which
+      will notify users trying to read data with this flag down the road.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: LegacyRecord(data_file_path: str, output_dir: str, maxlen: int, minlen: int, missing_data: str = '', sep: str = ',')
+
+   Bases: :py:obj:`DataRecord`
+
+
+   LegacyRecord is derived from DataRecord.
+
+   Similar to ExistingRecord, it reads data from csv files.
+   Unlike ExistingRecord, it can read any csv, not just ones written by
+   an ActiveRecord object.
+
+
+   Initialize ExistingRecord object.
+
+
+   :Parameters:
+
+       **data_file_path** : str
+           Path to first data file relative to output_dir.
+           The data columns are inferred from this file's header
+
+       **output_dir** : str
+           Working directory.
+
+       **maxlen** : int
+           Maximum length of record.
+
+       **minlen** : int
+           Minimum length of record.
+
+       **missing_data** : str, optional
+           string that represents missing data in input file
+           The default is ''.
+
+       **sep** : str, optional
+           delimeter in input files
+           The default is ','.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: missing_data
+      :value: ''
+
+
+
+   .. py:attribute:: sep
+      :value: ','
+
+
+      
+      str: delimiter for output CSV files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: output_dir
+
+      
+      str: Directory where data are stored.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: time_zero
+      :value: None
+
+
+      
+      float: Timestamp corresponding to the start of the experiment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: current_file
+      :value: None
+
+
+
+   .. py:attribute:: missing
+      :value: ''
+
+
+
+   .. py:attribute:: metadata
+
+
+   .. py:attribute:: file_counter
+      :value: 0
+
+
+      
+      int: Counts the number of files that have been written.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: files
+      :value: []
+
+
+
+   .. py:attribute:: file_index
+      :value: 0
+
+
+
+   .. py:attribute:: file
+
+
+   .. py:method:: read_header(data_file_path: str) -> list[str]
+
+      
+      Read header.
+
+
+      :Parameters:
+
+          **data_file_path** : str
+              full path to data file
+
+      :Returns:
+
+          list[str]
+              List of column names.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_file(file_name: str)
+
+      
+      Append in_file.
+
+
+      :Parameters:
+
+          **file_name** : str
+              Full path to data
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read_next_line() -> bool
+
+      
+      Read one line of data from the input file, and adds it to record.
+
+
+
+      :Returns:
+
+          bool
+              True if the line was successfully read.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:function:: kendall_p(v: DataArray) -> float
+
+   
+   Determine whether the thermopile headings are stable.
+
+   See NIST Tech Note 1374 for more details.
+
+   :Parameters:
+
+       **v** : DataArray
+           vector of voltage measurements
+
+   :Returns:
+
+       float
+           kendall_p: A number between 0 and 1. Small numbers (less than 0.25)
+           show a decreasing trend, while large numbers (greater than 0.75)
+           show an increasing trend
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: runs_statistic(v: DataArray) -> float
+
+   
+   Determine whether the thermopile headings are stable.
+
+   See NIST Tech Note 1374 for more details.
+
+   :Parameters:
+
+       **v** : DataArray
+           vector of voltage measurements
+
+   :Returns:
+
+       float
+           Zscore based on number of "runs" (consecutive points with same trend)
+           0 is the expected number of runs in random data, and small numbers mean
+           long runs (not random)
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: ExptParameters(config_files: Union[str, list[str]], run_settings_file: str = None, initial_dict: dict = None, config_file_priority: list[int] = None, header: int = 0, columns: list[str] = None, column_types: list[str] = None)
+
+   The ExptParameters class keeps track of experimental settings.
+
+   Users specify two files used to describe how a program will run.
+
+   * config_file: contains information that never changes over the duration of
+     an experiment. ex. instrument GPIB addresses, VNA IFBW. See below for
+     formatting information.
+
+   * run_settings_file: a spreadsheet of values specifying measurements that
+     occur sequentially.ex. frequencies, power levels Each row represents a
+     measurement. Each column represents a variable.
+
+   The ExptParameters object can be read like a dictionary. For example:
+
+       params = ExptParameters("C:\examples\\", config.csv", "run.csv")
+       print(params["VNA_IFBW"])
+
+   These variables are read-only, so
+
+       params["VNA_IFBW"] = 10
+
+   does not work.
+
+
+   For run settings, the ExptParameters object keeps track of the index of
+   the current data point. So, params["Frequency"] will return a number,
+   rather than a list. To get the next Frequency point, call params.advance().
+
+
+   Initialize an ExptParameters object.
+
+
+   :Parameters:
+
+       **config_files** : Union[str, list[str]]
+           If the value is a string, it is interpreted as the path to the
+           config file.
+           
+           If as list of strings is given, each entry is interpreted as
+           the path to a config file. Each config file is read in the order
+           given in the list. If the same setting exists in multiple config
+           files, use config_file_priority to determine which setting to use.
+
+       **run_settings_file** : str
+           Full path to run settings file
+
+       **initial_dict** : dict
+           A dictionary to use to initialize the config before adding additional csv files
+
+       **config_file_priority** : list[int], optional
+           Indicates the priority of the corresponding (by order) config
+           file. Higher priority corresponds to lower numbers.If None,
+           all files have equal priority. The default is None.
+
+       **header** : int, optional
+           Number of lines to discard when reading run_settings. The default
+           is 0.
+
+       **columns** : list[str], optional
+           Names of columns in run settings file. The default is None.
+           If None, first check config file. If that fails, check run file for
+           column names
+
+       **column_types** : list[str], optional
+           Data types for columns in run settings. The default is None.
+           If None, first check config file. If that fails, assume everything
+           is a float.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: columns
+      :value: None
+
+
+      
+      list[str]: the keys of run settings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: column_types
+      :value: None
+
+
+      
+      list[str]: the types of data stored in columns of run settings.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: index
+      :value: None
+
+
+      
+      int: Tracks progress through the steps given in run settings.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: num_steps
+      :value: None
+
+
+      
+      int: number of rows in run settings file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: run_settings
+      :value: None
+
+
+      
+      dict[str, list]: stores run settings
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_config_files(config_files)
+
+      
+      Make a dictionary from config files
+
+
+      :Parameters:
+
+          **config_files** : str or list(str)
+              Path or a list of paths to the config files to load.
+
+      :Returns:
+
+          dict
+              Dictionary of config files
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: load_run_settings(in_file, header: int = 0)
+
+      
+      Load run settings.
+
+
+      :Parameters:
+
+          **in_file** : str
+              Full path to run file
+
+          **header** : int, optional
+              Number of lines to ignore at top of file. The default is 0.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          ValueError
+              If Run settings column is duplicated in config file.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_run_settings(file_name: str)
+
+      
+      Save run settings to file as csv.
+
+
+      :Parameters:
+
+          **file_name** : str
+              Full path to file.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: save_config(file_name: str, output_format='CSV')
+
+      
+      Save config to file as csv.
+
+
+      :Parameters:
+
+          **file_name** : str
+              Full path to file.
+
+          **output_format** : str, optional
+              The format of the file. Options are CSV. The default is CSV.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_column(column)
+
+      
+      Get a column from run_settings.
+
+
+      :Parameters:
+
+          **column** : str
+              column to return
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: advance()
+
+      
+      Advance to the next row in run file.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: complete()
+
+      
+      Test if run is complete.
+
+      Returns true if advance() has been called enough times to completely
+      iterate through the run settings file, so that no more rows are
+      available.
+
+
+      :Returns:
+
+          bool
+              True if complete
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: keys()
+
+      
+      Get keys.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:exception:: ExptParametersReadError(message)
+
+   Bases: :py:obj:`Exception`
+
+
+   Exception raised for reading ExptParameters.
+
+   Attributes:
+       message -- explanation of the error
+
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: message
+
+
+.. py:function:: get_config_as_dictionary(config_files)
+
+.. py:function:: save_dictionary_as_config(dictionary, path)
+

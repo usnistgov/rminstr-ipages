@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rminstr.instruments.measurement_functionalities &#8212; Rocky Mountain Instruments 0.6.6a3.dev2+ga2c84b576.d20260227 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../../_static/documentation_options.js?v=5f1640f5"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="rminstr.instruments.measurement_functionalities.common_behaviours" href="common_behaviours/index.html" />
+    <link rel="prev" title="rminstr.instruments.communications" href="../communications/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rminstr.instruments.measurement_functionalities">
+<span id="rminstr-instruments-measurement-functionalities"></span><h1>rminstr.instruments.measurement_functionalities<a class="headerlink" href="#module-rminstr.instruments.measurement_functionalities" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="common_behaviours/index.html">rminstr.instruments.measurement_functionalities.common_behaviours</a></li>
+<li class="toctree-l1"><a class="reference internal" href="state_models/index.html">rminstr.instruments.measurement_functionalities.state_models</a></li>
+</ul>
+</div>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.VNAParamError" title="rminstr.instruments.measurement_functionalities.VNAParamError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">VNAParamError</span></code></a></p></td>
+<td><p>Error raised when bad VNA parameters are passed.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.SetupOnly" title="rminstr.instruments.measurement_functionalities.SetupOnly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetupOnly</span></code></a></p></td>
+<td><p>A state model of an instrument that can only call setup commands.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.Triggerable" title="rminstr.instruments.measurement_functionalities.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Triggerable</span></code></a></p></td>
+<td><p>A state model of an instrument that can be armed and triggered.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_Ammeter" title="rminstr.instruments.measurement_functionalities.ABC_Ammeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_Ammeter</span></code></a></p></td>
+<td><p>Abstraction of a ammeter as a state machine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter" title="rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_DCSubPowerMeter</span></code></a></p></td>
+<td><p>Abstraction of a DC Substituted Power Meter as a state machine.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_SignalGenerator" title="rminstr.instruments.measurement_functionalities.ABC_SignalGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_SignalGenerator</span></code></a></p></td>
+<td><p>Abstraction of a signal generator as a SetupOnly state machine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator" title="rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_ArmedSignalGenerator</span></code></a></p></td>
+<td><p>Abstraction of an signal generator as a Triggerable state machine.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep" title="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_SMUSourceSweep</span></code></a></p></td>
+<td><p>Abstraction of an SMU that can sweep between a list of source values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator" title="rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_VoltageGenerator</span></code></a></p></td>
+<td><p>Abstraction of a voltage generator as a state machine.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator" title="rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_CurrentGenerator</span></code></a></p></td>
+<td><p>Abstraction of a current generator as a state machine.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_Voltmeter" title="rminstr.instruments.measurement_functionalities.ABC_Voltmeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_Voltmeter</span></code></a></p></td>
+<td><p>Abstraction of a Voltmeter measurement functionality.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_TemperatureController" title="rminstr.instruments.measurement_functionalities.ABC_TemperatureController"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_TemperatureController</span></code></a></p></td>
+<td><p>Abstraction of a temperature controller.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger" title="rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_EnvironmentLogger</span></code></a></p></td>
+<td><p>Abstraction of an environment temperature/humidity logger.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter" title="rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_RFPowerMeter</span></code></a></p></td>
+<td><p>Abstraction of an rf powermeter measurement functionality.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.measurement_functionalities.ABC_VNA" title="rminstr.instruments.measurement_functionalities.ABC_VNA"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ABC_VNA</span></code></a></p></td>
+<td><p>Abstraction of a Vector Network Analyzer (VNA) measurement functionality.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">SetupOnly</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A state model of an instrument that can only call setup commands.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>states</strong><span class="classifier">list(str)</span></dt><dd><p>List of possible states for the machine to be in.</p>
+</dd>
+<dt><strong>state</strong><span class="classifier">str</span></dt><dd><p>Current state of the machine.</p>
+</dd>
+<dt><strong>default_setup_settings</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of the default setup values. Only runs in the initial_setup function.
+This is defined in each child class.</p>
+</dd>
+<dt><strong>initial_setup_settings</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of most recent initial_setup arguments.</p>
+</dd>
+<dt><strong>setup_settings</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of most recent setup arguments.</p>
+</dd>
+<dt><strong>info_dict</strong><span class="classifier">dict</span></dt><dd><p>Dictionary of information about the instrument.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.states">
+<span class="sig-name descname"><span class="pre">states</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('uninit',</span> <span class="pre">'init',</span> <span class="pre">'unarmed')</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.states" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.default_setup_settings">
+<span class="sig-name descname"><span class="pre">default_setup_settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.default_setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.initial_setup_settings">
+<span class="sig-name descname"><span class="pre">initial_setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.initial_setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.setup_settings">
+<span class="sig-name descname"><span class="pre">setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.state">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">state</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.state" title="Link to this definition">¶</a></dt>
+<dd><p>State attribute, reflects current position in state model.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.info_dict">
+<span class="sig-name descname"><span class="pre">info_dict</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.info_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close the instrument.</p>
+<p>Good to call if the kernel will continue running after use.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.initial_setup">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">initial_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.initial_setup" title="Link to this definition">¶</a></dt>
+<dd><p>Run the initial setup of the instrument.</p>
+<p>This function is defined in the child classes.
+Keyword arguments passed in that are not part of the header are passed to the instrument
+as a raw command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">list</span></dt><dd><p>The function may need arguments. Arguemnts on this parent function do nothing.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the instrument should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.setup">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Run the setup function of the instrument.</p>
+<p>Defined mainly in the child classes.
+Keyword arguments passed in that are not part of the header are passed to the instrument
+as a raw command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">list</span></dt><dd><p>The function may need arguments. Arguemnts on this parent function do nothing.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the instrument should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.SetupOnly.query_state">
+<span class="sig-name descname"><span class="pre">query_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.SetupOnly.query_state" title="Link to this definition">¶</a></dt>
+<dd><p>Check the state of the machine according to state model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Current state of the instrument.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">Triggerable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.instruments.measurement_functionalities.SetupOnly" title="rminstr.instruments.measurement_functionalities.SetupOnly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SetupOnly</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>A state model of an instrument that can be armed and triggered.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>arm_settings: dict</strong></dt><dd><p>Dictionary of most recent arm arguments</p>
+</dd>
+<dt><strong>trigger_settings: dict</strong></dt><dd><p>Dictionary of most recent trigger arguments</p>
+</dd>
+<dt><strong>fetch_data_settings: dict</strong></dt><dd><p>Dictionary of most recent fetch_data arguments</p>
+</dd>
+<dt><strong>meas_start_time: float</strong></dt><dd><p>Absolute time used for calculating measurement start times</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.states">
+<span class="sig-name descname"><span class="pre">states</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.states" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.arm_settings">
+<span class="sig-name descname"><span class="pre">arm_settings</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.arm_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.trigger_settings">
+<span class="sig-name descname"><span class="pre">trigger_settings</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.trigger_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.fetch_data_settings">
+<span class="sig-name descname"><span class="pre">fetch_data_settings</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.fetch_data_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.meas_start_time">
+<span class="sig-name descname"><span class="pre">meas_start_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.meas_start_time" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.wait_until_data_available">
+<span class="sig-name descname"><span class="pre">wait_until_data_available</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.wait_until_data_available" title="Link to this definition">¶</a></dt>
+<dd><p>Wait until the state attribute is data_available.</p>
+<p>Raise an error after a timeout number of seconds if data_available
+is not detected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>timeout</strong><span class="classifier">float, optional</span></dt><dd><p>Seconds to wait before raising an error. If None, check
+settings for “timeout”. If timeout is not in settings,
+default to 2 seconds.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>If timeout occurs waiting for data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.arm">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">arm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.arm" title="Link to this definition">¶</a></dt>
+<dd><p>Take arguments and keyword arguments that define the arming of the instrument.</p>
+<p>Implemented in the child classes. Kwargs get passed as raw commands
+if they are not in the header of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">list</span></dt><dd><p>The function may need arguments. Arguemnts on this parent function do nothing.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the arm function should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.trigger">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Take arguments and keyword arguments that define the triggering of the instrument.</p>
+<p>Implemented in the child classes. Kwargs get passed as raw commands
+if they are not in the header of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*args</strong><span class="classifier">list</span></dt><dd><p>The function may need arguments. Arguemnts on this parent function do nothing.</p>
+</dd>
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the arm trigger should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.fetch_data">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fetch_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.fetch_data" title="Link to this definition">¶</a></dt>
+<dd><p>Take arguments and keyword arguments that definef fetching_data of the instrument.</p>
+<p>Implemented in the child classes. Kwargs get passed as raw commands
+if they are not in the header of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the fetch_data function should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.Triggerable.do_after_group_trigger">
+<span class="sig-name descname"><span class="pre">do_after_group_trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.Triggerable.do_after_group_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Perform operations immediatley after a grouptrigger is called.</p>
+<p>This function should take not arguments. Don’t override if nothing is
+required for the specific instrument.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_Ammeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_Ammeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_Ammeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a ammeter as a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_Ammeter.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_Ammeter.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_DCSubPowerMeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a DC Substituted Power Meter as a state machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close a dcsub power meter safely, should turn off the source.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SignalGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_SignalGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SignalGenerator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.SetupOnly" title="rminstr.instruments.measurement_functionalities.state_models.SetupOnly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.SetupOnly</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a signal generator as a SetupOnly state machine.</p>
+<p>The class tracks state of instrument, and automatically stores settings
+when initialized and when setup is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SignalGenerator.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SignalGenerator.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SignalGenerator.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SignalGenerator.close" title="Link to this definition">¶</a></dt>
+<dd><p>Turn of a SignalGenerator on close.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_ArmedSignalGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of an signal generator as a Triggerable state machine.</p>
+<p>The class tracks state of instrument, and automatically stores settings
+when initialized and when setup is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_SMUSourceSweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of an SMU that can sweep between a list of source values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>wiring_congfigurations: tuple(str)</strong></dt><dd><p>Possible wiring options expected of an SMU. Use these as naming conventions for establishing
+the wiring setup on initializtion</p>
+</dd>
+<dt><strong>source_measure_configurations: tuple(str)</strong></dt><dd><p>Possible source-measure configurations, use these as naming conventions for establishing
+the source-measure configurations on initialization</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.wiring_configurations">
+<span class="sig-name descname"><span class="pre">wiring_configurations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('2W',</span> <span class="pre">'4W')</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.wiring_configurations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.source_measure_configurations">
+<span class="sig-name descname"><span class="pre">source_measure_configurations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('SVMV',</span> <span class="pre">'SVMI',</span> <span class="pre">'SIMI',</span> <span class="pre">'SIMV')</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep.source_measure_configurations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_VoltageGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.SetupOnly" title="rminstr.instruments.measurement_functionalities.state_models.SetupOnly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.SetupOnly</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a voltage generator as a state machine.</p>
+<p>A voltage generator just outputs voltage. It does not measure anything.
+More complex behaviors should be modeled by another functionality.</p>
+<p>The class tracks state of instrument, and automatically stores settings
+when initialized and when setup is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator.close" title="Link to this definition">¶</a></dt>
+<dd><p>Turn off a VoltageGenerator on close.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_CurrentGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a current generator as a state machine.</p>
+<p>A current generator just outputs current. It does not measure anything.</p>
+<p>The class tracks state of instrument, and automatically stores settings
+when initialized and when setup is called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator.close" title="Link to this definition">¶</a></dt>
+<dd><p>Turn off a current-generator on close.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_Voltmeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_Voltmeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_Voltmeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a Voltmeter measurement functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_Voltmeter.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_Voltmeter.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_TemperatureController">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_TemperatureController</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_TemperatureController" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.SetupOnly" title="rminstr.instruments.measurement_functionalities.state_models.SetupOnly"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.SetupOnly</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a temperature controller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_TemperatureController.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_TemperatureController.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_EnvironmentLogger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of an environment temperature/humidity logger.</p>
+<p>An environment logger records ambient humidity and temperature, and has
+fetchable data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_RFPowerMeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of an rf powermeter measurement functionality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>Path to save log of arguments passed to state model methods. No log if
+none saved. The default is None.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.VNAParamError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">VNAParamError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.VNAParamError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></p>
+<p>Error raised when bad VNA parameters are passed.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.VNAParamError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.VNAParamError.message" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VNA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.measurement_functionalities.</span></span><span class="sig-name descname"><span class="pre">ABC_VNA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VNA" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="state_models/index.html#rminstr.instruments.measurement_functionalities.state_models.Triggerable" title="rminstr.instruments.measurement_functionalities.state_models.Triggerable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.state_models.Triggerable</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstraction of a Vector Network Analyzer (VNA) measurement functionality.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VNA.acceptable_args">
+<span class="sig-name descname"><span class="pre">acceptable_args</span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VNA.acceptable_args" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VNA.valid_first">
+<span class="sig-name descname"><span class="pre">valid_first</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['a',</span> <span class="pre">'b',</span> <span class="pre">'S']</span></em><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VNA.valid_first" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VNA.w2p_params">
+<span class="sig-name descname"><span class="pre">w2p_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vna_port1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vna_port2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VNA.w2p_params" title="Link to this definition">¶</a></dt>
+<dd><p>Generate 2-port wave parameter strings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>port1</strong><span class="classifier">int</span></dt><dd><p>VNA port number connected to device port 1.</p>
+</dd>
+<dt><strong>port2</strong><span class="classifier">int</span></dt><dd><p>VNA port number connected to device port 2..</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list[str]</dt><dd><p>List of parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.measurement_functionalities.ABC_VNA.validate_param">
+<span class="sig-name descname"><span class="pre">validate_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.measurement_functionalities.ABC_VNA.validate_param" title="Link to this definition">¶</a></dt>
+<dd><p>Check a VNA parameter matches expectations.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">rminstr</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../data_structures/index.html">rminstr.data_structures</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">rminstr.instruments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utilities/index.html">rminstr.utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/rminstr/instruments/measurement_functionalities/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../../v0.6.5/index.html">v0.6.5</a></li>
+  <li><a href="index.html">development</a></li>
+  <li><a href="../../../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/rminstr/instruments/measurement_functionalities/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

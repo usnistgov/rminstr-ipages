@@ -1,0 +1,90 @@
+rminstr.utilities.importer
+==========================
+
+.. py:module:: rminstr.utilities.importer
+
+.. autoapi-nested-parse::
+
+   Importer utilities for calorimeter-python.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.utilities.importer.import_instrument
+   rminstr.utilities.importer.instrument_iterator
+
+
+Module Contents
+---------------
+
+.. py:function:: import_instrument(model_name: str, functionality: str) -> type
+
+   
+   Import an instrument model/functionality by string.
+
+
+   :Parameters:
+
+       **model_name** : str
+           Name of of instrument model to import.
+
+       **functionality** : str
+           Name of measurement functionality to import.
+
+   :Returns:
+
+       type
+           Instrument class of given model/functionality.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: instrument_iterator()
+
+   
+   Iterate over all the instrument implementations available in rminstr.
+
+
+
+
+   :Yields:
+
+       namedtuple
+           Has fields model, impl, abc, statemodel.
+           Field `model` is a str of the model name.
+           Field `impl` is the class object of a measurment functionality implementation.
+           Field `abc` is the measurement functionality abstraction class object.
+           Fiel `statemodel` is the statemodel definition the functionality abstraction uses.
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

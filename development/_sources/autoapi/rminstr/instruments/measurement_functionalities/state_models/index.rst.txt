@@ -1,0 +1,493 @@
+rminstr.instruments.measurement_functionalities.state_models
+============================================================
+
+.. py:module:: rminstr.instruments.measurement_functionalities.state_models
+
+.. autoapi-nested-parse::
+
+   State model definitions all intstruments inherit from.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.measurement_functionalities.state_models.SetupOnly
+   rminstr.instruments.measurement_functionalities.state_models.Triggerable
+
+
+Module Contents
+---------------
+
+.. py:class:: SetupOnly(log_path: str = None)
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   
+   A state model of an instrument that can only call setup commands.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **states** : list(str)
+           List of possible states for the machine to be in.
+
+       **state** : str
+           Current state of the machine.
+
+       **default_setup_settings** : dict
+           Dictionary of the default setup values. Only runs in the initial_setup function.
+           This is defined in each child class.
+
+       **initial_setup_settings** : dict
+           Dictionary of most recent initial_setup arguments.
+
+       **setup_settings** : dict
+           Dictionary of most recent setup arguments.
+
+       **info_dict** : dict
+           Dictionary of information about the instrument.
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: states
+      :value: ('uninit', 'init', 'unarmed')
+
+
+
+   .. py:attribute:: default_setup_settings
+      :value: None
+
+
+
+   .. py:attribute:: initial_setup_settings
+
+
+   .. py:attribute:: setup_settings
+
+
+   .. py:property:: state
+
+      
+      State attribute, reflects current position in state model.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:method:: close()
+
+      
+      Close the instrument.
+
+      Good to call if the kernel will continue running after use.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: initial_setup(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Run the initial setup of the instrument.
+
+      This function is defined in the child classes.
+      Keyword arguments passed in that are not part of the header are passed to the instrument
+      as a raw command.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the instrument should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Run the setup function of the instrument.
+
+      Defined mainly in the child classes.
+      Keyword arguments passed in that are not part of the header are passed to the instrument
+      as a raw command.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the instrument should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Triggerable(log_path: str = None)
+
+   Bases: :py:obj:`SetupOnly`, :py:obj:`abc.ABC`
+
+
+   
+   A state model of an instrument that can be armed and triggered.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :Attributes:
+
+       **arm_settings: dict**
+           Dictionary of most recent arm arguments
+
+       **trigger_settings: dict**
+           Dictionary of most recent trigger arguments
+
+       **fetch_data_settings: dict**
+           Dictionary of most recent fetch_data arguments
+
+       **meas_start_time: float**
+           Absolute time used for calculating measurement start times
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: acceptable_args
+
+
+   .. py:attribute:: states
+
+
+   .. py:attribute:: arm_settings
+
+
+   .. py:attribute:: trigger_settings
+
+
+   .. py:attribute:: fetch_data_settings
+
+
+   .. py:attribute:: meas_start_time
+      :value: 0
+
+
+
+   .. py:method:: wait_until_data_available(timeout: float = None)
+
+      
+      Wait until the state attribute is data_available.
+
+      Raise an error after a timeout number of seconds if data_available
+      is not detected.
+
+      :Parameters:
+
+          **timeout** : float, optional
+              Seconds to wait before raising an error. If None, check
+              settings for "timeout". If timeout is not in settings,
+              default to 2 seconds.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              If timeout occurs waiting for data.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that define the arming of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the arm function should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that define the triggering of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*args** : list
+              The function may need arguments. Arguemnts on this parent function do nothing.
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the arm trigger should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(*args, **kwargs)
+      :abstractmethod:
+
+
+      
+      Take arguments and keyword arguments that definef fetching_data of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the fetch_data function should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Perform operations immediatley after a grouptrigger is called.
+
+      This function should take not arguments. Don't override if nothing is
+      required for the specific instrument.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

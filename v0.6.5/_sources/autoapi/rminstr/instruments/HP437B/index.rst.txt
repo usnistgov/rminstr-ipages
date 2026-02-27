@@ -1,0 +1,346 @@
+rminstr.instruments.HP437B
+==========================
+
+.. py:module:: rminstr.instruments.HP437B
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.HP437B.RFPowerMeter
+
+
+Package Contents
+----------------
+
+.. py:class:: RFPowerMeter(GPIB_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter`
+
+
+   Implements the powermeter measurment functionality for the HP437B.
+
+
+   Initialize the powermeter class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Initialization method.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(meas_freq_MHz: int = None, cal_factor_percent: int = None, read_units: str = None, read_range: int = None, resolution: int = None, averages: int = None, zero_cal: bool = False, **kwargs)
+
+      
+      Change powermeter settings.
+
+
+      :Parameters:
+
+          **meas_freq_MHz** : int, optional
+              Measurement update frequency.
+
+          **cal_factor_percent** : int, optional
+              Cal factor.
+
+          **read_units** : str, optional
+              LN or W for Watts, LG or dBm for dBm.
+
+          **read_range** : int, optional
+              Set range (0 is auto, 1 is -20 dBm, 2 is -10 dBm, ..., 5 is 20 dBm).
+
+          **resolution** : int, optional
+              1 for 1%, 2 for 0.1 %, 3 for 0.01% full scale.
+
+          **averages** : int, optional
+              Filter averages. uncertainties may change with this setting.
+
+          **zero_cal** : bool, optional
+              Will zero calibrate the instrument with a power sensor. Default is False
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm()
+
+      
+      Arm the powermeter to measure when tiggered.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Send trigger signal over GPIB.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(p_column_name: str = 'Power (W)') -> dict
+
+      
+      Fetch data from the powermeter.
+
+
+      :Parameters:
+
+          **p_column_name** : str, optional
+              Name to give power columns in dictionary. The default is "Power (W)"
+
+      :Returns:
+
+          dict
+              Dictionary with give names as keys.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Raise instrument errors the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Return instrument errors messages if any.
+
+
+
+      :Returns:
+
+          str
+              Instrument errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state.
+
+
+
+      :Returns:
+
+          str
+              Instrument state.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Perform operations immediatley after a grouptrigger is called.
+
+      This function should take not arguments. Don't override if nothing is
+      required for the specific instrument.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

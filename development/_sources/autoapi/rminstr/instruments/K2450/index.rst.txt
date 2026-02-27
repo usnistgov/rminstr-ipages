@@ -1,0 +1,886 @@
+rminstr.instruments.K2450
+=========================
+
+.. py:module:: rminstr.instruments.K2450
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.K2450.SMUSourceSweep
+   rminstr.instruments.K2450.DCSubPowerMeter
+
+
+Package Contents
+----------------
+
+.. py:class:: SMUSourceSweep(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.TSPRunner`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep`
+
+
+   Implementation of a source sweeping smu on K2450.
+
+   This is the implementation of the sourcesweep measurement functionality of
+   for the K2450 using tsp scripts. This class inherits from the TSPRunner and
+   _abc_smu_sourcesweep classes. This class also inherits some default behaviours
+   from the abstract class. Relevant to the user, these are:
+
+       1. Methods must follow the state model, can not be called from the wrong state or a warning is raised and nothing happens
+       2. Settings are automatically stored in a local dictionary when set
+
+
+   Attributes
+   ----------
+   panel_configurations : list
+       Possible panel connections for the SMU.
+
+   overvoltages : list
+       List of over voltage protection values that can be commanded to the SMU.
+
+
+
+   Initialize source sweep smu.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: panel_configurations
+      :value: ['rear', 'front']
+
+
+
+   .. py:attribute:: overvoltages
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(wiring: str = None, source_measure: str = None, panel: str = None, **kwargs)
+
+      
+      Initialize K2450 as a source sweep smu.
+
+      Initialization method for the K2450. Passed key word arguments are stored
+      in a local dictionary.
+
+      :Parameters:
+
+          **wiring** : str, optional
+              Either '4W' or '2W'. The default is None.
+
+          **source_measure** : str, optional
+              Sets up what is being sourced/measured using a naming convention. 'SVMI' set it to
+              source volts and measure current; 'SIMV' sets it to source current and measure
+              voltage. The default is None.
+
+          **panel** : str, optional
+              Either 'rear' or 'front'. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(source: str = None, source_level: float = None, source_range: float = None, source_ilimit: float = None, measure_range: float = None, measure_autozero: bool = None, over_voltage_protection: float = None, measure_for_duration_or_count: str = None, duration_per_level: float = None, initial_level_duration: float = None, count_per_level: int = None, nplc: float = None, source_readback: bool = None, source_delay: float = None, source_trigger_levels: list = None, buffer_size: float = None, buffer_fill_mode: str = None, **kwargs)
+
+      
+      Change the SMU settings.
+
+      Source and current values are in units of Volts or Amps, depending on the
+      configuration of the SMU
+
+      :Parameters:
+
+          **source** : str, optional
+              Whether or not the source is on. Either 'off' or 'on'. The default is None.
+
+          **source_level** : float, optional
+              Value to set the source to. This will not turn on or off the source. The default is None.
+
+          **source_range** : float, str, optional
+              Range of the source, in units dependent on your source settings.
+              If 'auto', smu will set range automatically. The default is None.
+
+          **source_ilimit** : float, optional
+              Hardware current limiter setting on the source output. The default is None.
+
+          **measure_range** : float, optional
+              Measurment range in units dependent on the measure settings.
+              If 'auto' smu will set range automatically. The default is None.
+
+          **measure_autozero** : bool, optional
+              If True, measurements will autozero between each reading. If False,
+              the SMU will only autozero once immediately after being triggered. The default is None.
+
+          **over_voltage_protection** : float, optional
+              Sets the voltage protector on the SMU. See overvoltages attribute for list of possible values.
+              The method will round up to the nearest possible value. The default is None.
+
+          **measure_for_duration_or_count** : str, optional
+              Either 'count' or 'duration'. Sets the source sweep to be given each source level as set number of measurements
+              or measure for a set amount of time. The default is None.
+
+          **duration_per_level** : float, optional
+              How long to measure each sweep value for if measurements are set to duration. The default is None.
+
+          **initial_level_duration** : float, optional
+              If set, will change the initial duration for source sweep value if measurements are set to duration.
+              Set to negative value to turn off this setting, and use duration _per_level for every source value.
+
+          **count_per_level** : int, optional
+              How many measurements to take if measurements are set to count. The default is None.
+
+          **nplc** : float, optional
+              How long to integrate measurements for in power line cycles (about 1/60 seconds). The default is None.
+
+          **source_readback** : bool, optional
+              If true, the SMU will measure the source value it gives. This
+              will approximatley double the measurement time per sample. Otherwise it will report
+              the nominal setpoint value. The default is None.
+
+          **source_delay** : float or str, optional
+              Time to wait before taking a measurement after changing source level. if 'auto' SMU will
+              automatically set delay. The default is None.
+
+          **source_trigger_levels** : iter, optional
+              Source levels to sweep through on trigger. If 'auto' the SMU will measure at
+              whatever the current source level is at. The default is None.
+
+          **buffer_size** : float, optional
+              Number of readings to allocate for in the memory buffer. The default is None.
+
+          **buffer_fill_mode** : str, optional
+              Either 'fill_once' or 'continuous'. Determines how the SMU handles taking more readings
+              than allocated for by buffer_size. The default is 'fill_once'.
+              'fill_once' will fill the buffer then stop, 'continuous' will overwrite previous readings.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'bus', trigger_timeout: float = 100000.0, trigger_mode: str = None)
+
+      
+      Arm the SMU.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Trigger the SMU.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(delete_buffer: bool = True, meas_start_time: float = None) -> dict
+
+      
+      Fetch data from the buffer.
+
+
+      :Parameters:
+
+          **delete_buffer** : bool, optional
+              If True, deallocates the buffer from the SMU's memory. The default is False.
+
+          **meas_start_time** : float, optional
+              If provided, will be used as timestamp for time of trigger. The default is None.
+
+      :Returns:
+
+          dict
+              Dictionary of measurements. Columns are automatically named based on how the
+              instrument was initalized.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          **state** : str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Not implemented.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_machine_info()
+
+      
+      Poll machine for serial and firmware version numbers.
+
+      Returns serial, firmware
+
+
+      :Returns:
+
+          str
+              Serial of SMU.
+
+          str
+              Firmware version of SMU.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Run post-trigger commands after an external trigger event.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: DCSubPowerMeter(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter`, :py:obj:`rminstr.instruments.communications.TSPRunner`
+
+
+   Control the K2450 behaving as a DC substituted power meter.
+
+   Attributes
+   ----------
+   sensor_types : str,
+       Type of sensors that are supported in the code (currently only "platinum_thinfilm").
+
+   panel_configurations : list
+       Possible panel connections for the SMU ('rear' or 'front').
+
+   overvoltages : list
+       list of over voltage protection values that can be commanded to the SMU.
+
+
+
+   Initialize the DC substituted power meter.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: meas_start_time
+      :value: 0
+
+
+
+   .. py:attribute:: sensor_types
+      :value: ['platinum_thinfilm', 'thermistor']
+
+
+
+   .. py:attribute:: panel_configurations
+      :value: ['rear', 'front']
+
+
+
+   .. py:attribute:: overvoltages
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:attribute:: fetch_data
+
+      
+      Take arguments and keyword arguments that definef fetching_data of the instrument.
+
+      Implemented in the child classes. Kwargs get passed as raw commands
+      if they are not in the header of the function.
+
+      :Parameters:
+
+          **\*\*kwargs** : dict
+              Any keyword arguments the fetch_data function should have.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: initial_setup(sensor_type: str = None, panel: str = None, initial_source: float = 0, **kwargs)
+
+      
+      Set initial setup of K2450 as a DC substituted power meter.
+
+      Passed key word arguments are stored
+      in a local dictionary. Determines the sensor type, panel, and other
+      commands that are setup before an experiment begins or to reset the instrument;
+      it places the instrument into a known safe state.
+
+      :Parameters:
+
+          **sensor_type: str,optional**
+              Type of sensor being controlled. Must be
+              'platinum_thinfilm' or 'thermistor'.
+
+          **panel** : str, optional
+              Either 'rear' or 'front'. The default is None.
+
+          **initial_source** : float, optional
+              The feedback loop will be initialized to source this value (Volts
+              for thinfilms and  Amps for thermistors).
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(resistance_setpoint: float = None, k_p: float = None, k_i: float = None, n_filter: float = None, duration: float = None, source_ubound: float = None, source_lbound: float = None, source: Union[str, bool] = None, source_level: float = None, source_range: float = None, source_ilimit: float = None, measure_range: float = None, measure_autozero: bool = None, over_voltage_protection: float = None, nplc: float = None, source_readback: bool = None, source_delay: float = None, buffer_size: float = None, buffer_fill_mode: str = None, v0_cal: float = None, vm_cal: float = None, i0_cal: float = None, im_cal: float = None, trigger_var: float = None, max_source_diff: float = None, **kwargs)
+
+      
+      Change the settings of the K2450.
+
+      Source and current values are in units of Volts or Amps, depending on the
+      configuration of the SMU
+
+      :Parameters:
+
+          **resistance_setpoint** : float, optional
+              The setpoint resistance.
+
+          **k_p** : float, optional
+              The proportional gain on linear controller.
+
+          **k_i** : float, optional
+              The intergral gain on linear controller.
+
+          **n_filter** : int, optional
+              The window sample size for the rolling average filtering. 0 Turns filter off, window size can be 1-100 samples.
+
+          **duration** : float, optional
+              How long to hold control loop for.
+
+          **source_ubound** : float, optional
+              Software upper limit on sourced value.
+
+          **source_lbound** : float, optional
+              Software lower limit on sourced value.
+
+          **source** : Union[str, bool], optional
+              Whether or not to turn the source on or off. Either 'off'/'on' or True/False.
+
+          **source_level** : float, optional
+              Value to set the source to.
+
+          **source_range** : Union[float, str], optional
+              If 'auto', smu will set range automatically.
+
+          **source_ilimit** : float, optional
+              Current limiter setting on the source output.
+
+          **measure_range** : float, optional
+              Measurment range. If 'auto' smu will set range automatically.
+
+          **measure_autozero** : bool, optional
+              If true, measurements will autozero between each reading. If false,
+              the SMU will only autozero once immediatley after being triggered.
+
+          **over_voltage_protection** : float, optional
+              Sets the voltage protector on the SMU. See overvoltages attribute for list of possible values.
+              The method will round up to the neares possible value.
+
+          **nplc** : float, optional
+              How long to integrate measurements for in power line cycles (about 1/60 seconds).
+
+          **source_readback** : bool, optional
+              If true, the SMU will measure the source value it gives, Otherwise it will return the nominal value.
+              This will approximatley double the measurement time per sample.
+
+          **source_delay** : Union[float, str], optional
+              Time to wait before taking a measurement after changing source level. if 'auto' SMU will
+              automatically set delay.
+
+          **buffer_size** : float, optional
+              Number of readings to allocated memory for the buffer.
+
+          **buffer_fill_mode** : str, optional
+              Either 'fill_once' or 'continuous'. Determines how the SMU handles taking more readings
+              than allocated for by buffer_size. The default is 'fill_once'.
+              'fill_once' will fill the buffer then stop, 'continuous' will overwrite previous readings.
+
+          **v0_cal** : float, optional
+              Calibrated Voltage offset (V). The default is None.
+
+          **vm_cal** : float, optional
+              Calibrated voltage slope correction (V/V). The default is None.
+
+          **i0_cal** : float, optional
+              Calibrated current offset correction (A). The default is None.
+
+          **im_cal** : float, optional
+              Calibrated current slope correction (A/A). The default is None.
+
+          **trigger_var** : float, optional
+              Threshhold for source value to send trigger pulses when compared
+              against square of finite difference of the source. Set to zero to
+              turn off output trigger pulses. The default is None.
+
+          **max_source_diff** : float
+              Maximum change in source value during the feedback loop. Doesn't apply
+              to thinfilms. Only used for thermistors to handle noe-linearity on the
+              IV curve.
+
+          **other_commands** : list[str]
+              any other commands are passed through to the SMU automatically.
+
+          **\*\*kwargs**
+              Catches any commands that aren't recognized.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'bus', trigger_timeout: float = 100000.0, trigger_out: bool = False)
+
+      
+      Arm the SMU.
+
+      trigger_source: str, optional
+          Either 'bus' or 'ext'. Bus will trigger by GPIB bus (either through self.trigger() or a GPIB GET
+          command through a GPIB interface). Ext will trigger externally by digital i/o pin 1.
+
+      trigger_timeout: float,
+          How long to wait for a trigger signal before continuing the feedback
+          loop. The default is 1e5s.
+
+      trigger_out; bool,
+          If True, asserts a trigger pulse over digital i/o pin 6 when triggered.
+          The default is False.
+
+      delay: float,
+          How long to wait after a trigger before starting the feedback loop. The default is 0.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger(*instruments)
+
+      
+      Trigger a DC susbtituted power measurement.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_machine_info()
+
+      
+      Poll machine for serial and firmware version numbers.
+
+
+
+      :Returns:
+
+          str
+              Serial of SMU.
+
+          str
+              Firmware version of SMU.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: close()
+
+      
+      Close out the instrument safely.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

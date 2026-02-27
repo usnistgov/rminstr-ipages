@@ -1,0 +1,396 @@
+rminstr.instruments.Fluke_1620A
+===============================
+
+.. py:module:: rminstr.instruments.Fluke_1620A
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.Fluke_1620A.EnvironmentLogger
+
+
+Package Contents
+----------------
+
+.. py:class:: EnvironmentLogger(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_EnvironmentLogger`
+
+
+   Class for using a Fluke 1620A as an environment logger.
+
+
+   Initialize the enviornment_logger class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources.
+           The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup()
+
+      
+      Put the instrument into a safe, known state.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(temp_unit: str = None, channel: int = None)
+
+      
+      Adjust settings on the Fluke 1620A.
+
+
+      :Parameters:
+
+          **temp_unit** : str, optional
+              'C' or 'F'. 'Units to report temperature readings in,
+              doesn't apply to readings
+              downloaded from the intruments data-record, which are always
+              in Celcius. The default is None.
+
+          **channel** : int, optional
+              What sensor channel current readings should be taken from. Only
+              applies to fetch_data calls for the current reading, reading
+              downloaded from data record always include both sensors.
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm()
+
+      
+      Do nothing except check for errors. Added for compatibility.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Do nothing except check for errors. Added for compatibility.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(since: datetime.datetime = None, until: datetime.datetime = None, verbose_download: bool = False, verbose_parse: bool = False, chunk_size: int = 256)
+
+      
+      Fetch data from the enviornment logger.
+
+      If neither since, until, or at are provided this function will fetch
+      the most recent reading from the active channel - use setup to set the
+      active channel.
+
+      :Parameters:
+
+          **since** : datetime, optional
+              What date to pull the data record since. If provided, and
+              'until' isn't, will pull data record up untill the current
+              datetime. If 'all', all readings stored on the instruments
+              memory will be downloaded. The default is None.
+
+          **until** : datetime, optional
+              End datetime to pull the data record of. If provided, the since.
+              must also be provided and can't be 'all'. The default is None.
+
+          **verbose_download** : bool, optional
+              Creates a progress bar for download (can take a few minutes to
+              download the data). The default is False.
+
+          **verbose_parse** : bool, optional
+              Prints information about the data blocks. The default is False.
+
+          **chunk_size** : int, optional
+              For since/until data fetches. Size of chunks (in bytes) to download
+              data-record file in. The default is 256.
+
+      :Returns:
+
+          dict
+              Dict containing ndarrays of temperature, humidity, and time stamps
+              of readings.
+              If fetching the current readings, out is a dict of ndarrays with
+              timestamps, humidity, and temperature. The sensor that took the
+              readings and the temperature units are defined in the setup comand.
+              If since/until is provided temperature is always in Celcius and both
+              sensors are ALWAYS provided. That data is provided in a heirarchical
+              dictionary. The first level keys are the sensor idsc and the second
+              level is a dictionary of timpstamps, temperature readings as an
+              ndarray, humidity as an ndarry, and metadata strings about the
+              instrument and sensor.
+
+
+
+
+      :Raises:
+
+          Exception
+              If confusing parameters are given.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_time_zero()
+
+      
+      Set current time as time zero.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Get any error messages on the intstrument.
+
+
+
+      :Returns:
+
+          str
+              Result of an error query on the insturment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Raise any error messages on instrument as InstrumentErrors in python.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Error associated with an instrument.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: parse_binary_file(data, verbose=False)
+
+      
+      Parse a binary file downloaded from the instrument.
+
+
+      :Parameters:
+
+          **data** : bytes
+              Raw bytes data as a large string of bytes, as downloaded from
+              the instrument.
+
+          **verbose** : bool, optional
+              If True, prints info about parsing. The default is False.
+
+      :Returns:
+
+          dict:
+              Dictionary of data parsed from the logger.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

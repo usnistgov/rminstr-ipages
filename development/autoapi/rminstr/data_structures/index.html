@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rminstr.data_structures &#8212; Rocky Mountain Instruments 0.6.6a3.dev2+ga2c84b576.d20260227 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../_static/documentation_options.js?v=5f1640f5"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="rminstr.instruments" href="../instruments/index.html" />
+    <link rel="prev" title="rminstr" href="../index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rminstr.data_structures">
+<span id="rminstr-data-structures"></span><h1>rminstr.data_structures<a class="headerlink" href="#module-rminstr.data_structures" title="Link to this heading">¶</a></h1>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.ExptParametersReadError" title="rminstr.data_structures.ExptParametersReadError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExptParametersReadError</span></code></a></p></td>
+<td><p>Exception raised for reading ExptParameters.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p></td>
+<td><p>The DataRecord class records experimental data from long measurements.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.TimeSeries" title="rminstr.data_structures.TimeSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSeries</span></code></a></p></td>
+<td><p>Class for oraganizing 1D timeseries data, output by DataRecords.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.ExistingRecord" title="rminstr.data_structures.ExistingRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExistingRecord</span></code></a></p></td>
+<td><p>ExistingRecord is derived from DataRecord.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.ActiveRecord" title="rminstr.data_structures.ActiveRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActiveRecord</span></code></a></p></td>
+<td><p>ActiveRecord is derived from DataRecord.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.LegacyRecord" title="rminstr.data_structures.LegacyRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LegacyRecord</span></code></a></p></td>
+<td><p>LegacyRecord is derived from DataRecord.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.ExptParameters" title="rminstr.data_structures.ExptParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExptParameters</span></code></a></p></td>
+<td><p>The ExptParameters class keeps track of experimental settings.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.kendall_p" title="rminstr.data_structures.kendall_p"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kendall_p</span></code></a>(→ float)</p></td>
+<td><p>Determine whether the thermopile headings are stable.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.runs_statistic" title="rminstr.data_structures.runs_statistic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">runs_statistic</span></code></a>(→ float)</p></td>
+<td><p>Determine whether the thermopile headings are stable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.get_config_as_dictionary" title="rminstr.data_structures.get_config_as_dictionary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_config_as_dictionary</span></code></a>(config_files)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.save_dictionary_as_config" title="rminstr.data_structures.save_dictionary_as_config"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_dictionary_as_config</span></code></a>(dictionary, path)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">DataRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord" title="Link to this definition">¶</a></dt>
+<dd><p>The DataRecord class records experimental data from long measurements.</p>
+<p>There are two derived classes: ActiveRecord and ExistingRecord.
+ActiveRecord is intended to store data from experiments in progress.
+ExistingRecord is intended to read data files</p>
+<p>Comments:</p>
+<ul class="simple">
+<li><p>A DataRecord object will keep track of an arbitrary number of scalar
+variables (“columns”).</p></li>
+<li><p>Data are stored in fixed-length deques, so that the ammount of
+memory required does not increase over time during long measurements.</p></li>
+<li><p>Data and metadata are automatically written out at regular intervals
+so that if the measurement is interrupted, minimal data is lost. Data
+files are automatically named to avoid overwriting data.</p></li>
+<li><p>Each measurement is associated with an auto-generated timestamp.
+The auto_generated timestamp can be overriden by calling self.update
+with the timestamp argument. Timestamps can also be disabled by
+initializing with auto_timestamps = False.</p></li>
+<li><p>The [] operator is overloaded, and allows access to the most recent
+measurement</p></li>
+</ul>
+<p>Initialize a DataRecord object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>columns</strong><span class="classifier">list[str]</span></dt><dd><p>Names of variables tracked by the DataRecord object.
+list of strings.</p>
+</dd>
+<dt><strong>maxlen</strong><span class="classifier">int</span></dt><dd><p>Maximum length of the data record in samples.</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">str</span></dt><dd><p>Directory where data are stored.</p>
+</dd>
+<dt><strong>minlen</strong><span class="classifier">int</span></dt><dd><p>Minimum length of data record. Used to ensure recent history is
+available to measurement program.</p>
+</dd>
+<dt><strong>auto_timestamps</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, automatically assign timestamps to data points when
+update() is called. The default is True.</p>
+</dd>
+<dt><strong>sep</strong><span class="classifier">str, optional</span></dt><dd><p>Delimiter for output CSV files. The default is “,”</p>
+</dd>
+<dt><strong>repo_path: str, optional</strong></dt><dd><p>path to the git repository. If none, use default path.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.columns" title="Link to this definition">¶</a></dt>
+<dd><p>list[str]: List of colum names.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.output_dir" title="Link to this definition">¶</a></dt>
+<dd><p>str: Directory where data are stored.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.sep">
+<span class="sig-name descname"><span class="pre">sep</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">','</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.sep" title="Link to this definition">¶</a></dt>
+<dd><p>str: delimiter for output CSV files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.repo_path">
+<span class="sig-name descname"><span class="pre">repo_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.repo_path" title="Link to this definition">¶</a></dt>
+<dd><p>str: path to git repository.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>float: Timestamp corresponding to the start of the experiment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.auto_timestamps">
+<span class="sig-name descname"><span class="pre">auto_timestamps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.auto_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>bool: If True, automatically assign timestamps to data points when
+update() is called.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.maxlen">
+<span class="sig-name descname"><span class="pre">maxlen</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.maxlen" title="Link to this definition">¶</a></dt>
+<dd><p>int: Maximum length of the data record in samples.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.minlen">
+<span class="sig-name descname"><span class="pre">minlen</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.minlen" title="Link to this definition">¶</a></dt>
+<dd><p>int: Minimum length of data record. Used to ensure recent history is
+available to measurement program.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.current_index">
+<span class="sig-name descname"><span class="pre">current_index</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.current_index" title="Link to this definition">¶</a></dt>
+<dd><p>int: Index of current measurement.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.timestamps">
+<span class="sig-name descname"><span class="pre">timestamps</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>dict[str, deque[float]]: Keys correspond to “columns” attribute.
+Each entry is a deque of timestamps associated with measurements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.counters">
+<span class="sig-name descname"><span class="pre">counters</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.counters" title="Link to this definition">¶</a></dt>
+<dd><p>dict[str, deque[int]]: Keys correspond to “columns” attribute.
+Each entry is a deque of indices associated with measurements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.record">
+<span class="sig-name descname"><span class="pre">record</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.record" title="Link to this definition">¶</a></dt>
+<dd><p>dict[str, deque[float]]: Keys correspond to “columns” attribute.
+Each entry is a deque of values associated with measurements.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.indices">
+<span class="sig-name descname"><span class="pre">indices</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.indices" title="Link to this definition">¶</a></dt>
+<dd><p>deque[int]: contains indices of all measuerments</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.file_counter">
+<span class="sig-name descname"><span class="pre">file_counter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.DataRecord.file_counter" title="Link to this definition">¶</a></dt>
+<dd><p>int: Counts the number of files that have been written.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.update_queue">
+<span class="sig-name descname"><span class="pre">update_queue</span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.update_queue" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord.update" title="Link to this definition">¶</a></dt>
+<dd><p>Record measurement data.</p>
+<p>Appends data to specified column, writes data to file when the record
+reaches a length of self.maxlen.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">str</span></dt><dd><p>Name of column to append data to.</p>
+</dd>
+<dt><strong>value</strong><span class="classifier">float</span></dt><dd><p>data to append to column.</p>
+</dd>
+<dt><strong>timestamp</strong><span class="classifier">float, optional</span></dt><dd><p>If None, use result of self.get_time(). Caution: when using this
+argument, the user is responsible for ensuring that these
+timestamps are ordered. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.array_update">
+<span class="sig-name descname"><span class="pre">array_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">iter</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord.array_update" title="Link to this definition">¶</a></dt>
+<dd><p>Update a data column with an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">str</span></dt><dd><p>Column to add to.</p>
+</dd>
+<dt><strong>values</strong><span class="classifier">iter</span></dt><dd><p>Data values to add to.</p>
+</dd>
+<dt><strong>timestamps</strong><span class="classifier">iter</span></dt><dd><p>Timestamps of values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_recent_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord.output" title="Link to this definition">¶</a></dt>
+<dd><p>Manage length of the internal data structures.</p>
+<p>This version of output does not save data to a file. It only maintains
+the length of the record while also maintaining the invariants.</p>
+<p>Please overload this method if you want to actually save data.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>write_recent_data</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, the most recent self.minlen samples are retained in the
+record and not written to file.</p>
+<p>If True, all data in the record are written to file, so that the
+record is empty after this method is called.</p>
+<p>The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.stage_update">
+<span class="sig-name descname"><span class="pre">stage_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord.stage_update" title="Link to this definition">¶</a></dt>
+<dd><p>Add a timeseries to the batch update queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">str</span></dt><dd><p>Name of column to append data to.</p>
+</dd>
+<dt><strong>values</strong><span class="classifier">np.ndarray</span></dt><dd><p>list of values to append</p>
+</dd>
+<dt><strong>timestamps</strong><span class="classifier">float, optional</span></dt><dd><p>Timestamps associated with values.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.batch_update">
+<span class="sig-name descname"><span class="pre">batch_update</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord.batch_update" title="Link to this definition">¶</a></dt>
+<dd><p>Clear batch update queue.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.get_time_series">
+<span class="sig-name descname"><span class="pre">get_time_series</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_min</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delta_t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.get_time_series" title="Link to this definition">¶</a></dt>
+<dd><p>Make timeseries data for a given variable.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">str</span></dt><dd><p>the column that you want to convert to timeseries data</p>
+</dd>
+<dt><strong>t_min</strong><span class="classifier">float, optional</span></dt><dd><p>Only return data that was measured later than this time.
+If None, use the earliest available time.
+The default is None.</p>
+</dd>
+<dt><strong>t_max</strong><span class="classifier">float, optional</span></dt><dd><p>Only return data that was measured earlier than this time.
+If None, use the latest available time.
+The default is None.</p>
+</dd>
+<dt><strong>delta_t</strong><span class="classifier">float, optional</span></dt><dd><p>If not None, resample data with time interval delta_t. The function
+does not interpolate, but rather uses the most recent past value.
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt>tuple[DataArray, DataArray]</dt><dd><p>(times, values)</p>
+<dl class="simple">
+<dt>times<span class="classifier">numpy array of floats</span></dt><dd><p>timestamps of samples</p>
+</dd>
+<dt>values<span class="classifier">numpy array of floats</span></dt><dd><p>values from column</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>record_empty</dt><dd><p>Raised if an index error occurs when self.timestamps[column][0]
+is accessed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.DataRecord.get_conditional_data">
+<span class="sig-name descname"><span class="pre">get_conditional_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">Index</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataArray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataArray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">IndexArray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataArray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">DataArray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.DataRecord.get_conditional_data" title="Link to this definition">¶</a></dt>
+<dd><p>Return the rows that satisfy a given condition.</p>
+<ul class="simple">
+<li><p>Each row is evaluated independently</p></li>
+<li><p>Missing values are populated with NaN</p></li>
+</ul>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>columns</strong><span class="classifier">list of str</span></dt><dd><p>Specifies which colums to export.</p>
+</dd>
+<dt><strong>condition</strong><span class="classifier">Callable[[Index, DataArray, DataArray], bool]</span></dt><dd><p>If True, append data to output.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl>
+<dt>tuple[IndexArray, DataArray, DataArray]</dt><dd><p>(indicies, times, values)</p>
+<dl class="simple">
+<dt>indices<span class="classifier">numpy array of ints</span></dt><dd><p>indices of the samples.</p>
+</dd>
+<dt>times<span class="classifier">dict of numpy arrays of floats</span></dt><dd><p>timestamps of samples, indexed by column</p>
+</dd>
+<dt>values<span class="classifier">dict of numpy array of floats</span></dt><dd><p>values from column, indexed by column</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">TimeSeries</span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<p>Class for oraganizing 1D timeseries data, output by DataRecords.</p>
+<p>NamedTuple like object. Can be indexed or iterated like a tuple where
+index 0 is the t attribute and index 1 is the values. Has additional
+functionality usefil for time series data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t</strong><span class="classifier">np.ndarray</span></dt><dd><p>Absolute time stamps in seconds of timeseries, from when data was
+taken.</p>
+</dd>
+<dt><strong>values: str</strong></dt><dd><p>Values of timeseries data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.t">
+<span class="sig-name descname"><span class="pre">t</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.t" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.trel">
+<span class="sig-name descname"><span class="pre">trel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries.trel" title="Link to this definition">¶</a></dt>
+<dd><p>Get the relative time of.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ExistingRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
+<p>ExistingRecord is derived from DataRecord.</p>
+<p>An ExistingRecord object reads files created by ActiveRecord.</p>
+<p>Initialize ExistingRecord object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>Full path to metadata file.</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">str, optional</span></dt><dd><p>Directory where data is stored. If None, determine from metadata
+file. The default is None.</p>
+</dd>
+<dt><strong>maxlen</strong><span class="classifier">int, optional</span></dt><dd><p>Maximum length of record. If None, infer from metadata file.
+The default is None.</p>
+</dd>
+<dt><strong>minlen</strong><span class="classifier">int, optional</span></dt><dd><p>Minimum length of record. If None, set to maxlen.
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>float: Timestamp corresponding to the start of the experiment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.auto_timestamps">
+<span class="sig-name descname"><span class="pre">auto_timestamps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.auto_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>bool: If True, automatically assign timestamps to data points when
+update() is called.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.maxlen">
+<span class="sig-name descname"><span class="pre">maxlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.maxlen" title="Link to this definition">¶</a></dt>
+<dd><p>int: Maximum length of the data record in samples.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.current_file">
+<span class="sig-name descname"><span class="pre">current_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.current_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.metadata_filepath">
+<span class="sig-name descname"><span class="pre">metadata_filepath</span></span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.metadata_filepath" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.file_index">
+<span class="sig-name descname"><span class="pre">file_index</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.file_index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.file">
+<span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.read_header">
+<span class="sig-name descname"><span class="pre">read_header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.read_header" title="Link to this definition">¶</a></dt>
+<dd><p>Read the header of the current file and enumerate columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.read_next_line">
+<span class="sig-name descname"><span class="pre">read_next_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.read_next_line" title="Link to this definition">¶</a></dt>
+<dd><p>Read one line of data from the input file, and adds it to record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>bool</dt><dd><p>True if the line was successfully read.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord.batch_read">
+<span class="sig-name descname"><span class="pre">batch_read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord.batch_read" title="Link to this definition">¶</a></dt>
+<dd><p>Read the entirety of DataRecord at once.</p>
+<p>The output is a in a dictionary of tupled timeseries. This method uses
+pandas as backend for reading and parsing files. So, it has no effect
+on the state of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>columns_list</strong><span class="classifier">list[str], optional</span></dt><dd><p>either None (returns every column in record) or list of strings of
+columns to return. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict[str, tuple]</dt><dd><p>{column: (timestamp,value)}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ActiveRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage_everything</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
+<p>ActiveRecord is derived from DataRecord.</p>
+<p>An ActiveRecord stores and continually saves experimental data from
+measurements in progress.</p>
+<p>Additional Comments about of ActiveRecord:</p>
+<ul class="simple">
+<li><p>Data files are automatically written. When the data is written to
+a file, it is automatically converted to a CSV format, where each
+column is a variable, each row is a measurement, and the rows are
+strictly time-ordered. It is not necessary to have the same number
+of entries for each column. Missing data is automatically populated
+with NaN.</p></li>
+<li><p>A specified number of recent samples (self.minlen) are kept in memory
+for flow control. These samples can be written to a file and deleted
+from memory by calling self.output with write_recent_data = True.</p></li>
+</ul>
+<p>Initialize an ActiveRecord object.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>columns</strong><span class="classifier">list[str]</span></dt><dd><p>Names of variables that will be recorded.</p>
+</dd>
+<dt><strong>maxlen</strong><span class="classifier">int</span></dt><dd><p>Maximum number of samples to retain in memory.</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">str</span></dt><dd><p>Directory where output data is written. Ends in “\”.</p>
+</dd>
+<dt><strong>minlen</strong><span class="classifier">str, optional</span></dt><dd><p>Number of samples to be retained in memory after writing data to a
+file. The default is 0.</p>
+</dd>
+<dt><strong>auto_timestamps</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, maintain a list of timestamps for each column.The default
+is True.</p>
+</dd>
+<dt><strong>sep</strong><span class="classifier">str, optional</span></dt><dd><p>Delimeter in output file. The default is “,”.</p>
+</dd>
+<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
+where x is a number (1,2,3,…) that is appended if neccessary
+to avoid overwriting existing data, and y is the index of the
+data file.</p>
+<p>If not specied (None): the meas_name will default to the date
+in YYYYMMDD format.</p>
+<p>The default is None.</p>
+</dd>
+<dt><strong>instruments: dict, optional</strong></dt><dd><p>dictionary w/ columns as keys and instruments as values. Each
+instrument is expected to have an info_dict attribute. If not None,
+will connect those column keys to instrument vaues in the metadata.</p>
+<p>The default is None.</p>
+</dd>
+<dt><strong>stage_everything</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the setitem method adds updates to the update queue rather
+than directly updating the record. This behavior can be used to
+ensure updates are time-ordered in the output file. If True,
+batch_update must be called to update the record.</p>
+<p>The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.local_backups">
+<span class="sig-name descname"><span class="pre">local_backups</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.local_backups" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.session_str">
+<span class="sig-name descname"><span class="pre">session_str</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.session_str" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>float: Timestamp corresponding to the start of the experiment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.auto_timestamps">
+<span class="sig-name descname"><span class="pre">auto_timestamps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.auto_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>bool: If True, automatically assign timestamps to data points when
+update() is called.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.minlen">
+<span class="sig-name descname"><span class="pre">minlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.minlen" title="Link to this definition">¶</a></dt>
+<dd><p>int: Minimum length of data record. Used to ensure recent history is
+available to measurement program.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.file_counter">
+<span class="sig-name descname"><span class="pre">file_counter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.file_counter" title="Link to this definition">¶</a></dt>
+<dd><p>int: Counts the number of files that have been written.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.stage_everything">
+<span class="sig-name descname"><span class="pre">stage_everything</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.stage_everything" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata_file_name">
+<span class="sig-name descname"><span class="pre">metadata_file_name</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata_file_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_recent_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output" title="Link to this definition">¶</a></dt>
+<dd><p>Write data to a file. Also writes metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>write_recent_data</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, the most recent self.minlen samples are retained in the
+record and not written to file.</p>
+<p>If True, all data in the record are written to file, so that the
+record is empty after this method is called.</p>
+<p>The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.get_time">
+<span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.get_time" title="Link to this definition">¶</a></dt>
+<dd><p>Get relative time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>float</dt><dd><p>current relative time</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_timer">
+<span class="sig-name descname"><span class="pre">init_timer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_zero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_timer" title="Link to this definition">¶</a></dt>
+<dd><p>Set time = 0 for relative timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_zero</strong><span class="classifier">float, optional</span></dt><dd><p>Timestamp of time = 0. If None, use result of time.time().
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_metadata">
+<span class="sig-name descname"><span class="pre">init_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Populate self.metadata with the default metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
+where x is a number (1,2,3,…) that is appended if neccessary
+to avoid overwriting existing data, and y is the index of the
+data file.</p>
+<p>If not specied (None): the meas_name will default to the date
+in YYYYMMDD format.</p>
+<p>The default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_instruments">
+<span class="sig-name descname"><span class="pre">add_instruments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_instruments" title="Link to this definition">¶</a></dt>
+<dd><p>Add instruments to metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>instruments :dict</strong></dt><dd><p>dictionairy containing instruments with info_dict attribute
+expected to be a dictionairy with columns as keys, and instruments
+as values. Each instrument is expected to have ‘info_dict’ as an
+attribute. If a ‘range’ is not in info dict, it will not be saved.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_file">
+<span class="sig-name descname"><span class="pre">add_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_file" title="Link to this definition">¶</a></dt>
+<dd><p>Increments file counter and maintains metadata.</p>
+<p>Determines name of next output file and adds the file to self.metadata
+with key “file_x”, where x is the current value of file_counter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>name of next output file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output_metadata">
+<span class="sig-name descname"><span class="pre">output_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output_metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Write metadata to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>use_backup</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, saves to local backup (~/rminstr/self.session_str).
+The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.check_missing_files">
+<span class="sig-name descname"><span class="pre">check_missing_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.check_missing_files" title="Link to this definition">¶</a></dt>
+<dd><p>Check if any files are missing from the target directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>list[Path]</dt><dd><p>List of paths expected to be in target directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.clean_backups">
+<span class="sig-name descname"><span class="pre">clean_backups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.clean_backups" title="Link to this definition">¶</a></dt>
+<dd><p>Clean up backups at the end of an experiment.</p>
+<p>Combines the backup directory with the target directory.
+If it cant, adds a noe to the metadata that this step failed, which
+will notify users trying to read data with this flag down the road.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">LegacyRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
+<p>LegacyRecord is derived from DataRecord.</p>
+<p>Similar to ExistingRecord, it reads data from csv files.
+Unlike ExistingRecord, it can read any csv, not just ones written by
+an ActiveRecord object.</p>
+<p>Initialize ExistingRecord object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_file_path</strong><span class="classifier">str</span></dt><dd><p>Path to first data file relative to output_dir.
+The data columns are inferred from this file’s header</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">str</span></dt><dd><p>Working directory.</p>
+</dd>
+<dt><strong>maxlen</strong><span class="classifier">int</span></dt><dd><p>Maximum length of record.</p>
+</dd>
+<dt><strong>minlen</strong><span class="classifier">int</span></dt><dd><p>Minimum length of record.</p>
+</dd>
+<dt><strong>missing_data</strong><span class="classifier">str, optional</span></dt><dd><p>string that represents missing data in input file
+The default is ‘’.</p>
+</dd>
+<dt><strong>sep</strong><span class="classifier">str, optional</span></dt><dd><p>delimeter in input files
+The default is ‘,’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.missing_data">
+<span class="sig-name descname"><span class="pre">missing_data</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.missing_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.sep">
+<span class="sig-name descname"><span class="pre">sep</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">','</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.sep" title="Link to this definition">¶</a></dt>
+<dd><p>str: delimiter for output CSV files.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.output_dir" title="Link to this definition">¶</a></dt>
+<dd><p>str: Directory where data are stored.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>float: Timestamp corresponding to the start of the experiment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.current_file">
+<span class="sig-name descname"><span class="pre">current_file</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.current_file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.missing">
+<span class="sig-name descname"><span class="pre">missing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.missing" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.file_counter">
+<span class="sig-name descname"><span class="pre">file_counter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.file_counter" title="Link to this definition">¶</a></dt>
+<dd><p>int: Counts the number of files that have been written.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.files">
+<span class="sig-name descname"><span class="pre">files</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.files" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.file_index">
+<span class="sig-name descname"><span class="pre">file_index</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.file_index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.file">
+<span class="sig-name descname"><span class="pre">file</span></span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.file" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.read_header">
+<span class="sig-name descname"><span class="pre">read_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.read_header" title="Link to this definition">¶</a></dt>
+<dd><p>Read header.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data_file_path</strong><span class="classifier">str</span></dt><dd><p>full path to data file</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>list[str]</dt><dd><p>List of column names.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.add_file">
+<span class="sig-name descname"><span class="pre">add_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.add_file" title="Link to this definition">¶</a></dt>
+<dd><p>Append in_file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>Full path to data</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.LegacyRecord.read_next_line">
+<span class="sig-name descname"><span class="pre">read_next_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rminstr.data_structures.LegacyRecord.read_next_line" title="Link to this definition">¶</a></dt>
+<dd><p>Read one line of data from the input file, and adds it to record.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>bool</dt><dd><p>True if the line was successfully read.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.data_structures.kendall_p">
+<span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">kendall_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rminstr.data_structures.kendall_p" title="Link to this definition">¶</a></dt>
+<dd><p>Determine whether the thermopile headings are stable.</p>
+<p>See NIST Tech Note 1374 for more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>v</strong><span class="classifier">DataArray</span></dt><dd><p>vector of voltage measurements</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>kendall_p: A number between 0 and 1. Small numbers (less than 0.25)
+show a decreasing trend, while large numbers (greater than 0.75)
+show an increasing trend</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.data_structures.runs_statistic">
+<span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">runs_statistic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#rminstr.data_structures.runs_statistic" title="Link to this definition">¶</a></dt>
+<dd><p>Determine whether the thermopile headings are stable.</p>
+<p>See NIST Tech Note 1374 for more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>v</strong><span class="classifier">DataArray</span></dt><dd><p>vector of voltage measurements</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>Zscore based on number of “runs” (consecutive points with same trend)
+0 is the expected number of runs in random data, and small numbers mean
+long runs (not random)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ExptParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_settings_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_file_priority</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters" title="Link to this definition">¶</a></dt>
+<dd><p>The ExptParameters class keeps track of experimental settings.</p>
+<p>Users specify two files used to describe how a program will run.</p>
+<ul class="simple">
+<li><p>config_file: contains information that never changes over the duration of
+an experiment. ex. instrument GPIB addresses, VNA IFBW. See below for
+formatting information.</p></li>
+<li><p>run_settings_file: a spreadsheet of values specifying measurements that
+occur sequentially.ex. frequencies, power levels Each row represents a
+measurement. Each column represents a variable.</p></li>
+</ul>
+<p>The ExptParameters object can be read like a dictionary. For example:</p>
+<blockquote>
+<div><p>params = ExptParameters(“C:examples\”, config.csv”, “run.csv”)
+print(params[“VNA_IFBW”])</p>
+</div></blockquote>
+<p>These variables are read-only, so</p>
+<blockquote>
+<div><p>params[“VNA_IFBW”] = 10</p>
+</div></blockquote>
+<p>does not work.</p>
+<p>For run settings, the ExptParameters object keeps track of the index of
+the current data point. So, params[“Frequency”] will return a number,
+rather than a list. To get the next Frequency point, call params.advance().</p>
+<p>Initialize an ExptParameters object.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>config_files</strong><span class="classifier">Union[str, list[str]]</span></dt><dd><p>If the value is a string, it is interpreted as the path to the
+config file.</p>
+<p>If as list of strings is given, each entry is interpreted as
+the path to a config file. Each config file is read in the order
+given in the list. If the same setting exists in multiple config
+files, use config_file_priority to determine which setting to use.</p>
+</dd>
+<dt><strong>run_settings_file</strong><span class="classifier">str</span></dt><dd><p>Full path to run settings file</p>
+</dd>
+<dt><strong>initial_dict</strong><span class="classifier">dict</span></dt><dd><p>A dictionary to use to initialize the config before adding additional csv files</p>
+</dd>
+<dt><strong>config_file_priority</strong><span class="classifier">list[int], optional</span></dt><dd><p>Indicates the priority of the corresponding (by order) config
+file. Higher priority corresponds to lower numbers.If None,
+all files have equal priority. The default is None.</p>
+</dd>
+<dt><strong>header</strong><span class="classifier">int, optional</span></dt><dd><p>Number of lines to discard when reading run_settings. The default
+is 0.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list[str], optional</span></dt><dd><p>Names of columns in run settings file. The default is None.
+If None, first check config file. If that fails, check run file for
+column names</p>
+</dd>
+<dt><strong>column_types</strong><span class="classifier">list[str], optional</span></dt><dd><p>Data types for columns in run settings. The default is None.
+If None, first check config file. If that fails, assume everything
+is a float.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExptParameters.columns" title="Link to this definition">¶</a></dt>
+<dd><p>list[str]: the keys of run settings</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.column_types">
+<span class="sig-name descname"><span class="pre">column_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExptParameters.column_types" title="Link to this definition">¶</a></dt>
+<dd><p>list[str]: the types of data stored in columns of run settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExptParameters.index" title="Link to this definition">¶</a></dt>
+<dd><p>int: Tracks progress through the steps given in run settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.num_steps">
+<span class="sig-name descname"><span class="pre">num_steps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExptParameters.num_steps" title="Link to this definition">¶</a></dt>
+<dd><p>int: number of rows in run settings file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.run_settings">
+<span class="sig-name descname"><span class="pre">run_settings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ExptParameters.run_settings" title="Link to this definition">¶</a></dt>
+<dd><p>dict[str, list]: stores run settings</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.add_config_files">
+<span class="sig-name descname"><span class="pre">add_config_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.add_config_files" title="Link to this definition">¶</a></dt>
+<dd><p>Make a dictionary from config files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>config_files</strong><span class="classifier">str or list(str)</span></dt><dd><p>Path or a list of paths to the config files to load.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary of config files</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.load_run_settings">
+<span class="sig-name descname"><span class="pre">load_run_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">in_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.load_run_settings" title="Link to this definition">¶</a></dt>
+<dd><p>Load run settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>in_file</strong><span class="classifier">str</span></dt><dd><p>Full path to run file</p>
+</dd>
+<dt><strong>header</strong><span class="classifier">int, optional</span></dt><dd><p>Number of lines to ignore at top of file. The default is 0.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>ValueError</dt><dd><p>If Run settings column is duplicated in config file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.save_run_settings">
+<span class="sig-name descname"><span class="pre">save_run_settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.save_run_settings" title="Link to this definition">¶</a></dt>
+<dd><p>Save run settings to file as csv.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>Full path to file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.save_config">
+<span class="sig-name descname"><span class="pre">save_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'CSV'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.save_config" title="Link to this definition">¶</a></dt>
+<dd><p>Save config to file as csv.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>Full path to file.</p>
+</dd>
+<dt><strong>output_format</strong><span class="classifier">str, optional</span></dt><dd><p>The format of the file. Options are CSV. The default is CSV.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.get_column">
+<span class="sig-name descname"><span class="pre">get_column</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.get_column" title="Link to this definition">¶</a></dt>
+<dd><p>Get a column from run_settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>column</strong><span class="classifier">str</span></dt><dd><p>column to return</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.advance">
+<span class="sig-name descname"><span class="pre">advance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.advance" title="Link to this definition">¶</a></dt>
+<dd><p>Advance to the next row in run file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.complete">
+<span class="sig-name descname"><span class="pre">complete</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.complete" title="Link to this definition">¶</a></dt>
+<dd><p>Test if run is complete.</p>
+<p>Returns true if advance() has been called enough times to completely
+iterate through the run settings file, so that no more rows are
+available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>bool</dt><dd><p>True if complete</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParameters.keys">
+<span class="sig-name descname"><span class="pre">keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParameters.keys" title="Link to this definition">¶</a></dt>
+<dd><p>Get keys.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParametersReadError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ExptParametersReadError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExptParametersReadError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised for reading ExptParameters.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>message – explanation of the error</p>
+</dd>
+</dl>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ExptParametersReadError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#rminstr.data_structures.ExptParametersReadError.message" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.data_structures.get_config_as_dictionary">
+<span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">get_config_as_dictionary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_files</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.get_config_as_dictionary" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rminstr.data_structures.save_dictionary_as_config">
+<span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">save_dictionary_as_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dictionary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.save_dictionary_as_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rminstr</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">rminstr.data_structures</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../instruments/index.html">rminstr.instruments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utilities/index.html">rminstr.utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/autoapi/rminstr/data_structures/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../v0.6.5/index.html">v0.6.5</a></li>
+  <li><a href="index.html">development</a></li>
+  <li><a href="../../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../../_sources/autoapi/rminstr/data_structures/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

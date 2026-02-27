@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rminstr.instruments.K2450 &#8212; Rocky Mountain Instruments 0.6.6a3.dev2+ga2c84b576.d20260227 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../../_static/documentation_options.js?v=5f1640f5"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="rminstr.instruments.KS_E8257D" href="../KS_E8257D/index.html" />
+    <link rel="prev" title="rminstr.instruments.HP437B" href="../HP437B/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rminstr.instruments.K2450">
+<span id="rminstr-instruments-k2450"></span><h1>rminstr.instruments.K2450<a class="headerlink" href="#module-rminstr.instruments.K2450" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.K2450.SMUSourceSweep" title="rminstr.instruments.K2450.SMUSourceSweep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SMUSourceSweep</span></code></a></p></td>
+<td><p>Implementation of a source sweeping smu on K2450.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.K2450.DCSubPowerMeter" title="rminstr.instruments.K2450.DCSubPowerMeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DCSubPowerMeter</span></code></a></p></td>
+<td><p>Control the K2450 behaving as a DC substituted power meter.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.K2450.</span></span><span class="sig-name descname"><span class="pre">SMUSourceSweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../communications/index.html#rminstr.instruments.communications.TSPRunner" title="rminstr.instruments.communications.TSPRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.communications.TSPRunner</span></code></a>, <a class="reference internal" href="../measurement_functionalities/index.html#rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep" title="rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.ABC_SMUSourceSweep</span></code></a></p>
+<p>Implementation of a source sweeping smu on K2450.</p>
+<p>This is the implementation of the sourcesweep measurement functionality of
+for the K2450 using tsp scripts. This class inherits from the TSPRunner and
+_abc_smu_sourcesweep classes. This class also inherits some default behaviours
+from the abstract class. Relevant to the user, these are:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Methods must follow the state model, can not be called from the wrong state or a warning is raised and nothing happens</p></li>
+<li><p>Settings are automatically stored in a local dictionary when set</p></li>
+</ol>
+</div></blockquote>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>panel_configurations<span class="classifier">list</span></dt><dd><p>Possible panel connections for the SMU.</p>
+</dd>
+<dt>overvoltages<span class="classifier">list</span></dt><dd><p>List of over voltage protection values that can be commanded to the SMU.</p>
+</dd>
+</dl>
+<p>Initialize source sweep smu.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>visa_address</strong><span class="classifier">str</span></dt><dd><p>Visa address of instrument.</p>
+</dd>
+<dt><strong>resource_manager</strong><span class="classifier">visa.ResourceManager, optional</span></dt><dd><p>Pyvisa resource manager for opening visa resources. The default is None.</p>
+</dd>
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>If provided, will log at the specified path. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.info_dict">
+<span class="sig-name descname"><span class="pre">info_dict</span></span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.info_dict" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.panel_configurations">
+<span class="sig-name descname"><span class="pre">panel_configurations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['rear',</span> <span class="pre">'front']</span></em><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.panel_configurations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.overvoltages">
+<span class="sig-name descname"><span class="pre">overvoltages</span></span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.overvoltages" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.default_setup_settings">
+<span class="sig-name descname"><span class="pre">default_setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.default_setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.initial_setup">
+<span class="sig-name descname"><span class="pre">initial_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wiring</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_measure</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.initial_setup" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize K2450 as a source sweep smu.</p>
+<p>Initialization method for the K2450. Passed key word arguments are stored
+in a local dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>wiring</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘4W’ or ‘2W’. The default is None.</p>
+</dd>
+<dt><strong>source_measure</strong><span class="classifier">str, optional</span></dt><dd><p>Sets up what is being sourced/measured using a naming convention. ‘SVMI’ set it to
+source volts and measure current; ‘SIMV’ sets it to source current and measure
+voltage. The default is None.</p>
+</dd>
+<dt><strong>panel</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘rear’ or ‘front’. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ilimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_autozero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_voltage_protection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_for_duration_or_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_per_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_level_duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count_per_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nplc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_readback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_trigger_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_fill_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Change the SMU settings.</p>
+<p>Source and current values are in units of Volts or Amps, depending on the
+configuration of the SMU</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>source</strong><span class="classifier">str, optional</span></dt><dd><p>Whether or not the source is on. Either ‘off’ or ‘on’. The default is None.</p>
+</dd>
+<dt><strong>source_level</strong><span class="classifier">float, optional</span></dt><dd><p>Value to set the source to. This will not turn on or off the source. The default is None.</p>
+</dd>
+<dt><strong>source_range</strong><span class="classifier">float, str, optional</span></dt><dd><p>Range of the source, in units dependent on your source settings.
+If ‘auto’, smu will set range automatically. The default is None.</p>
+</dd>
+<dt><strong>source_ilimit</strong><span class="classifier">float, optional</span></dt><dd><p>Hardware current limiter setting on the source output. The default is None.</p>
+</dd>
+<dt><strong>measure_range</strong><span class="classifier">float, optional</span></dt><dd><p>Measurment range in units dependent on the measure settings.
+If ‘auto’ smu will set range automatically. The default is None.</p>
+</dd>
+<dt><strong>measure_autozero</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, measurements will autozero between each reading. If False,
+the SMU will only autozero once immediately after being triggered. The default is None.</p>
+</dd>
+<dt><strong>over_voltage_protection</strong><span class="classifier">float, optional</span></dt><dd><p>Sets the voltage protector on the SMU. See overvoltages attribute for list of possible values.
+The method will round up to the nearest possible value. The default is None.</p>
+</dd>
+<dt><strong>measure_for_duration_or_count</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘count’ or ‘duration’. Sets the source sweep to be given each source level as set number of measurements
+or measure for a set amount of time. The default is None.</p>
+</dd>
+<dt><strong>duration_per_level</strong><span class="classifier">float, optional</span></dt><dd><p>How long to measure each sweep value for if measurements are set to duration. The default is None.</p>
+</dd>
+<dt><strong>initial_level_duration</strong><span class="classifier">float, optional</span></dt><dd><p>If set, will change the initial duration for source sweep value if measurements are set to duration.
+Set to negative value to turn off this setting, and use duration _per_level for every source value.</p>
+</dd>
+<dt><strong>count_per_level</strong><span class="classifier">int, optional</span></dt><dd><p>How many measurements to take if measurements are set to count. The default is None.</p>
+</dd>
+<dt><strong>nplc</strong><span class="classifier">float, optional</span></dt><dd><p>How long to integrate measurements for in power line cycles (about 1/60 seconds). The default is None.</p>
+</dd>
+<dt><strong>source_readback</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, the SMU will measure the source value it gives. This
+will approximatley double the measurement time per sample. Otherwise it will report
+the nominal setpoint value. The default is None.</p>
+</dd>
+<dt><strong>source_delay</strong><span class="classifier">float or str, optional</span></dt><dd><p>Time to wait before taking a measurement after changing source level. if ‘auto’ SMU will
+automatically set delay. The default is None.</p>
+</dd>
+<dt><strong>source_trigger_levels</strong><span class="classifier">iter, optional</span></dt><dd><p>Source levels to sweep through on trigger. If ‘auto’ the SMU will measure at
+whatever the current source level is at. The default is None.</p>
+</dd>
+<dt><strong>buffer_size</strong><span class="classifier">float, optional</span></dt><dd><p>Number of readings to allocate for in the memory buffer. The default is None.</p>
+</dd>
+<dt><strong>buffer_fill_mode</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘fill_once’ or ‘continuous’. Determines how the SMU handles taking more readings
+than allocated for by buffer_size. The default is ‘fill_once’.
+‘fill_once’ will fill the buffer then stop, ‘continuous’ will overwrite previous readings.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.arm">
+<span class="sig-name descname"><span class="pre">arm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.arm" title="Link to this definition">¶</a></dt>
+<dd><p>Arm the SMU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.trigger">
+<span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Trigger the SMU.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.fetch_data">
+<span class="sig-name descname"><span class="pre">fetch_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delete_buffer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.fetch_data" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch data from the buffer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>delete_buffer</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, deallocates the buffer from the SMU’s memory. The default is False.</p>
+</dd>
+<dt><strong>meas_start_time</strong><span class="classifier">float, optional</span></dt><dd><p>If provided, will be used as timestamp for time of trigger. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Dictionary of measurements. Columns are automatically named based on how the
+instrument was initalized.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.query_state">
+<span class="sig-name descname"><span class="pre">query_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.query_state" title="Link to this definition">¶</a></dt>
+<dd><p>Check the state of the machine according to state model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>state</strong><span class="classifier">str</span></dt><dd><p>Current state of the instrument.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.get_errors">
+<span class="sig-name descname"><span class="pre">get_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.get_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Not implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.get_machine_info">
+<span class="sig-name descname"><span class="pre">get_machine_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.get_machine_info" title="Link to this definition">¶</a></dt>
+<dd><p>Poll machine for serial and firmware version numbers.</p>
+<p>Returns serial, firmware</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Serial of SMU.</p>
+</dd>
+<dt>str</dt><dd><p>Firmware version of SMU.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.SMUSourceSweep.do_after_group_trigger">
+<span class="sig-name descname"><span class="pre">do_after_group_trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.SMUSourceSweep.do_after_group_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Run post-trigger commands after an external trigger event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.K2450.</span></span><span class="sig-name descname"><span class="pre">DCSubPowerMeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../measurement_functionalities/index.html#rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter" title="rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.ABC_DCSubPowerMeter</span></code></a>, <a class="reference internal" href="../communications/index.html#rminstr.instruments.communications.TSPRunner" title="rminstr.instruments.communications.TSPRunner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.communications.TSPRunner</span></code></a></p>
+<p>Control the K2450 behaving as a DC substituted power meter.</p>
+<section id="id1">
+<h3>Attributes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>sensor_types<span class="classifier">str,</span></dt><dd><p>Type of sensors that are supported in the code (currently only “platinum_thinfilm”).</p>
+</dd>
+<dt>panel_configurations<span class="classifier">list</span></dt><dd><p>Possible panel connections for the SMU (‘rear’ or ‘front’).</p>
+</dd>
+<dt>overvoltages<span class="classifier">list</span></dt><dd><p>list of over voltage protection values that can be commanded to the SMU.</p>
+</dd>
+</dl>
+<p>Initialize the DC substituted power meter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>visa_address</strong><span class="classifier">str</span></dt><dd><p>Visa address of instrument.</p>
+</dd>
+<dt><strong>resource_manager</strong><span class="classifier">visa.ResourceManager, optional</span></dt><dd><p>Pyvisa resource manager for opening visa resources. The default is None.</p>
+</dd>
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>If provided, will log at the specified path. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.meas_start_time">
+<span class="sig-name descname"><span class="pre">meas_start_time</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.meas_start_time" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.sensor_types">
+<span class="sig-name descname"><span class="pre">sensor_types</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['platinum_thinfilm',</span> <span class="pre">'thermistor']</span></em><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.sensor_types" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.panel_configurations">
+<span class="sig-name descname"><span class="pre">panel_configurations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['rear',</span> <span class="pre">'front']</span></em><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.panel_configurations" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.overvoltages">
+<span class="sig-name descname"><span class="pre">overvoltages</span></span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.overvoltages" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.default_setup_settings">
+<span class="sig-name descname"><span class="pre">default_setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.default_setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.fetch_data">
+<span class="sig-name descname"><span class="pre">fetch_data</span></span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.fetch_data" title="Link to this definition">¶</a></dt>
+<dd><p>Take arguments and keyword arguments that definef fetching_data of the instrument.</p>
+<p>Implemented in the child classes. Kwargs get passed as raw commands
+if they are not in the header of the function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>**kwargs</strong><span class="classifier">dict</span></dt><dd><p>Any keyword arguments the fetch_data function should have.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.initial_setup">
+<span class="sig-name descname"><span class="pre">initial_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sensor_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.initial_setup" title="Link to this definition">¶</a></dt>
+<dd><p>Set initial setup of K2450 as a DC substituted power meter.</p>
+<p>Passed key word arguments are stored
+in a local dictionary. Determines the sensor type, panel, and other
+commands that are setup before an experiment begins or to reset the instrument;
+it places the instrument into a known safe state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>sensor_type: str,optional</strong></dt><dd><p>Type of sensor being controlled. Must be
+‘platinum_thinfilm’ or ‘thermistor’.</p>
+</dd>
+<dt><strong>panel</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘rear’ or ‘front’. The default is None.</p>
+</dd>
+<dt><strong>initial_source</strong><span class="classifier">float, optional</span></dt><dd><p>The feedback loop will be initialized to source this value (Volts
+for thinfilms and  Amps for thermistors).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">resistance_setpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_i</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ubound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_lbound</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_level</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_ilimit</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_autozero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over_voltage_protection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nplc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_readback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_fill_mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v0_cal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vm_cal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i0_cal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_cal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_source_diff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Change the settings of the K2450.</p>
+<p>Source and current values are in units of Volts or Amps, depending on the
+configuration of the SMU</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>resistance_setpoint</strong><span class="classifier">float, optional</span></dt><dd><p>The setpoint resistance.</p>
+</dd>
+<dt><strong>k_p</strong><span class="classifier">float, optional</span></dt><dd><p>The proportional gain on linear controller.</p>
+</dd>
+<dt><strong>k_i</strong><span class="classifier">float, optional</span></dt><dd><p>The intergral gain on linear controller.</p>
+</dd>
+<dt><strong>n_filter</strong><span class="classifier">int, optional</span></dt><dd><p>The window sample size for the rolling average filtering. 0 Turns filter off, window size can be 1-100 samples.</p>
+</dd>
+<dt><strong>duration</strong><span class="classifier">float, optional</span></dt><dd><p>How long to hold control loop for.</p>
+</dd>
+<dt><strong>source_ubound</strong><span class="classifier">float, optional</span></dt><dd><p>Software upper limit on sourced value.</p>
+</dd>
+<dt><strong>source_lbound</strong><span class="classifier">float, optional</span></dt><dd><p>Software lower limit on sourced value.</p>
+</dd>
+<dt><strong>source</strong><span class="classifier">Union[str, bool], optional</span></dt><dd><p>Whether or not to turn the source on or off. Either ‘off’/’on’ or True/False.</p>
+</dd>
+<dt><strong>source_level</strong><span class="classifier">float, optional</span></dt><dd><p>Value to set the source to.</p>
+</dd>
+<dt><strong>source_range</strong><span class="classifier">Union[float, str], optional</span></dt><dd><p>If ‘auto’, smu will set range automatically.</p>
+</dd>
+<dt><strong>source_ilimit</strong><span class="classifier">float, optional</span></dt><dd><p>Current limiter setting on the source output.</p>
+</dd>
+<dt><strong>measure_range</strong><span class="classifier">float, optional</span></dt><dd><p>Measurment range. If ‘auto’ smu will set range automatically.</p>
+</dd>
+<dt><strong>measure_autozero</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, measurements will autozero between each reading. If false,
+the SMU will only autozero once immediatley after being triggered.</p>
+</dd>
+<dt><strong>over_voltage_protection</strong><span class="classifier">float, optional</span></dt><dd><p>Sets the voltage protector on the SMU. See overvoltages attribute for list of possible values.
+The method will round up to the neares possible value.</p>
+</dd>
+<dt><strong>nplc</strong><span class="classifier">float, optional</span></dt><dd><p>How long to integrate measurements for in power line cycles (about 1/60 seconds).</p>
+</dd>
+<dt><strong>source_readback</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, the SMU will measure the source value it gives, Otherwise it will return the nominal value.
+This will approximatley double the measurement time per sample.</p>
+</dd>
+<dt><strong>source_delay</strong><span class="classifier">Union[float, str], optional</span></dt><dd><p>Time to wait before taking a measurement after changing source level. if ‘auto’ SMU will
+automatically set delay.</p>
+</dd>
+<dt><strong>buffer_size</strong><span class="classifier">float, optional</span></dt><dd><p>Number of readings to allocated memory for the buffer.</p>
+</dd>
+<dt><strong>buffer_fill_mode</strong><span class="classifier">str, optional</span></dt><dd><p>Either ‘fill_once’ or ‘continuous’. Determines how the SMU handles taking more readings
+than allocated for by buffer_size. The default is ‘fill_once’.
+‘fill_once’ will fill the buffer then stop, ‘continuous’ will overwrite previous readings.</p>
+</dd>
+<dt><strong>v0_cal</strong><span class="classifier">float, optional</span></dt><dd><p>Calibrated Voltage offset (V). The default is None.</p>
+</dd>
+<dt><strong>vm_cal</strong><span class="classifier">float, optional</span></dt><dd><p>Calibrated voltage slope correction (V/V). The default is None.</p>
+</dd>
+<dt><strong>i0_cal</strong><span class="classifier">float, optional</span></dt><dd><p>Calibrated current offset correction (A). The default is None.</p>
+</dd>
+<dt><strong>im_cal</strong><span class="classifier">float, optional</span></dt><dd><p>Calibrated current slope correction (A/A). The default is None.</p>
+</dd>
+<dt><strong>trigger_var</strong><span class="classifier">float, optional</span></dt><dd><p>Threshhold for source value to send trigger pulses when compared
+against square of finite difference of the source. Set to zero to
+turn off output trigger pulses. The default is None.</p>
+</dd>
+<dt><strong>max_source_diff</strong><span class="classifier">float</span></dt><dd><p>Maximum change in source value during the feedback loop. Doesn’t apply
+to thinfilms. Only used for thermistors to handle noe-linearity on the
+IV curve.</p>
+</dd>
+<dt><strong>other_commands</strong><span class="classifier">list[str]</span></dt><dd><p>any other commands are passed through to the SMU automatically.</p>
+</dd>
+<dt><strong>**kwargs</strong></dt><dd><p>Catches any commands that aren’t recognized.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.arm">
+<span class="sig-name descname"><span class="pre">arm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bus'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_timeout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100000.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_out</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.arm" title="Link to this definition">¶</a></dt>
+<dd><p>Arm the SMU.</p>
+<dl class="simple">
+<dt>trigger_source: str, optional</dt><dd><p>Either ‘bus’ or ‘ext’. Bus will trigger by GPIB bus (either through self.trigger() or a GPIB GET
+command through a GPIB interface). Ext will trigger externally by digital i/o pin 1.</p>
+</dd>
+<dt>trigger_timeout: float,</dt><dd><p>How long to wait for a trigger signal before continuing the feedback
+loop. The default is 1e5s.</p>
+</dd>
+<dt>trigger_out; bool,</dt><dd><p>If True, asserts a trigger pulse over digital i/o pin 6 when triggered.
+The default is False.</p>
+</dd>
+<dt>delay: float,</dt><dd><p>How long to wait after a trigger before starting the feedback loop. The default is 0.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.trigger">
+<span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Trigger a DC susbtituted power measurement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.query_state">
+<span class="sig-name descname"><span class="pre">query_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.query_state" title="Link to this definition">¶</a></dt>
+<dd><p>Check the state of the machine according to state model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Current state of the instrument.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.get_machine_info">
+<span class="sig-name descname"><span class="pre">get_machine_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.get_machine_info" title="Link to this definition">¶</a></dt>
+<dd><p>Poll machine for serial and firmware version numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Serial of SMU.</p>
+</dd>
+<dt>str</dt><dd><p>Firmware version of SMU.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.K2450.DCSubPowerMeter.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.K2450.DCSubPowerMeter.close" title="Link to this definition">¶</a></dt>
+<dd><p>Close out the instrument safely.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">rminstr</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../data_structures/index.html">rminstr.data_structures</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">rminstr.instruments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utilities/index.html">rminstr.utilities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/rminstr/instruments/K2450/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../../v0.6.5/index.html">v0.6.5</a></li>
+  <li><a href="../../../../../development/index.html">development</a></li>
+  <li><a href="index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../../../_sources/autoapi/rminstr/instruments/K2450/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

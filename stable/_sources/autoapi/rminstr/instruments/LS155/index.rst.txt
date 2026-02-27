@@ -1,0 +1,323 @@
+rminstr.instruments.LS155
+=========================
+
+.. py:module:: rminstr.instruments.LS155
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.LS155.CurrentGenerator
+
+
+Package Contents
+----------------
+
+.. py:class:: CurrentGenerator(GPIB_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_CurrentGenerator`
+
+
+   Implementation the LS155 as a current generator.
+
+
+   Initialize a LS155 for the current generator.
+
+
+   :Parameters:
+
+       **visa_resource** : visa.Resource
+           Visa resource for the instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(panel: str = None, **kwargs)
+
+      
+      Set initial state of the machine.
+
+
+      :Parameters:
+
+          **panel** : str, optional
+              The panel to use (REAR or FRONT). The default is None.
+
+          **other_commands** : list, optional
+              list of strings, commands to be sent directly to machine. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(panel: str = None, i_range: float = None, i_limit: float = None, over_voltage_protection: float = None, current_level: float = None, source: bool = None, other_commands: list = None, **kwargs)
+
+      
+      Adjust settings on the machine.
+
+
+      :Parameters:
+
+          **panel** : str, optional
+              The panel to use (REAR or FRONT). The default is None.
+
+          **current** : float, optional
+              The current to output. The default is None.
+
+          **i_range** : float, optional
+              The range for the current output. The default is None.
+
+          **i_limit** : float, optional
+              Maximum current the sourec will output. The default is None.
+
+          **over_voltage_protection** : float, optional
+              Maximum voltage the source will output. The default is None.
+
+          **current_level** : float, optional
+              The current amplitude to source in A. The default is None.
+
+          **source** : bool, optional
+              Turns source on when True, off when False. The default is True.
+
+          **other_commands** : list, optional
+              List of other command not covered by keyword arguments. Written directly to instrument. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm()
+
+      
+      Arms the instrument.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Set the output of the source on.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data()
+
+      
+      Fetch the data. This does nothing execpt state model stuff.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Query the status of the instrument. If there are errors, raise them as Python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument returns an error message or state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Query the status of the instrument. If there are errors, returns the error message.
+
+
+
+      :Returns:
+
+          str
+              Instruments error message.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

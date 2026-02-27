@@ -1,0 +1,296 @@
+rminstr.instruments.LS330
+=========================
+
+.. py:module:: rminstr.instruments.LS330
+
+.. autoapi-nested-parse::
+
+   
+   Created on Wed Mar  6 14:47:49 2024
+
+   @author: rfpower
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.LS330.TemperatureController
+
+
+Package Contents
+----------------
+
+.. py:class:: TemperatureController(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_TemperatureController`
+
+
+   LS340 as a temperature controller.
+
+
+   Initialize the Voltmeter class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:attribute:: fetch_data
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Initiliaze the temperature controllers's local settings to a safe state.
+
+      This funciton should only be run if the instrument is not currently in a safe state,
+      otherwise settings will be overwritten
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(assign_curve: str = None, sensor_units: str = None)
+
+      
+      Change Settings.
+
+
+      :Parameters:
+
+          **assign_curve** : int, optional
+              Change curve. See Table 3-1 in manual for curve numbers.
+              The default is None.
+
+          **sensor_units** : str, optional
+              K for Kelvin, C for Celsius, S for sensor units (e.g. V for a
+              silicon diode). The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          **state** : str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Get any errors present on the instrument as a string.
+
+
+
+      :Returns:
+
+          str
+              Error string if one is there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      If the LS330 is in an error state, raise the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm()
+
+      
+      Arm, placeholder does nothing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Arm, placeholder does nothing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

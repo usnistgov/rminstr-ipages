@@ -1,0 +1,67 @@
+rminstr.utilities.timing
+========================
+
+.. py:module:: rminstr.utilities.timing
+
+.. autoapi-nested-parse::
+
+   Module for timing related objects.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.utilities.timing.Timer
+
+
+Module Contents
+---------------
+
+.. py:class:: Timer
+
+   Simple timer class for making getting relative times.
+
+   An instance of a timer class stores its time of initialization. Calling
+   the class instance returns its time since
+   initialization.
+
+   Attributes
+   ----------
+   t0 : float
+       Absolute time at initialization of class in seconds.
+
+
+
+   Timer init, takes no arguments.
+
+
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: t0
+
+

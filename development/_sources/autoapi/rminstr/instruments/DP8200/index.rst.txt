@@ -1,0 +1,232 @@
+rminstr.instruments.DP8200
+==========================
+
+.. py:module:: rminstr.instruments.DP8200
+
+.. autoapi-nested-parse::
+
+   
+   Created on Thu Jun  6 11:45:39 2024
+
+   @author: rfpower
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.DP8200.VoltageGenerator
+
+
+Package Contents
+----------------
+
+.. py:class:: VoltageGenerator(GPIB_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_VoltageGenerator`
+
+
+   Implementation of the DP8200 as a voltage generator.
+
+
+   Initialize DP8200 as a voltage generator.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager
+           Optionally declare what resource manager to use for opening the
+           visa resource object.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Get errors.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Raise errors present on instrument as exceptions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Run initial setup routine on voltage calibrator.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(v_range: float = None, source_level: float = None)
+
+      
+      Adjust settings on the DP8200.
+
+
+      :Parameters:
+
+          **v_range** : float, optional
+              Voltage range of output. 100e-3, 10, 100, or 1000 V.
+              Value will be rounded up to nearest valid value. The default is None.
+
+          **source_level** : float, optional
+              Voltage level to output. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          Exception
+              On bad inputs.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

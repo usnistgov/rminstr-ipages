@@ -1,0 +1,783 @@
+rminstr.instruments.HP3458A
+===========================
+
+.. py:module:: rminstr.instruments.HP3458A
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.HP3458A.Voltmeter
+   rminstr.instruments.HP3458A.Ammeter
+
+
+Package Contents
+----------------
+
+.. py:class:: Voltmeter(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_Voltmeter`
+
+
+   Implementation the HP3458A as a Voltmeter.
+
+
+   Initialize the Voltmeter class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The Default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(display: bool = False, **kwargs)
+
+      
+      Initialize the Voltmeters local settings to a safe state.
+
+
+      :Parameters:
+
+          **display** : bool, optional
+              Boolean to turn on the front display or not. The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(nplc: float = None, v_range: float = None, num_readings: int = None, timer: float = None, autozero=None, extout_mode: str = None, extout_polarity: str = None, **kwargs)
+
+      
+      Change Voltmeter settings.
+
+
+      :Parameters:
+
+          **nplc** : float, optional
+              Number of power line cycles to integrate over. The default is None.
+
+          **v_range** : float, optional
+              Voltage measurement range The default is None.
+
+          **num_readings** : int, optional
+              Number of readings to take. The default is None.
+
+          **timer** : float, optional
+              Time between measuring points. If it is smaller then the time it
+              takes to measure (from nplc), will throw a trigger too fast error.
+              Be warned. The default is None.
+
+          **autozero: bool, optional**
+              Set the autozero settings TRUE or FALSE. TRUE will have
+              instrument zero before every measurement, doubling sample time. False
+              will have instrument zero once, then it will do it again only if
+              settings are changed. The default is None.
+
+          **extout_mode: str, optional**
+              Adjust how the external trigger signal is generated.
+              The initial state is 'ONCE' where the trigger() method needs
+              to be called with "generate_extout" in order to produce a signal.
+              The default is None.
+
+          **extout_polarity: str, optional**
+              Adjust the polarity of the external trigger signal. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'BUS')
+
+      
+      Arm the instrument, and define how it will trigger/send out trigger signals.
+
+
+      :Parameters:
+
+          **delay** : float, optional
+              Delay between trigger and reading start. The default is 0.
+
+          **trigger_source: str, optional**
+              'BUS' or 'EXT', source of triggering. The default is 'BUS'.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger(*instruments)
+
+      
+      Send trigger signal over GPIB.
+
+
+      :Parameters:
+
+          **instruments** : list
+              List of positional arguments of instruments to trigger from the HP.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(time_column_name: str = 'timestamp', v_column_name: str = 'Voltage (V)', meas_start_time: float = None) -> dict
+
+      
+      Fetch data from the machine.
+
+
+      :Parameters:
+
+          **time_column_name** : str, optional
+              Name you want for timestamps key. The default is "timestamp".
+
+          **v_column_name** : str, optional
+              Name you want for voltage key. The default is "Voltage (V)".
+
+          **meas_start_time** : float, optional
+              If provided, will be used as timestamp for time of trigger. The default is None.
+
+      :Returns:
+
+          dict
+              Measurement data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: special_read()
+
+      
+      Read from HP3458A output buffer.
+
+      The HP3458A is unusual, and pyvisa's read() does not work.
+      read_bytes works, but requires extra work to parse correctly.
+      This funtion does that work for you.
+
+
+      :Returns:
+
+          str
+              Whatever happens to be on the HP3458A's output buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      If the HP3458A is in an error state, raise the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors() -> str
+
+      
+      Get any errors present on the instrument as a string.
+
+
+
+      :Returns:
+
+          str
+              Error string if one is there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Run post-trigger commands after an external trigger event.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: Ammeter(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_Ammeter`
+
+
+   Implementation the HP3458A as an Ammeter.
+
+
+   Initialize the Ammeter class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(display: bool = False, **kwargs)
+
+      
+      Initiliaze the ammeter's local settings to a safe state.
+
+
+      :Parameters:
+
+          **display** : bool, optional
+              Boolean to turn on the front display or not. The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(nplc: float = None, i_range: float = None, num_readings: int = None, timer: float = None, measure_autozero: bool = None, **kwargs)
+
+      
+      Change measurement settings.
+
+
+      :Parameters:
+
+          **nplc** : float, optional
+              Number of power line cycles to integrate over. The default is None.
+
+          **i_range** : float, optional
+              Current measurement range. The default is None.
+
+          **num_readings** : int, optional
+              Number of readings to take. The default is None.
+
+          **timer** : float, optional
+              Timer between measurements. Needs to be long enough or there will be an error. The default is None.
+
+          **measure_autozero** : bool, optional
+              Whether or not to auto zero each measurement. If False it will auto zero once at the beginning.
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'BUS')
+
+      
+      Arm the machine.
+
+      Currently just sets the machine to auto trigger, hold.
+
+      :Parameters:
+
+          **delay** : float, optioanl
+              Delay between receiving a trigger command and taking the measurement. The default is 0.
+
+          **trigger_mode: str, optional**
+              BUS for triggering via GPIB, EXT for external triggering. The default is 'BUS'.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger(*instruments)
+
+      
+      Send trigger signal over GPIB.
+
+
+      :Parameters:
+
+          **instruments** : list
+              List of positional arguments of instruments to trigger from the HP,
+              if applicable.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(time_column_name: str = 'timestamp', i_column_name: str = 'Current (A)', meas_start_time: float = None) -> dict
+
+      
+      Fetch data from the machine.
+
+
+      :Parameters:
+
+          **time_column_name** : str, optional
+              Name you want for timestamps key. The default is "timestamp".
+
+          **i_column_name** : str, optional
+              Name you want for current key. The default is "Current (A)".
+
+          **meas_start_time** : float, optional
+              If provided, will be used as timestamp for time of trigger. The default is None.
+
+      :Returns:
+
+          dict
+              Measurement data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: special_read()
+
+      
+      Read from HP3458A output buffer.
+
+      The HP3458A is unusual, and pyvisa's read() does not work.
+      read_bytes works, but requires extra work to parse correctly.
+      This funtion does that work for you.
+
+
+      :Returns:
+
+          str
+              Whatever happens to be on the HP3458A's output buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      If the HP3458A is in an error state, raise the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors() -> str
+
+      
+      Get any errors present on the instrument as a string.
+
+
+
+      :Returns:
+
+          str
+              Error string if one is there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Run post-trigger commands after an external trigger event.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

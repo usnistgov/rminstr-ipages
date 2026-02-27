@@ -1,0 +1,121 @@
+rminstr.utilities.path
+======================
+
+.. py:module:: rminstr.utilities.path
+
+.. autoapi-nested-parse::
+
+   Module with custom pathing funcitons.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.utilities.path.validate_path
+   rminstr.utilities.path.new_local_dir
+   rminstr.utilities.path.new_dir
+
+
+Module Contents
+---------------
+
+.. py:function:: validate_path(path, check_dirs: list[str] = None, accept_duplicates: bool = False) -> str
+
+   
+   Validate if path is an existing file.
+
+
+   :Parameters:
+
+       **filename** : str
+           The file path to check.
+
+       **check_dirs** : list[str], optional
+           If true, will check in the directories for a file matching the
+           original name. If found, will return a valid file
+           path from one of those directories. The default is True.
+
+       **accept_duplicates** : bool, optional
+           If true and files with the same basename found in the search
+           directories, will return the first file found. Else, will throw an
+           error. The default is False.
+
+   :Returns:
+
+       str
+           Valid file path.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: new_local_dir(base_name: str)
+
+   
+   Create local directory with an iterated name.
+
+
+
+   :Returns:
+
+       rel_path
+           Relative path to newly create local directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: new_dir(base_dir: str, base_name: str)
+
+   
+   Create a directory with an iterated name inside base_dir.
+
+
+
+   :Returns:
+
+       path.
+           Absolute path to newly create local directory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

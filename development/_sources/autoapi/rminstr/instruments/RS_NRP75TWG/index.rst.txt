@@ -1,0 +1,386 @@
+rminstr.instruments.RS_NRP75TWG
+===============================
+
+.. py:module:: rminstr.instruments.RS_NRP75TWG
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.RS_NRP75TWG.RFPowerMeter
+
+
+Package Contents
+----------------
+
+.. py:class:: RFPowerMeter(GPIB_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_RFPowerMeter`
+
+
+   Implements the RF powermeter measurment functionality for the RS_NRP75TWG.
+
+
+   Initiate the instrument.
+
+
+   :Parameters:
+
+       **visa_resource** : visa.Resources
+           The pyvisa resource.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: num_readings
+      :value: 0
+
+
+
+   .. py:attribute:: trigger_source
+      :value: 'IMM'
+
+
+
+   .. py:attribute:: trigger_t0
+      :value: None
+
+
+
+   .. py:attribute:: init_t0
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Initiliazation method.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Raise instrument errors the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Raise instrument errors the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(read_units: str = None, integration_time: int = None, average_state: int = None, zero_once: bool = None, trig_delay: Union[float, str] = None, **kwargs)
+
+      
+      Change powermeter settings.
+
+
+      :Parameters:
+
+          **read_units** : str, optional
+              W for Watts, dBm for dBm.
+
+          **integration_time** : str, optional
+              time in seconds of an average
+
+          **average_state** : int, optional
+              averaging only effective when ON. 'On' or 'Off'.
+
+          **zero_once: bool, optional**
+              Performs a zeroing measurement on setup call.
+              Ensure all input signals are turned
+              off. Blocks script while zeroing finishes. Performs if True.
+
+          **trig_delay: float, optional**
+              Sets the delay between the measurement and the trigger event.
+              If 'AUTO', the sensor automatically waits until it settles to
+              take the measurement. 0.1 to
+              5.0 or 'auto'/'AUTO'. Default is 'auto'.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'BUS')
+
+      
+      Arm the Voltmeter to measure when tiggered.
+
+
+      :Parameters:
+
+          **delay** : float, optional
+              delay after triggered. The default is 0.
+
+          **trigger_source** : str, optional
+              how the instrument will be triggered. The default is "BUS".
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Send trigger signal over GPIB.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(p_column_name: str = None, v_column_name: str = None) -> dict
+
+      
+      Fetch data from the Voltmeter.
+
+
+      :Parameters:
+
+          **p_column_name: str, optional**
+              Name to give power clumns in output dictionairy. The default is
+              "Power (<UNIT>)"
+
+          **v_column_name** : str, optional
+              alias for p_column_name.
+
+      :Returns:
+
+          dict
+              dictionary with give names as keys.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: check_is_measuring()
+
+      
+      Check if power meter is measuring.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state.
+
+
+
+      :Returns:
+
+          str
+              Instrument state.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Perform tasks after a group trigger.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Records &#8212; Rocky Mountain Instruments 0.6.6a3.dev2+ga2c84b576.d20260227 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=5f1640f5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Experiment Parameters" href="plot_e12_exptparameters.html" />
+    <link rel="prev" title="Instrument Interfaces" href="e00_instrument_interfaces.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-plot-e11-data-record-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="data-records">
+<span id="sphx-glr-auto-examples-plot-e11-data-record-py"></span><h1>Data Records<a class="headerlink" href="#data-records" title="Link to this heading">¶</a></h1>
+<p>Data records are a tool for managing time series data collected
+over the course of a measurement. They store aligned time series data
+and meta data about the file in multiple csv files.</p>
+<p>An ActiveRecord is a context manager that will automatically dump
+any data in the memory to the target directory in the event of
+an exception or error.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rminstr.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ActiveRecord</span><span class="p">,</span> <span class="n">ExistingRecord</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">with</span> <span class="n">ActiveRecord</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;column_1&#39;</span><span class="p">,</span> <span class="s1">&#39;column_2&#39;</span><span class="p">],</span> <span class="n">output_dir</span><span class="o">=</span><span class="s1">&#39;outputs&#39;</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">minlen</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span> <span class="k">as</span> <span class="n">rec</span><span class="p">:</span>
+    <span class="c1"># add a single sample. Time stamps can be applied automatically</span>
+    <span class="c1"># or through the timestamp keyword.</span>
+    <span class="n">rec</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;column_1&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># add multiple samples all at once, time stamps need to be</span>
+    <span class="c1"># provided in this case</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">timestamps</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+        <span class="n">samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">timestamps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="n">rec</span><span class="o">.</span><span class="n">array_update</span><span class="p">(</span><span class="s1">&#39;column_2&#39;</span><span class="p">,</span> <span class="n">samples</span><span class="p">,</span> <span class="n">timestamps</span><span class="p">)</span>
+
+    <span class="c1"># The most recent sample in a column can be accessed via indexing</span>
+
+    <span class="n">last_sample</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="s1">&#39;column_2&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Columns can be indexed into by their timestamps</span>
+
+    <span class="n">time_series</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">get_time_series</span><span class="p">(</span>
+        <span class="s1">&#39;column_2&#39;</span><span class="p">,</span> <span class="n">t_min</span><span class="o">=</span><span class="n">timestamps</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">t_max</span><span class="o">=</span><span class="n">timestamps</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>To read the data back in, point the <code class="docutils literal notranslate"><span class="pre">ExistingRecord</span></code> class to
+the metadata file produced by the <code class="docutils literal notranslate"><span class="pre">ActiveRecord</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">opened</span> <span class="o">=</span> <span class="n">ExistingRecord</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;outputs/</span><span class="si">{</span><span class="n">rec</span><span class="o">.</span><span class="n">metadata_file_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read each line in the record one at a time</span>
+<span class="c1"># and index into it like you would an active record</span>
+<span class="k">while</span> <span class="n">opened</span><span class="o">.</span><span class="n">read_next_line</span><span class="p">():</span>
+    <span class="k">pass</span>
+<span class="n">last_sample</span> <span class="o">=</span> <span class="n">opened</span><span class="p">[</span><span class="s1">&#39;column_1&#39;</span><span class="p">]</span>
+
+
+<span class="c1"># Read the entire record at once into a</span>
+<span class="c1"># dictionary of ``TimeSeries`` objects.</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="n">opened</span><span class="o">.</span><span class="n">batch_read</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-e11-data-record-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/933bb03591df9d2ba25115c30dbf6ce4/plot_e11_data_record.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_e11_data_record.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/f800eb1d5d907d10aff6376d75dfb163/plot_e11_data_record.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_e11_data_record.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/de1c3f1b60b13015eff8bb9a3e2b899f/plot_e11_data_record.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_e11_data_record.zip</span></code></a></p>
+</div>
+</div>
+<p class="rubric">Related examples</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip="Data records are a tool for managing time series data collected over the course of a measurement. They store aligned time series data and meta data about the file in multiple csv files."><img alt="" src="../_images/sphx_glr_plot_e11_data_record_thumb.png" />
+<p><a class="reference internal" href="#sphx-glr-auto-examples-plot-e11-data-record-py"><span class="std std-ref">Data Records</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Data Records</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="Experiment Parameters are a type safe markup language that utilizes CSV files to described arbitrarily nested dictionaries. Experiment parameters are always a dictionary, but may contain lists and other dictionaries."><img alt="" src="../_images/sphx_glr_plot_e12_exptparameters_thumb.png" />
+<p><a class="reference internal" href="plot_e12_exptparameters.html#sphx-glr-auto-examples-plot-e12-exptparameters-py"><span class="std std-ref">Experiment Parameters</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Experiment Parameters</div>
+</div></div><p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="e00_instrument_interfaces.html">Instrument Interfaces</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Records</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_e12_exptparameters.html">Experiment Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/auto_examples/plot_e11_data_record.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../v0.6.5/index.html">v0.6.5</a></li>
+  <li><a href="plot_e11_data_record.html">development</a></li>
+  <li><a href="../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/auto_examples/plot_e11_data_record.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

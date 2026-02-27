@@ -1,0 +1,293 @@
+rminstr.instruments.KS_E8257D
+=============================
+
+.. py:module:: rminstr.instruments.KS_E8257D
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.KS_E8257D.SignalGenerator
+
+
+Package Contents
+----------------
+
+.. py:class:: SignalGenerator(visa_resource: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_SignalGenerator`
+
+
+   Signal generator implementation of KS_E8257D.
+
+
+   Initialize KS_E8257D as a signal generator.
+
+
+   :Parameters:
+
+       **visa_resource** : visa.Resource
+           visa resource for the instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: default_settings
+
+
+   .. py:attribute:: trigger_count
+      :value: 0
+
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Initialize instrument.
+
+
+      :Parameters:
+
+          **\*\*kwargs** : list, optional
+              List of strings, commands to be sent directly to machine.
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(dBm: float = None, f_GHz: float = None, source_on: bool = None, AM: bool = None, AM_ext_port: int = None, AM_ext_sensitivity_percent_per_volt: float = None, AM_installed: bool = True, **kwargs)
+
+      
+      Adjust settings on the machine.
+
+
+      :Parameters:
+
+          **dBm** : float, optional
+              Power setting in dBm. The default is None.
+
+          **f_GHz** : float, optional
+              Frequency setting in GHz. The default is None.
+
+          **source_on** : bool, optional
+              Turns source on when True, off when False. The default is None.
+
+          **port** : int, optional
+              Determines which port is used for the commands. The default is None.
+
+          **AM** : bool, optional
+              Turns on or off the Amplitude Modulation. The default is None.
+
+          **AM_ext_port** : int, optional
+              What port to use for Amplitude Modulation. The default is None.
+
+          **AM_ext_sensitivity_percent_per_volt** : float, optional
+              Sensitivity of the Amplitude Modulation in percent per volt. The default is None.
+
+          **other_commands** : list, optional
+              List of other command not covered by keyword arguments. Written directly to instrument. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Query the status of the instrument. If there are errors, raise them as Python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Will raise the error in the instrument as a python error if present.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Query the status of the instrument. If there are errors, returns the error message.
+
+
+
+      :Returns:
+
+          str
+              Instruments error message.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data()
+
+      
+      Do nothing, this class collects no data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_frequency()
+
+      
+      Return the frequency in GHz.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

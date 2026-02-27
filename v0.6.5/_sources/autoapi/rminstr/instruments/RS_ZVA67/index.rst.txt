@@ -1,0 +1,388 @@
+rminstr.instruments.RS_ZVA67
+============================
+
+.. py:module:: rminstr.instruments.RS_ZVA67
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.RS_ZVA67.VNA
+
+
+Package Contents
+----------------
+
+.. py:class:: VNA(VNA_GPIB: str, timeout=5000, resetParams=True, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_VNA`
+
+
+   Implementation the ZVA67 as a VNA.
+
+   Attributes
+   ----------
+   ID : str
+       ID string from the VNA.
+
+
+
+   Initialize a VNA object
+
+
+   :Parameters:
+
+       **VNA_GPIB** : str
+           Visa address of instrument.
+
+       **timeout** : int
+           When to time out the resource. The default is 5000.
+
+       **resetParams** : bool
+           Whether or not to reset the parameters. The default is True.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: ID
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Put instrument into safe and known initial state.
+
+
+      :Parameters:
+
+          **\*\*kwargs**
+              Optional keyword arguments. These will be sent to the setup function.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm()
+
+      
+      Arm the VNA so that it will measure a trace when triggered.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Start a measurement.
+
+      Only works if the trigger source is set to MAN (manual). Otherwise,
+      this method does nothing.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data() -> tuple
+
+      
+      Fetch measurement data.
+
+
+
+      :Returns:
+
+          dict
+              keys 'Frequency (GHz)', <param1>, <param2>, etc. Frequency is
+              a 1-d array of floats. Each param is a 1d array
+              of complex data. Params keys are the parameters passed in setup (e.g.
+              a11, b11, etc...).
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(flist_GHz: numpy.ndarray[float] = None, fstart_GHz: float = None, fstop_GHz: float = None, npoints: float = None, sweep_type: str = None, params: list[str] = None, power_dBm: float = None, IFBW: bool = None, average: int = None)
+
+      
+      Change the settings of the VNA.
+
+
+      :Parameters:
+
+          **flist_GHz** : np.ndarray[float], optional
+              List of frequencies to sweep over.
+              The default is None.
+
+          **fstart_GHz** : float, optional
+              Start frequency for a sweep. fstart, fstop, npoints, and sweep
+              type must be provided all at once. The default is None.
+
+          **fstop_GHz** : float, optional
+              Stop frequency. fstart, fstop, npoints, and sweep
+              type must be provided all at onceThe default is None.
+
+          **npoints** : float, optional
+              Number of points. fstart, fstop, npoints, and sweep
+              type must be provided all at once. The default is None.
+
+          **sweep_type** : str, {lin, log}
+              Linear or logarithmic sweep. fstart, fstop, npoints, and sweep
+              type must be provided all at once. The default is None.
+
+          **params** : list[str], optional
+              Parameters to measure (a11, b12, S11, etc). The default is None.
+              Firs number is source port, second number is recieving port.
+
+          **power_dBm** : float, optional
+              Power to source. The default is None.
+
+          **IFBW** : bool, optional
+              Intermediate frequency bandwidth in Hz. The default is None.
+
+          **average: int, optional**
+              If provided, the VNA will average multiple passes. The default is 0.
+              Adjusting this setting will clear the average state on the VNA.
+
+          **Raises**
+              ..
+
+          **------**
+              ..
+
+          **ValueError**
+              DESCRIPTION.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Checks the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          **state** : str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Run post-trigger commands after an external trigger event.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Query the status of the instrument.
+
+      If there are errors, raise them as Python errors.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Raises an instrument error when the instrument claims it has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Query the status of the instrument.
+
+
+
+      :Returns:
+
+          str
+              Error message
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

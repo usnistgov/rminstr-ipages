@@ -1,0 +1,326 @@
+rminstr.instruments.HP34420A
+============================
+
+.. py:module:: rminstr.instruments.HP34420A
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.HP34420A.Voltmeter
+
+
+Package Contents
+----------------
+
+.. py:class:: Voltmeter(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_Voltmeter`
+
+
+   Implementation the HP34420A as a Voltmeter.
+
+
+   Initialize the Voltmeter class instance.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Initiliaze the Voltmeters's local settings to a safe state.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(nplc: float = None, v_range: float = None, num_readings: int = None, channel: int = None, zero_now: bool = None, **kwargs)
+
+      
+      Change Voltmeter settings.
+
+
+      :Parameters:
+
+          **nplc** : float, optional
+              Power line cycle intergration. The default is None.
+
+          **v_range** : float, optional
+              Voltage measurement range. If it is set to 0 it will use auto. The default is None.
+
+          **num_readings** : int, optional
+              Number of readings to take on trigger. The default is None.
+
+          **channel** : int, optional
+              The channel to measure from: 1 or 2. The default is None.
+
+          **zero_now: float, optional**
+              If true, sets the current reading as the NULL value. 0 turns off
+              the null operation on the NVM. The default is None. NVM will
+              subtract the NULL value from each measurement.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(delay: float = 0, trigger_source: str = 'BUS')
+
+      
+      Arm the instrument, and define how it will trigger.
+
+
+      :Parameters:
+
+          **delay** : float, optional
+              Delay between trigger and reading start. The default is 0.
+
+          **trigger_source: str, optional**
+              'BUS' or 'EXT', source of triggering. The default is 'BUS'.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Send trigger signal over GPIB.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data(time_column_name: str = 'timestamp', v_column_name: str = 'Voltage (V)', meas_start_time: float = None) -> dict
+
+      
+      Fetch data from the Voltmeter.
+
+
+      :Parameters:
+
+          **time_column_name** : str, optional
+              Name to give timestamps in dictionary. The default is "timestamp".
+
+          **v_column_name** : str, optional
+              Name to give voltage columns in dictionary. The default is "Voltage (V)".
+
+          **meas_start_time** : float, optional
+              If provided, will be used as timestamp for time of trigger. The default is None.
+
+      :Returns:
+
+          dict
+              Measurement data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state of the machine.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Get any errors present on the instrument as a string.
+
+
+
+      :Returns:
+
+          str
+              Error string if one is there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      If the HP34420A is in an error state, raise the errors as python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

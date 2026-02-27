@@ -1,0 +1,250 @@
+rminstr.instruments.Anritsu_MG3696A
+===================================
+
+.. py:module:: rminstr.instruments.Anritsu_MG3696A
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.Anritsu_MG3696A.SignalGenerator
+
+
+Package Contents
+----------------
+
+.. py:class:: SignalGenerator(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_SignalGenerator`
+
+
+   Implementation of the Anritsu MG3696A as a signal generator.
+
+
+   Initialize a signal generator object.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_setup_settings
+
+
+   .. py:method:: initial_setup(**kwargs)
+
+      
+      Set initial state of the machine.
+
+
+      :Parameters:
+
+          **other_commands** : list, optional
+              List of strings, commands to be sent directly to machine. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(dBm: float = None, f_GHz: float = None, dBm_limit: float = None, source_on: bool = None, **kwargs)
+
+      
+      Adjust settings on the machine.
+
+      Note, the MG3696A can have amplitude modulation, but our unit
+      does not have that option installed.
+
+      :Parameters:
+
+          **dBm** : float, optional
+              Power level setting in dBm. The default is None.
+
+          **f_GHz** : float, optional
+              Frequency setting in GHz. The default is None.
+
+          **dBm_limit** : float, optional
+              Power level setting in dBm. The default is None.
+
+          **source_on** : bool, optional
+              Turns source on when True, off when False. The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state()
+
+      
+      Check the state of the machine.
+
+
+
+      :Returns:
+
+          **state** : str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Query the status of the instrument. If there are errors, raise them as Python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Query the status of the instrument. If there are errors, returns the error message.
+
+
+
+      :Returns:
+
+          str
+              Instruments error message.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_frequency()
+
+      
+      Return the frequency in GHz.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

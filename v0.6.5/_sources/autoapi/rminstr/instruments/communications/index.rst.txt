@@ -1,0 +1,1323 @@
+rminstr.instruments.communications
+==================================
+
+.. py:module:: rminstr.instruments.communications
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   rminstr.instruments.communications.InstrumentError
+   rminstr.instruments.communications.SettingError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.communications.Instrument
+   rminstr.instruments.communications.TSPRunner
+   rminstr.instruments.communications.GPIBInterface
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.instruments.communications.get_bit
+   rminstr.instruments.communications.do_after_group_trigger
+   rminstr.instruments.communications.ext_trigger
+
+
+Package Contents
+----------------
+
+.. py:class:: Instrument(visa_resource)
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Wrapper for pyvisa Resource objects. This class exists to standardize the interface of derived instruments.
+
+   Attributes
+   ----------
+   visa_resource : visa.Resource
+       Pyvisa resource object of the connected instrument.
+
+   time_zero : float
+       Absolute time for relative timestamps.
+
+
+
+   Initiate the instrument.
+
+
+   :Parameters:
+
+       **visa_resource** : visa.Resources
+           The pyvisa resource.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: visa_resource
+
+
+   .. py:attribute:: time_zero
+      :value: None
+
+
+
+   .. py:method:: write(txt)
+
+      
+      Shortened version of self.visa_resource.write(txt).
+
+
+      :Parameters:
+
+          **txt** : str
+              Text to write.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read_stb(num_attempts=3)
+
+      
+      Shortened version of self.visa_resource.read_stb().
+
+
+      :Parameters:
+
+          **num_attempts** : int, optional
+              Number of attempts for reading the status bit if there is an error.
+              The default is 3.
+
+      :Returns:
+
+          str
+              The status_byte.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read()
+
+      
+      Shortened version of self.visa_resource.read().
+
+
+
+      :Returns:
+
+          str
+              Result of self.visa_resource.read().
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query(txt)
+
+      
+      Shortened version of self.visa_resource.query().
+
+
+      :Parameters:
+
+          **txt** : str
+              The text to query.
+
+      :Returns:
+
+          str
+              Result of self.visa_resource.query().
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read_bytes(n)
+
+      
+      Shortened version of self.visa_resource.read_bytes(n).
+
+
+      :Parameters:
+
+          **n** : int
+              Number of bytes to read
+
+      :Returns:
+
+          str
+              Result of self.visa_resource.read_bytes(n)
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: set_time_zero(time_zero=None)
+
+      
+      Set time zero for relative timestamps.
+
+
+      :Parameters:
+
+          **time_zero** : float, optional
+              Time zero for relative timestamps
+              if None, use the result of time.time().
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: clear_output()
+
+      
+      Clear the output buffer on the instrument connection.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_relative_time()
+
+      
+      Get the relataive time since instantiation.
+
+      Use for making timestamps. Returns the result of
+      time.time() - time_zero.
+
+
+      :Returns:
+
+          float
+              Time relative to self.time_zero
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_info()
+
+      
+      Get instrument metadata you may want to keep track of.
+
+
+
+      :Returns:
+
+          dict
+              Keys: ex. "GPIB address"
+              Values: ex. 11
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+      :abstractmethod:
+
+
+      
+      Query the instrument status.
+
+      Query the status of the instrument. If there are errors, raise them as Python errors.
+      Abstract method.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+      :abstractmethod:
+
+
+      
+      Query the instrument errors.
+
+      Query the status of the instrument. Returns errors as a string.
+      Abstract method.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:function:: get_bit(x, bit)
+
+   
+   Return a specific bit in x. Intended to make the status byte easier to read.
+
+
+   :Parameters:
+
+       **x** : int
+           Value to get bit from
+
+       **bit** : int
+           A power of 2: 1, 2, 4, 8, 16, 32, 64, 128
+           I.E. the 5th bit would be 2^5 = 32
+
+   :Returns:
+
+       True if the bit is 1, False otherwise
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:exception:: InstrumentError(message)
+
+   Bases: :py:obj:`Exception`
+
+
+   InstrumentErrors are raised when an instrument is in an error state.
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:exception:: SettingError(message)
+
+   Bases: :py:obj:`Exception`
+
+
+   InstrumentErrors are raised when a bad seeting is passed.
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:class:: TSPRunner(visa_resource)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`
+
+
+   Protocols for interacting with TSP enabled instruments.
+
+   The TSPRunner is a communication class that inherits from instrument, the more
+   fundemental communication object. It is design to handle communication over pyvisa
+   with instruments that are tsp enabled, and expect tsp langauage commands (Lua).
+
+   Attributes
+   ----------
+   timeout : float
+       Seconds for timeout when trying to read off data.
+
+   stb_reg : dict
+       Dictionary of status byte bit places.
+
+   termination_str : str
+       Termination string that is sent at the end of run scripts to signal its end.
+
+   busy : bool
+       If True, it means that the instrument is running a tsp script, trying to command
+       it at that moment will raise an error.
+
+   busy_count : int
+       Counter for busy checks, used in some methods for debugging.
+
+   logs : bool
+       When True, the class will print logs of commands, states, and other
+       debugging information to the console.
+
+   last_scr : str
+       String of the last tsp script that was commmanded to run through run_script.
+
+
+
+   Initialize a tsp instrument.
+
+
+   :Parameters:
+
+       **visa_resource** : visa.Resource
+           Pyvisa resource that is the tsp enabled instrument.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: info_dict
+
+
+   .. py:attribute:: timeout
+      :value: 2
+
+
+
+   .. py:attribute:: stb_reg
+
+
+   .. py:attribute:: termination_str
+      :value: 'script_complete'
+
+
+
+   .. py:attribute:: busy
+      :value: False
+
+
+
+   .. py:attribute:: busy_count
+      :value: 0
+
+
+
+   .. py:attribute:: logs
+      :value: False
+
+
+
+   .. py:attribute:: last_scr
+      :value: ''
+
+
+
+   .. py:method:: get_info()
+
+      
+      Get machine info.
+
+
+
+      :Returns:
+
+          dict
+              instrument information.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Raise an error if error bit is high on instrument.
+
+      Needs to be reworked to actually get the error message,
+      TSP scripts block sending commands for error information, need to work
+      out a protocl that accounts for this. Currently, this will just raise
+      an error, telling you to check the instrument.
+
+
+      :Returns:
+
+          None
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Error if the error bit is high.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_output_bit(bit: int)
+
+      
+      Check a bit in the status byte register.
+
+
+      :Parameters:
+
+          **bit** : int
+              Bit placement you want to check.
+
+      :Returns:
+
+          bool
+              Returns True if bit is high. False otherwise.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: tsp_trace()
+
+      
+      Print the status of the TSPRunner instance.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: check_busy(showGarbage: bool = False)
+
+      
+      Check if the instrument is busy running a TSP script.
+
+      Checks if the instrument is busy by checking for termination strings,
+      and applying a zero order hold where the termination string sets the status False,
+      not busy, and sending a run script command sets the status True, busy.
+
+      :Parameters:
+
+          **showGarbage** : bool, optional
+              If true, logs information about the method. The default is False.
+
+      :Returns:
+
+          bool
+              True if busy, False if not.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: check_error_bit()
+
+      
+      Generate a status byte error if the error bit is high.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          StatusByteError
+              Error if the error bit in the status byte is high.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: wait(timeout: float)
+
+      
+      Wait until not busy, raise error if takes longer than timeout seconds.
+
+
+      :Parameters:
+
+          **timeout** : float
+              Time to wait before raising an error.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          SMUTimeoutError
+              Error if the SMU is busy for longer than the timeout amount.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: flush_readout()
+
+      
+      Flushes the output buffer of the tsp enabled instrument.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Either prints outs instrument events or raises and error if the event is an error.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          Exception
+              Error if the SMU shows an error in its events.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: assign(varname: str, val: Union[int, float])
+
+      
+      Assign a variable to the TSP instruments global variable space.
+
+      Assigns a variable to the global namespace of the instrument. val is cast
+      as str(variable). If the tsp namespace variable is being assign a string,
+      enclose in quationtion marks. eg. val = "'string'". This is not the best
+      and could be reworked to account for more data types.
+
+      :Parameters:
+
+          **varname** : str
+              Name of the variable that will be used in the tsp instruments namespace.
+
+          **val** : float or int
+              The value to assign.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: print_number(varname: str)
+
+      
+      Command the TSP instument to print a number from its namespace.
+
+
+      :Parameters:
+
+          **varname** : str
+              String of tsp namespace variable.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_print(msg)
+
+      
+      Query the instrument.
+
+
+      :Parameters:
+
+          **msg** : str
+              String of message type to have it print.
+
+      :Returns:
+
+          str
+              Message query.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: run_script(scriptVar: str, force: bool = False)
+
+      
+      Run a TSP script stored on the instruments memory.
+
+
+      :Parameters:
+
+          **scriptVar** : str
+              String of script name on instruments non-volatile memory.
+
+          **force** : bool, optional
+              If true, will by-pass the busy checks. The default is False.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          BusyError
+              If force is False and instrument is busy while trying to be commanded,
+              this will be raised.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: read_buffer(deleteBuffer: bool = True)
+
+      
+      Read data from a data buffer of the TSP instrument.
+
+      This is the general purpose function for reading data off the instruments
+      memory buffer. This could be better generalized to usable for buffers with different names,
+      and for getting different types of data from the buffer.
+
+      :Parameters:
+
+          **deleteBuffer** : bool, optional
+              If true, read buffer will deallocate the buffer from the instruments
+              memory after the data has been read. The default is True.
+
+      :Returns:
+
+          dict
+              Dictionary of values from instrument. They are 'time', 'measure', 'source.'
+
+
+
+
+      :Raises:
+
+          BusyError
+              If instrument is busy when asking for data.
+
+          SMUTimeoutError
+              If instrument isn't busy, but a timeout occured while trying to download the data.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: load_script(project_name: str, script_name: str, file_names: list[str])
+
+      
+      Load a tsp project saved in the package's TSP directory.
+
+
+      :Parameters:
+
+          **project_name** : str
+              The name of the project, directory name in instruments//TSP.
+
+          **script_name** : str
+              The name to save the script as on the tsp instrument memory.
+
+          **file_names** : list [str]
+              List of files in the project, in order to be loaded onto the tsp
+              instrument.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:function:: do_after_group_trigger(*instruments)
+
+   
+   Call to have instruments perform post triggering commands.
+
+   Will call each instruments do_after_group_trigger() method,
+   as well as reset measurement start time, if applicable.
+
+   :Parameters:
+
+       **\*instruments** : instruments.communications.instrument
+           List of instruments to perform the post triggering commands on.
+
+   :Returns:
+
+       float
+           Trigger time, from time.time() at the beginning of this method.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: ext_trigger(self, *instruments)
+
+   
+   Call when an external trigger occurs so that the state model and other things can be updated.
+
+
+   :Parameters:
+
+       **\*instruments**
+           List of instruments to perform the external trigger on.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: GPIBInterface(interface_address: str, resource_manager: pyvisa.ResourceManager = None)
+
+   Calorimeter-python GPIB Interface for group triggering.
+
+   This is a wrapper for the pyvisa interface, and handles state model
+   management within calorimeter-python objects.
+
+   Attributes
+   ----------
+   interface : visa.Resource
+       GPIB pyvisa resource
+
+
+
+   Initialize the interface.
+
+
+   :Parameters:
+
+       **interface_address** : str
+           GPIB interface of form "GPIBX::INTFC".
+
+       **resource_manager** : _visa.ResourceManager, optional
+           Resource manager to instantiate interface with. If none provided,
+           a manager will be instantiated. The default is None
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: interface
+
+
+   .. py:method:: group_trigger(*instruments: rminstr.instruments.communications.Instrument)
+
+      
+      Send a group-execute-trigger (GET) signal to all instruments.
+
+      Instruments being triggered should all be positional arguments. Non
+      GPIB instruments will have their visa_resource.assert_trigger() method
+      called immediately following the GET command, and a warning will be
+      raised to the user.
+
+      Instrument classes that require additional commands/logic to manage
+      their state models following a group_trigger command are expected to
+      have a "do_after_group_trigger()" class instance
+      method that takes no arguments. Any
+      instrument class with this method will have it called immediately
+      following the GET.
+
+      :Parameters:
+
+          **\*instruments** : instruments.communications.instrument
+              Positional arguments all calorimeter-python instrument objects.
+
+      :Returns:
+
+          float
+              Clock time at do_after_group_trigger() time. Should be very close to GET signal.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: close()
+
+      
+      Close the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

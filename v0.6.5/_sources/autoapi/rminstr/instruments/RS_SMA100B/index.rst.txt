@@ -1,0 +1,446 @@
+rminstr.instruments.RS_SMA100B
+==============================
+
+.. py:module:: rminstr.instruments.RS_SMA100B
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rminstr.instruments.RS_SMA100B.ArmedSignalGenerator
+
+
+Package Contents
+----------------
+
+.. py:class:: ArmedSignalGenerator(visa_address: str, resource_manager: pyvisa.ResourceManager = None, log_path: str = None)
+
+   Bases: :py:obj:`rminstr.instruments.communications.Instrument`, :py:obj:`rminstr.instruments.measurement_functionalities.ABC_ArmedSignalGenerator`
+
+
+   Implementation the RS_SMA100B as an armed signal generator.
+
+   Attributes
+   ----------
+   trigger_count : int
+       Counts the number of times the instrument has been triggered.
+
+
+
+   Initialize RS SMA100B as an armed signal generator.
+
+
+   :Parameters:
+
+       **visa_address** : str
+           Visa address of instrument.
+
+       **resource_manager** : visa.ResourceManager, optional
+           Pyvisa resource manager for opening visa resources. The Default is None.
+
+       **log_path** : str, optional
+           If provided, will log at the specified path. The default is None.
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: default_settings
+
+
+   .. py:attribute:: trigger_count
+      :value: 0
+
+
+
+   .. py:method:: initial_setup(display: bool = True, list_file: str = '/var/user/list1.lsw', **kwargs)
+
+      
+      Initialize istrument.
+
+
+      :Parameters:
+
+          **display** : bool, optional
+              True, turns display on. False turns display off to improve
+              performance. The default is True.
+
+          **list_file** : str, optional
+              Source list file. Shouldn't need to be changed. The default is '/var/user/list1.lsw'
+
+          **other_commands** : list, optional
+              list of strings, commands to be sent directly to machine.
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: setup(dBm: float = None, f_GHz: float = None, dBm_limit: float = None, source_on: bool = None, AM: bool = None, AM_ext_port: int = None, AM_ext_sensitivity_percent_per_volt: float = None, pow_sweep_dBm: list[float] = None, freq_sweep_GHz: list[float] = None, time_sweep_micros: list[float] = None, **kwargs)
+
+      
+      Adjust settings on the machine.
+
+
+      :Parameters:
+
+          **dBm** : float, optional
+              Power level setting in dBm. The default is None.
+
+          **f_GHz** : float, optional
+              Frequency setting in GHz. The default is None.
+
+          **dBm_limit** : float, optional
+              Power limit setting in dBm. The default is None.
+
+          **source_on** : bool, optional
+              Turns source on when True, off when False. The default is None.
+
+          **AM** : bool, optional
+              Turns on the Amplitude Modulation. The default is None.
+
+          **AM_ext_port** : int, optional
+              What port to use for amplitude modulation. The default is None.
+
+          **AM_ext_sensitivity_percent_per_volt** : float, optional
+              Sensitivity of the amplitdue modulation in percent per volt. The default is None.
+
+          **pow_sweep_dBm: list[float], optional**
+              A list of power levels to sweep if using the signal generator to sweep.
+
+          **freq_sweep_GHz: list[float], optional**
+              A list of frequency levels to sweep if using the signal generator to sweep.
+
+          **time_sweep_micros: list[float], optional**
+              A list of durations to sweep with if using the signal generator to sweep.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: arm(list_mode: str = 'AUTO', trigger_source: str = 'BUS', output: str = None)
+
+      
+      Arm the signal generator so that it starts when triggered.
+
+
+      :Parameters:
+
+          **list_mode** : str, optional
+              Either 'AUTO' or 'STEP'. 'AUTO' will have source step through sweep
+              and dwell on each element for each time sweep value defined in
+              setup. 'STEP' will have source step through the index when a trigger
+              is received. The default is 'AUTO'.
+
+          **trigger_source** : str, optional
+              Either 'BUS' or 'EXT' trigger source for initiating/stepping through a
+              sweep. The default is 'BUS'.
+
+          **output: float, optional**
+              Either 'off' or 'on'; additional arming option. Overrides the list_mode
+              command if provided, and arms source to change the output status.
+              The default is None.
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: trigger()
+
+      
+      Trigger the signal generator.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: fetch_data()
+
+      
+      Fetch data from the signal generator.
+
+      This is a placeholder function.
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: query_state() -> str
+
+      
+      Check the state of the machine according to state model.
+
+
+
+      :Returns:
+
+          str
+              Current state of the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: raise_errors()
+
+      
+      Query the status of the instrument. If there are errors, raise them as Python errors.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+      :Raises:
+
+          InstrumentError
+              Instrument error if the instrument has errors or is in an error state.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_errors()
+
+      
+      Get any errors present on the instrument as a string.
+
+
+
+      :Returns:
+
+          str
+              Error string if one is there.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: do_after_group_trigger()
+
+      
+      Run post-trigger commands after an external trigger event.
+
+
+
+      :Returns:
+
+          None.
+              ..
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_sweep_index()
+
+      
+      Get the current index of the sweep.
+
+
+
+      :Returns:
+
+          int
+              Index of sweep.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_frequency()
+
+      
+      Get the frequency setpoint in GHz.
+
+
+
+      :Returns:
+
+          int
+              Frequency setpoint.
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

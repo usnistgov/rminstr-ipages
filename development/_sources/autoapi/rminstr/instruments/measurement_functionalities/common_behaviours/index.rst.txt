@@ -1,0 +1,65 @@
+rminstr.instruments.measurement_functionalities.common_behaviours
+=================================================================
+
+.. py:module:: rminstr.instruments.measurement_functionalities.common_behaviours
+
+.. autoapi-nested-parse::
+
+   Reusable behaviours that can be applied to instrument abstractions.
+
+   These behaviours include things like forcing a method to only be callable when the instrument
+   is in a certain state, saving key word arguments of a method to a dictionary defined
+   by a class attribute, and having certain methods change the state of the instrument afer being called.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.instruments.measurement_functionalities.common_behaviours.log_arguments
+
+
+Module Contents
+---------------
+
+.. py:function:: log_arguments(name: str, path: str, function: Callable) -> Callable
+
+   
+   Make function save keyword arguments to a log file.
+
+
+   :Parameters:
+
+       **name** : str
+           Name of instrument. Recommend __name__
+
+       **path** : str
+           Path to log to. Should end in .log
+
+       **function** : Callable
+           Function being wrapped.
+
+   :Returns:
+
+       Callable
+           Wrapped function.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
