@@ -15,6 +15,7 @@ Submodules
    /autoapi/rminstr/instruments/Anritsu_MG3696A/index
    /autoapi/rminstr/instruments/DP8200/index
    /autoapi/rminstr/instruments/Fluke_1620A/index
+   /autoapi/rminstr/instruments/Fluke_5720A/index
    /autoapi/rminstr/instruments/HP34420A/index
    /autoapi/rminstr/instruments/HP3457A/index
    /autoapi/rminstr/instruments/HP3458A/index
