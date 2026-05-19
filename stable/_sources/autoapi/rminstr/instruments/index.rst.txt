@@ -28,6 +28,7 @@ Submodules
    /autoapi/rminstr/instruments/LS330/index
    /autoapi/rminstr/instruments/LS340/index
    /autoapi/rminstr/instruments/RS_NRP75TWG/index
+   /autoapi/rminstr/instruments/RS_NRPxxTn/index
    /autoapi/rminstr/instruments/RS_SMA100B/index
    /autoapi/rminstr/instruments/RS_ZVA67/index
    /autoapi/rminstr/instruments/communications/index
