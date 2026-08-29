@@ -96,7 +96,7 @@ Package Contents
           !! processed by numpydoc !!
 
 
-   .. py:method:: setup(panel: str = None, i_range: float = None, i_limit: float = None, over_voltage_protection: float = None, current_level: float = None, source: bool = None, other_commands: list = None, **kwargs)
+   .. py:method:: setup(panel: str = None, i_range: float = None, i_limit: float = None, over_voltage_protection: float = None, current_level: float = None, source: bool = None, output: bool = None, other_commands: list = None, **kwargs)
 
       
       Adjust settings on the machine.
@@ -123,7 +123,10 @@ Package Contents
               The current amplitude to source in A. The default is None.
 
           **source** : bool, optional
-              Turns source on when True, off when False. The default is True.
+              Sets the source to adjust its state when a trigger command is sent.
+
+          **output** : bool, optional
+              Sets the ouput on (TRUE) or off (False)
 
           **other_commands** : list, optional
               List of other command not covered by keyword arguments. Written directly to instrument. The default is None.
