@@ -45,12 +45,12 @@ Module Contents
            directories, will return the first file found. Else, will throw an
            error. The default is False.
 
+
+
    :Returns:
 
        str
            Valid file path.
-
-
 
 
 
@@ -72,12 +72,12 @@ Module Contents
 
 
 
+
+
    :Returns:
 
        rel_path
            Relative path to newly create local directory.
-
-
 
 
 
@@ -99,12 +99,12 @@ Module Contents
 
 
 
+
+
    :Returns:
 
        path.
            Absolute path to newly create local directory.
-
-
 
 
 

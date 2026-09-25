@@ -37,12 +37,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -72,12 +72,12 @@ Package Contents
           **other_commands** : list, optional
               List of strings, commands to be sent directly to machine. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -122,12 +122,12 @@ Package Contents
           **AM_ext_sensitivity_percent_per_volt** : float, optional
               Sensitivity of the Amplitude Modulation in percent per volt. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -150,12 +150,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -178,6 +178,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -197,8 +199,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -210,12 +210,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Instruments error message
-
-
 
 
 

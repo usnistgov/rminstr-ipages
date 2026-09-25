@@ -56,12 +56,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -112,6 +112,8 @@ Package Contents
           **panel** : str, optional
               Either 'rear' or 'front'. The default is None.
 
+
+
       :Returns:
 
           None.
@@ -124,8 +126,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 
@@ -210,6 +210,8 @@ Package Contents
               than allocated for by buffer_size. The default is 'fill_once'.
               'fill_once' will fill the buffer then stop, 'continuous' will overwrite previous readings.
 
+
+
       :Returns:
 
           None.
@@ -229,8 +231,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -242,12 +242,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -270,12 +270,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -305,13 +305,13 @@ Package Contents
           **meas_start_time** : float, optional
               If provided, will be used as timestamp for time of trigger. The default is None.
 
+
+
       :Returns:
 
           dict
               Dictionary of measurements. Columns are automatically named based on how the
               instrument was initalized.
-
-
 
 
 
@@ -334,12 +334,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           **state** : str
               Current state of the instrument.
-
-
 
 
 
@@ -362,12 +362,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -391,6 +391,8 @@ Package Contents
       Returns serial, firmware
 
 
+
+
       :Returns:
 
           str
@@ -398,8 +400,6 @@ Package Contents
 
           str
               Firmware version of SMU.
-
-
 
 
 
@@ -422,12 +422,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -477,12 +477,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -532,12 +532,12 @@ Package Contents
           **\*\*kwargs** : dict
               Any keyword arguments the fetch_data function should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -576,6 +576,8 @@ Package Contents
               The feedback loop will be initialized to source this value (Volts
               for thinfilms and  Amps for thermistors).
 
+
+
       :Returns:
 
           None.
@@ -588,8 +590,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 
@@ -702,6 +702,8 @@ Package Contents
           **\*\*kwargs**
               Catches any commands that aren't recognized.
 
+
+
       :Returns:
 
           None.
@@ -714,8 +716,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 
@@ -748,12 +748,12 @@ Package Contents
           How long to wait after a trigger before starting the feedback loop. The default is 0.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -776,12 +776,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -804,12 +804,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -832,6 +832,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
@@ -839,8 +841,6 @@ Package Contents
 
           str
               Firmware version of SMU.
-
-
 
 
 
@@ -863,12 +863,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 

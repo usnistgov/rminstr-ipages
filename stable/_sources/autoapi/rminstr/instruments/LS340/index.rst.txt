@@ -37,12 +37,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -70,12 +70,12 @@ Package Contents
       otherwise settings will be overwritten.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -204,12 +204,12 @@ Package Contents
           **D** : float, optional
               D constant to use in manual PID mode. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -232,12 +232,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Error string if one is there.
-
-
 
 
 
@@ -260,6 +260,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -272,8 +274,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 

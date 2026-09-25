@@ -32,12 +32,12 @@ Package Contents
        **visa_resource** : visa.Resources
            The pyvisa resource.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -84,12 +84,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -112,12 +112,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -140,6 +140,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -155,13 +157,11 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
 
-   .. py:method:: setup(read_units: str = None, integration_time: int = None, average_state: int = None, zero_once: bool = None, trig_delay: Union[float, str] = None, **kwargs)
+   .. py:method:: setup(read_units: str = None, integration_time: int = None, average_state: int = None, zero_once: bool = None, trig_delay: float | str = None, **kwargs)
 
       
       Change powermeter settings.
@@ -189,12 +189,12 @@ Package Contents
               take the measurement. 0.1 to
               5.0 or 'auto'/'AUTO'. Default is 'auto'.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -224,12 +224,12 @@ Package Contents
           **trigger_source** : str, optional
               how the instrument will be triggered. The default is "BUS".
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -252,12 +252,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -288,12 +288,12 @@ Package Contents
           **v_column_name** : str, optional
               alias for p_column_name.
 
+
+
       :Returns:
 
           dict
               dictionary with give names as keys.
-
-
 
 
 
@@ -340,12 +340,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Instrument state.
-
-
 
 
 

@@ -29,13 +29,14 @@ An ActiveRecord is a context manager that will automatically dump
 any data in the memory to the target directory in the event of
 an exception or error.
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-43
+.. GENERATED FROM PYTHON SOURCE LINES 13-44
 
 .. code-block:: Python
 
 
-    from rminstr.data_structures import ActiveRecord, ExistingRecord
     import time
+
+    from rminstr.data_structures import ActiveRecord, ExistingRecord
 
     with ActiveRecord(
         ['column_1', 'column_2'], output_dir='outputs', maxlen=100, minlen=10
@@ -64,12 +65,12 @@ an exception or error.
         )
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-46
+.. GENERATED FROM PYTHON SOURCE LINES 45-47
 
 To read the data back in, point the ``ExistingRecord`` class to
 the metadata file produced by the ``ActiveRecord``.
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-58
+.. GENERATED FROM PYTHON SOURCE LINES 47-59
 
 .. code-block:: Python
 

@@ -5,17 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rminstr.data_structures &#8212; Rocky Mountain Instruments 0.6.6a3.dev19+gaa97ed0 documentation</title>
+    <title>rminstr.data_structures &#8212; Rocky Mountain Instruments 0.6.6a3.dev27+gcf983d8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=b4e39fc5"></script>
+    <script src="../../../_static/documentation_options.js?v=d43d30ad"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="rminstr.instruments" href="../instruments/index.html" />
@@ -88,20 +89,20 @@ $(document).ready(function(){
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p></td>
-<td><p>The DataRecord class records experimental data from long measurements.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.ActiveRecord" title="rminstr.data_structures.ActiveRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActiveRecord</span></code></a></p></td>
+<td><p>ActiveRecord is derived from DataRecord.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.TimeSeries" title="rminstr.data_structures.TimeSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSeries</span></code></a></p></td>
-<td><p>Class for oraganizing 1D timeseries data, output by DataRecords.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p></td>
+<td><p>The DataRecord class records experimental data from long measurements.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.ExistingRecord" title="rminstr.data_structures.ExistingRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExistingRecord</span></code></a></p></td>
 <td><p>ExistingRecord is derived from DataRecord.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.ActiveRecord" title="rminstr.data_structures.ActiveRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ActiveRecord</span></code></a></p></td>
-<td><p>ActiveRecord is derived from DataRecord.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.LegacyRecord" title="rminstr.data_structures.LegacyRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LegacyRecord</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.LegacyRecord" title="rminstr.data_structures.LegacyRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LegacyRecord</span></code></a></p></td>
 <td><p>LegacyRecord is derived from DataRecord.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.data_structures.TimeSeries" title="rminstr.data_structures.TimeSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TimeSeries</span></code></a></p></td>
+<td><p>Class for oraganizing 1D timeseries data, output by DataRecords.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#rminstr.data_structures.ExptParameters" title="rminstr.data_structures.ExptParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ExptParameters</span></code></a></p></td>
 <td><p>The ExptParameters class keeps track of experimental settings.</p></td>
@@ -130,6 +131,288 @@ $(document).ready(function(){
 </section>
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ActiveRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage_everything</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
+<p>ActiveRecord is derived from DataRecord.</p>
+<p>An ActiveRecord stores and continually saves experimental data from
+measurements in progress.</p>
+<p>Additional Comments about of ActiveRecord:</p>
+<ul class="simple">
+<li><p>Data files are automatically written. When the data is written to
+a file, it is automatically converted to a CSV format, where each
+column is a variable, each row is a measurement, and the rows are
+strictly time-ordered. It is not necessary to have the same number
+of entries for each column. Missing data is automatically populated
+with NaN.</p></li>
+<li><p>A specified number of recent samples (self.minlen) are kept in memory
+for flow control. These samples can be written to a file and deleted
+from memory by calling self.output with write_recent_data = True.</p></li>
+</ul>
+<p>Initialize an ActiveRecord object.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>columns</strong><span class="classifier">list[str]</span></dt><dd><p>Names of variables that will be recorded.</p>
+</dd>
+<dt><strong>maxlen</strong><span class="classifier">int</span></dt><dd><p>Maximum number of samples to retain in memory.</p>
+</dd>
+<dt><strong>output_dir</strong><span class="classifier">str</span></dt><dd><p>Directory where output data is written. Ends in “\”.</p>
+</dd>
+<dt><strong>minlen</strong><span class="classifier">str, optional</span></dt><dd><p>Number of samples to be retained in memory after writing data to a
+file. The default is 0.</p>
+</dd>
+<dt><strong>auto_timestamps</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, maintain a list of timestamps for each column.The default
+is True.</p>
+</dd>
+<dt><strong>sep</strong><span class="classifier">str, optional</span></dt><dd><p>Delimeter in output file. The default is “,”.</p>
+</dd>
+<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
+where x is a number (1,2,3,…) that is appended if neccessary
+to avoid overwriting existing data, and y is the index of the
+data file.</p>
+<p>If not specied (None): the meas_name will default to the date
+in YYYYMMDD format.</p>
+<p>The default is None.</p>
+</dd>
+<dt><strong>instruments: dict, optional</strong></dt><dd><p>dictionary w/ columns as keys and instruments as values. Each
+instrument is expected to have an info_dict attribute. If not None,
+will connect those column keys to instrument vaues in the metadata.</p>
+<p>The default is None.</p>
+</dd>
+<dt><strong>stage_everything</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the setitem method adds updates to the update queue rather
+than directly updating the record. This behavior can be used to
+ensure updates are time-ordered in the output file. If True,
+batch_update must be called to update the record.</p>
+<p>The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.local_backups">
+<span class="sig-name descname"><span class="pre">local_backups</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.local_backups" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.session_str">
+<span class="sig-name descname"><span class="pre">session_str</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.session_str" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata">
+<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.time_zero">
+<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.time_zero" title="Link to this definition">¶</a></dt>
+<dd><p>float: Timestamp corresponding to the start of the experiment</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.auto_timestamps">
+<span class="sig-name descname"><span class="pre">auto_timestamps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.auto_timestamps" title="Link to this definition">¶</a></dt>
+<dd><p>bool: If True, automatically assign timestamps to data points when
+update() is called.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.minlen">
+<span class="sig-name descname"><span class="pre">minlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.minlen" title="Link to this definition">¶</a></dt>
+<dd><p>int: Minimum length of data record. Used to ensure recent history is
+available to measurement program.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.file_counter">
+<span class="sig-name descname"><span class="pre">file_counter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.file_counter" title="Link to this definition">¶</a></dt>
+<dd><p>int: Counts the number of files that have been written.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.stage_everything">
+<span class="sig-name descname"><span class="pre">stage_everything</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.stage_everything" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata_file_name">
+<span class="sig-name descname"><span class="pre">metadata_file_name</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata_file_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output">
+<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_recent_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output" title="Link to this definition">¶</a></dt>
+<dd><p>Write data to a file. Also writes metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>write_recent_data</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, the most recent self.minlen samples are retained in the
+record and not written to file.</p>
+<p>If True, all data in the record are written to file, so that the
+record is empty after this method is called.</p>
+<p>The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.get_time">
+<span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.get_time" title="Link to this definition">¶</a></dt>
+<dd><p>Get relative time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>float</dt><dd><p>current relative time</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_timer">
+<span class="sig-name descname"><span class="pre">init_timer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_zero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_timer" title="Link to this definition">¶</a></dt>
+<dd><p>Set time = 0 for relative timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_zero</strong><span class="classifier">float, optional</span></dt><dd><p>Timestamp of time = 0. If None, use result of time.time().
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_metadata">
+<span class="sig-name descname"><span class="pre">init_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Populate self.metadata with the default metadata.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
+where x is a number (1,2,3,…) that is appended if neccessary
+to avoid overwriting existing data, and y is the index of the
+data file.</p>
+<p>If not specied (None): the meas_name will default to the date
+in YYYYMMDD format.</p>
+<p>The default is None</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_instruments">
+<span class="sig-name descname"><span class="pre">add_instruments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_instruments" title="Link to this definition">¶</a></dt>
+<dd><p>Add instruments to metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>instruments :dict</strong></dt><dd><p>dictionairy containing instruments with info_dict attribute
+expected to be a dictionairy with columns as keys, and instruments
+as values. Each instrument is expected to have ‘info_dict’ as an
+attribute. If a ‘range’ is not in info dict, it will not be saved.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_file">
+<span class="sig-name descname"><span class="pre">add_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_file" title="Link to this definition">¶</a></dt>
+<dd><p>Increments file counter and maintains metadata.</p>
+<p>Determines name of next output file and adds the file to self.metadata
+with key “file_x”, where x is the current value of file_counter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>name of next output file.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output_metadata">
+<span class="sig-name descname"><span class="pre">output_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output_metadata" title="Link to this definition">¶</a></dt>
+<dd><p>Write metadata to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>use_backup</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, saves to local backup (~/rminstr/self.session_str).
+The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.check_missing_files">
+<span class="sig-name descname"><span class="pre">check_missing_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.check_missing_files" title="Link to this definition">¶</a></dt>
+<dd><p>Check if any files are missing from the target directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>list[Path]</dt><dd><p>List of paths expected to be in target directory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.clean_backups">
+<span class="sig-name descname"><span class="pre">clean_backups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.clean_backups" title="Link to this definition">¶</a></dt>
+<dd><p>Clean up backups at the end of an experiment.</p>
+<p>Combines the backup directory with the target directory.
+If it cant, adds a noe to the metadata that this step failed, which
+will notify users trying to read data with this flag down the road.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="rminstr.data_structures.DataRecord">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">DataRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.DataRecord" title="Link to this definition">¶</a></dt>
@@ -470,43 +753,6 @@ is accessed.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">TimeSeries</span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
-<p>Class for oraganizing 1D timeseries data, output by DataRecords.</p>
-<p>NamedTuple like object. Can be indexed or iterated like a tuple where
-index 0 is the t attribute and index 1 is the values. Has additional
-functionality usefil for time series data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Attributes<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>t</strong><span class="classifier">np.ndarray</span></dt><dd><p>Absolute time stamps in seconds of timeseries, from when data was
-taken.</p>
-</dd>
-<dt><strong>values: str</strong></dt><dd><p>Values of timeseries data.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.t">
-<span class="sig-name descname"><span class="pre">t</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.t" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.values">
-<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.values" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.trel">
-<span class="sig-name descname"><span class="pre">trel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries.trel" title="Link to this definition">¶</a></dt>
-<dd><p>Get the relative time of.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="rminstr.data_structures.ExistingRecord">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ExistingRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ExistingRecord" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
@@ -625,288 +871,6 @@ columns to return. The default is None.</p>
 <dd class="field-even"><dl class="simple">
 <dt>dict[str, tuple]</dt><dd><p>{column: (timestamp,value)}</p>
 </dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">ActiveRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minlen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_timestamps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">instruments</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stage_everything</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#rminstr.data_structures.DataRecord" title="rminstr.data_structures.DataRecord"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataRecord</span></code></a></p>
-<p>ActiveRecord is derived from DataRecord.</p>
-<p>An ActiveRecord stores and continually saves experimental data from
-measurements in progress.</p>
-<p>Additional Comments about of ActiveRecord:</p>
-<ul class="simple">
-<li><p>Data files are automatically written. When the data is written to
-a file, it is automatically converted to a CSV format, where each
-column is a variable, each row is a measurement, and the rows are
-strictly time-ordered. It is not necessary to have the same number
-of entries for each column. Missing data is automatically populated
-with NaN.</p></li>
-<li><p>A specified number of recent samples (self.minlen) are kept in memory
-for flow control. These samples can be written to a file and deleted
-from memory by calling self.output with write_recent_data = True.</p></li>
-</ul>
-<p>Initialize an ActiveRecord object.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>columns</strong><span class="classifier">list[str]</span></dt><dd><p>Names of variables that will be recorded.</p>
-</dd>
-<dt><strong>maxlen</strong><span class="classifier">int</span></dt><dd><p>Maximum number of samples to retain in memory.</p>
-</dd>
-<dt><strong>output_dir</strong><span class="classifier">str</span></dt><dd><p>Directory where output data is written. Ends in “\”.</p>
-</dd>
-<dt><strong>minlen</strong><span class="classifier">str, optional</span></dt><dd><p>Number of samples to be retained in memory after writing data to a
-file. The default is 0.</p>
-</dd>
-<dt><strong>auto_timestamps</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, maintain a list of timestamps for each column.The default
-is True.</p>
-</dd>
-<dt><strong>sep</strong><span class="classifier">str, optional</span></dt><dd><p>Delimeter in output file. The default is “,”.</p>
-</dd>
-<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
-where x is a number (1,2,3,…) that is appended if neccessary
-to avoid overwriting existing data, and y is the index of the
-data file.</p>
-<p>If not specied (None): the meas_name will default to the date
-in YYYYMMDD format.</p>
-<p>The default is None.</p>
-</dd>
-<dt><strong>instruments: dict, optional</strong></dt><dd><p>dictionary w/ columns as keys and instruments as values. Each
-instrument is expected to have an info_dict attribute. If not None,
-will connect those column keys to instrument vaues in the metadata.</p>
-<p>The default is None.</p>
-</dd>
-<dt><strong>stage_everything</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, the setitem method adds updates to the update queue rather
-than directly updating the record. This behavior can be used to
-ensure updates are time-ordered in the output file. If True,
-batch_update must be called to update the record.</p>
-<p>The default is False.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.local_backups">
-<span class="sig-name descname"><span class="pre">local_backups</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.local_backups" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.session_str">
-<span class="sig-name descname"><span class="pre">session_str</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.session_str" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata">
-<span class="sig-name descname"><span class="pre">metadata</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.time_zero">
-<span class="sig-name descname"><span class="pre">time_zero</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.time_zero" title="Link to this definition">¶</a></dt>
-<dd><p>float: Timestamp corresponding to the start of the experiment</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.auto_timestamps">
-<span class="sig-name descname"><span class="pre">auto_timestamps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.auto_timestamps" title="Link to this definition">¶</a></dt>
-<dd><p>bool: If True, automatically assign timestamps to data points when
-update() is called.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.minlen">
-<span class="sig-name descname"><span class="pre">minlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.minlen" title="Link to this definition">¶</a></dt>
-<dd><p>int: Minimum length of data record. Used to ensure recent history is
-available to measurement program.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.file_counter">
-<span class="sig-name descname"><span class="pre">file_counter</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.file_counter" title="Link to this definition">¶</a></dt>
-<dd><p>int: Counts the number of files that have been written.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.stage_everything">
-<span class="sig-name descname"><span class="pre">stage_everything</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.stage_everything" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.metadata_file_name">
-<span class="sig-name descname"><span class="pre">metadata_file_name</span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.metadata_file_name" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output">
-<span class="sig-name descname"><span class="pre">output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">write_recent_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output" title="Link to this definition">¶</a></dt>
-<dd><p>Write data to a file. Also writes metadata.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>write_recent_data</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, the most recent self.minlen samples are retained in the
-record and not written to file.</p>
-<p>If True, all data in the record are written to file, so that the
-record is empty after this method is called.</p>
-<p>The default is False.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.get_time">
-<span class="sig-name descname"><span class="pre">get_time</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.get_time" title="Link to this definition">¶</a></dt>
-<dd><p>Get relative time.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>float</dt><dd><p>current relative time</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_timer">
-<span class="sig-name descname"><span class="pre">init_timer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_zero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_timer" title="Link to this definition">¶</a></dt>
-<dd><p>Set time = 0 for relative timestamps.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>time_zero</strong><span class="classifier">float, optional</span></dt><dd><p>Timestamp of time = 0. If None, use result of time.time().
-The default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.init_metadata">
-<span class="sig-name descname"><span class="pre">init_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meas_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.init_metadata" title="Link to this definition">¶</a></dt>
-<dd><p>Populate self.metadata with the default metadata.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>meas_name</strong><span class="classifier">str, optional</span></dt><dd><p>If specified, output files will be named meas_name_x_y.csv,
-where x is a number (1,2,3,…) that is appended if neccessary
-to avoid overwriting existing data, and y is the index of the
-data file.</p>
-<p>If not specied (None): the meas_name will default to the date
-in YYYYMMDD format.</p>
-<p>The default is None</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_instruments">
-<span class="sig-name descname"><span class="pre">add_instruments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_instruments" title="Link to this definition">¶</a></dt>
-<dd><p>Add instruments to metadata.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>instruments :dict</strong></dt><dd><p>dictionairy containing instruments with info_dict attribute
-expected to be a dictionairy with columns as keys, and instruments
-as values. Each instrument is expected to have ‘info_dict’ as an
-attribute. If a ‘range’ is not in info dict, it will not be saved.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.add_file">
-<span class="sig-name descname"><span class="pre">add_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.add_file" title="Link to this definition">¶</a></dt>
-<dd><p>Increments file counter and maintains metadata.</p>
-<p>Determines name of next output file and adds the file to self.metadata
-with key “file_x”, where x is the current value of file_counter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file_name</strong><span class="classifier">str</span></dt><dd><p>name of next output file.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.output_metadata">
-<span class="sig-name descname"><span class="pre">output_metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_backup</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.output_metadata" title="Link to this definition">¶</a></dt>
-<dd><p>Write metadata to a file.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>use_backup</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, saves to local backup (~/rminstr/self.session_str).
-The default is False.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.check_missing_files">
-<span class="sig-name descname"><span class="pre">check_missing_files</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.check_missing_files" title="Link to this definition">¶</a></dt>
-<dd><p>Check if any files are missing from the target directory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>list[Path]</dt><dd><p>List of paths expected to be in target directory.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.data_structures.ActiveRecord.clean_backups">
-<span class="sig-name descname"><span class="pre">clean_backups</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.data_structures.ActiveRecord.clean_backups" title="Link to this definition">¶</a></dt>
-<dd><p>Clean up backups at the end of an experiment.</p>
-<p>Combines the backup directory with the target directory.
-If it cant, adds a noe to the metadata that this step failed, which
-will notify users trying to read data with this flag down the road.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None.</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -1059,6 +1023,43 @@ The default is ‘,’.</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.data_structures.</span></span><span class="sig-name descname"><span class="pre">TimeSeries</span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<p>Class for oraganizing 1D timeseries data, output by DataRecords.</p>
+<p>NamedTuple like object. Can be indexed or iterated like a tuple where
+index 0 is the t attribute and index 1 is the values. Has additional
+functionality usefil for time series data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>t</strong><span class="classifier">np.ndarray</span></dt><dd><p>Absolute time stamps in seconds of timeseries, from when data was
+taken.</p>
+</dd>
+<dt><strong>values: str</strong></dt><dd><p>Values of timeseries data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.t">
+<span class="sig-name descname"><span class="pre">t</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.t" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rminstr.data_structures.TimeSeries.values" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.data_structures.TimeSeries.trel">
+<span class="sig-name descname"><span class="pre">trel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#rminstr.data_structures.TimeSeries.trel" title="Link to this definition">¶</a></dt>
+<dd><p>Get the relative time of.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1423,6 +1424,7 @@ available.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../v0.6.10/index.html">v0.6.10</a></li>
+  <li><a href="../../../../v1.0.0/index.html">v1.0.0</a></li>
   <li><a href="../../../../development/index.html">development</a></li>
   <li><a href="index.html">stable</a></li>
 </ul>
@@ -1435,7 +1437,7 @@ available.</p>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |

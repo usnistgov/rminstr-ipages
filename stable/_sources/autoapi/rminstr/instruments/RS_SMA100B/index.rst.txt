@@ -43,12 +43,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -91,12 +91,12 @@ Package Contents
               list of strings, commands to be sent directly to machine.
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -150,12 +150,12 @@ Package Contents
           **time_sweep_micros: list[float], optional**
               A list of durations to sweep with if using the signal generator to sweep.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -194,12 +194,12 @@ Package Contents
               command if provided, and arms source to change the output status.
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -222,12 +222,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -251,12 +251,12 @@ Package Contents
       This is a placeholder function.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -279,12 +279,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -307,6 +307,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -326,8 +328,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -339,12 +339,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Error string if one is there.
-
-
 
 
 
@@ -367,12 +367,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -395,12 +395,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           int
               Index of sweep.
-
-
 
 
 
@@ -423,12 +423,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           int
               Frequency setpoint.
-
-
 
 
 

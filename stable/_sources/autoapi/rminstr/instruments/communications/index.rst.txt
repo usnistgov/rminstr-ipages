@@ -19,8 +19,8 @@ Classes
 .. autoapisummary::
 
    rminstr.instruments.communications.Instrument
-   rminstr.instruments.communications.TSPRunner
    rminstr.instruments.communications.GPIBInterface
+   rminstr.instruments.communications.TSPRunner
 
 
 Functions
@@ -61,12 +61,12 @@ Package Contents
        **visa_resource** : visa.Resources
            The pyvisa resource.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -101,12 +101,12 @@ Package Contents
           **txt** : str
               Text to write.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -134,12 +134,12 @@ Package Contents
               Number of attempts for reading the status bit if there is an error.
               The default is 3.
 
+
+
       :Returns:
 
           str
               The status_byte.
-
-
 
 
 
@@ -162,12 +162,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.read().
-
-
 
 
 
@@ -194,12 +194,12 @@ Package Contents
           **txt** : str
               The text to query.
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.query().
-
-
 
 
 
@@ -226,12 +226,12 @@ Package Contents
           **n** : int
               Number of bytes to read
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.read_bytes(n)
-
-
 
 
 
@@ -260,12 +260,12 @@ Package Contents
               if None, use the result of time.time().
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -288,12 +288,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -318,12 +318,12 @@ Package Contents
       time.time() - time_zero.
 
 
+
+
       :Returns:
 
           float
               Time relative to self.time_zero
-
-
 
 
 
@@ -346,13 +346,13 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           dict
               Keys: ex. "GPIB address"
               Values: ex. 11
-
-
 
 
 
@@ -379,12 +379,12 @@ Package Contents
       Abstract method.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -411,6 +411,8 @@ Package Contents
       Abstract method.
 
 
+
+
       :Returns:
 
           None.
@@ -426,46 +428,9 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
-
-.. py:function:: get_bit(x, bit)
-
-   
-   Return a specific bit in x. Intended to make the status byte easier to read.
-
-
-   :Parameters:
-
-       **x** : int
-           Value to get bit from
-
-       **bit** : int
-           A power of 2: 1, 2, 4, 8, 16, 32, 64, 128
-           I.E. the 5th bit would be 2^5 = 32
-
-   :Returns:
-
-       True if the bit is 1, False otherwise
-           ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:exception:: InstrumentError(message)
 
@@ -525,6 +490,222 @@ Package Contents
        !! processed by numpydoc !!
 
 
+.. py:function:: get_bit(x, bit)
+
+   
+   Return a specific bit in x. Intended to make the status byte easier to read.
+
+
+   :Parameters:
+
+       **x** : int
+           Value to get bit from
+
+       **bit** : int
+           A power of 2: 1, 2, 4, 8, 16, 32, 64, 128
+           I.E. the 5th bit would be 2^5 = 32
+
+
+
+   :Returns:
+
+       True if the bit is 1, False otherwise
+           ..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:class:: GPIBInterface(interface_address: str, resource_manager: pyvisa.ResourceManager = None)
+
+   Calorimeter-python GPIB Interface for group triggering.
+
+   This is a wrapper for the pyvisa interface, and handles state model
+   management within calorimeter-python objects.
+
+   Attributes
+   ----------
+   interface : visa.Resource
+       GPIB pyvisa resource
+
+
+
+   Initialize the interface.
+
+
+   :Parameters:
+
+       **interface_address** : str
+           GPIB interface of form "GPIBX::INTFC".
+
+       **resource_manager** : _visa.ResourceManager, optional
+           Resource manager to instantiate interface with. If none provided,
+           a manager will be instantiated. The default is None
+
+
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:attribute:: interface
+
+
+   .. py:method:: group_trigger(*instruments: rminstr.instruments.communications.Instrument)
+
+      
+      Send a group-execute-trigger (GET) signal to all instruments.
+
+      Instruments being triggered should all be positional arguments. Non
+      GPIB instruments will have their visa_resource.assert_trigger() method
+      called immediately following the GET command, and a warning will be
+      raised to the user.
+
+      Instrument classes that require additional commands/logic to manage
+      their state models following a group_trigger command are expected to
+      have a "do_after_group_trigger()" class instance
+      method that takes no arguments. Any
+      instrument class with this method will have it called immediately
+      following the GET.
+
+      :Parameters:
+
+          **\*instruments** : instruments.communications.instrument
+              Positional arguments all calorimeter-python instrument objects.
+
+
+
+      :Returns:
+
+          float
+              Clock time at do_after_group_trigger() time. Should be very close to GET signal.
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: close()
+
+      
+      Close the instrument.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:function:: do_after_group_trigger(*instruments)
+
+   
+   Call to have instruments perform post triggering commands.
+
+   Will call each instruments do_after_group_trigger() method,
+   as well as reset measurement start time, if applicable.
+
+   :Parameters:
+
+       **\*instruments** : instruments.communications.instrument
+           List of instruments to perform the post triggering commands on.
+
+
+
+   :Returns:
+
+       float
+           Trigger time, from time.time() at the beginning of this method.
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: ext_trigger(self, *instruments)
+
+   
+   Call when an external trigger occurs so that the state model and other things can be updated.
+
+
+   :Parameters:
+
+       **\*instruments**
+           List of instruments to perform the external trigger on.
+
+
+
+   :Returns:
+
+       None.
+           ..
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
 .. py:class:: TSPRunner(visa_resource)
 
    Bases: :py:obj:`rminstr.instruments.communications.Instrument`
@@ -571,12 +752,12 @@ Package Contents
        **visa_resource** : visa.Resource
            Pyvisa resource that is the tsp enabled instrument.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -635,12 +816,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           dict
               instrument information.
-
-
 
 
 
@@ -667,6 +848,8 @@ Package Contents
       an error, telling you to check the instrument.
 
 
+
+
       :Returns:
 
           None
@@ -679,8 +862,6 @@ Package Contents
 
           InstrumentError
               Error if the error bit is high.
-
-
 
 
 
@@ -703,12 +884,12 @@ Package Contents
           **bit** : int
               Bit placement you want to check.
 
+
+
       :Returns:
 
           bool
               Returns True if bit is high. False otherwise.
-
-
 
 
 
@@ -731,12 +912,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -766,12 +947,12 @@ Package Contents
           **showGarbage** : bool, optional
               If true, logs information about the method. The default is False.
 
+
+
       :Returns:
 
           bool
               True if busy, False if not.
-
-
 
 
 
@@ -794,6 +975,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -806,8 +989,6 @@ Package Contents
 
           StatusByteError
               Error if the error bit in the status byte is high.
-
-
 
 
 
@@ -830,6 +1011,8 @@ Package Contents
           **timeout** : float
               Time to wait before raising an error.
 
+
+
       :Returns:
 
           None.
@@ -849,8 +1032,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -862,12 +1043,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -890,6 +1071,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -909,13 +1092,11 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
 
-   .. py:method:: assign(varname: str, val: Union[int, float])
+   .. py:method:: assign(varname: str, val: float)
 
       
       Assign a variable to the TSP instruments global variable space.
@@ -933,12 +1114,12 @@ Package Contents
           **val** : float or int
               The value to assign.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -965,12 +1146,12 @@ Package Contents
           **varname** : str
               String of tsp namespace variable.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -997,12 +1178,12 @@ Package Contents
           **msg** : str
               String of message type to have it print.
 
+
+
       :Returns:
 
           str
               Message query.
-
-
 
 
 
@@ -1032,6 +1213,8 @@ Package Contents
           **force** : bool, optional
               If true, will by-pass the busy checks. The default is False.
 
+
+
       :Returns:
 
           None.
@@ -1045,8 +1228,6 @@ Package Contents
           BusyError
               If force is False and instrument is busy while trying to be commanded,
               this will be raised.
-
-
 
 
 
@@ -1073,6 +1254,8 @@ Package Contents
               If true, read buffer will deallocate the buffer from the instruments
               memory after the data has been read. The default is True.
 
+
+
       :Returns:
 
           dict
@@ -1088,8 +1271,6 @@ Package Contents
 
           SMUTimeoutError
               If instrument isn't busy, but a timeout occured while trying to download the data.
-
-
 
 
 
@@ -1119,193 +1300,12 @@ Package Contents
               List of files in the project, in order to be loaded onto the tsp
               instrument.
 
+
+
       :Returns:
 
           None.
               ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-.. py:function:: do_after_group_trigger(*instruments)
-
-   
-   Call to have instruments perform post triggering commands.
-
-   Will call each instruments do_after_group_trigger() method,
-   as well as reset measurement start time, if applicable.
-
-   :Parameters:
-
-       **\*instruments** : instruments.communications.instrument
-           List of instruments to perform the post triggering commands on.
-
-   :Returns:
-
-       float
-           Trigger time, from time.time() at the beginning of this method.
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:function:: ext_trigger(self, *instruments)
-
-   
-   Call when an external trigger occurs so that the state model and other things can be updated.
-
-
-   :Parameters:
-
-       **\*instruments**
-           List of instruments to perform the external trigger on.
-
-   :Returns:
-
-       None.
-           ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-.. py:class:: GPIBInterface(interface_address: str, resource_manager: pyvisa.ResourceManager = None)
-
-   Calorimeter-python GPIB Interface for group triggering.
-
-   This is a wrapper for the pyvisa interface, and handles state model
-   management within calorimeter-python objects.
-
-   Attributes
-   ----------
-   interface : visa.Resource
-       GPIB pyvisa resource
-
-
-
-   Initialize the interface.
-
-
-   :Parameters:
-
-       **interface_address** : str
-           GPIB interface of form "GPIBX::INTFC".
-
-       **resource_manager** : _visa.ResourceManager, optional
-           Resource manager to instantiate interface with. If none provided,
-           a manager will be instantiated. The default is None
-
-   :Returns:
-
-       None.
-           ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
-
-   .. py:attribute:: interface
-
-
-   .. py:method:: group_trigger(*instruments: rminstr.instruments.communications.Instrument)
-
-      
-      Send a group-execute-trigger (GET) signal to all instruments.
-
-      Instruments being triggered should all be positional arguments. Non
-      GPIB instruments will have their visa_resource.assert_trigger() method
-      called immediately following the GET command, and a warning will be
-      raised to the user.
-
-      Instrument classes that require additional commands/logic to manage
-      their state models following a group_trigger command are expected to
-      have a "do_after_group_trigger()" class instance
-      method that takes no arguments. Any
-      instrument class with this method will have it called immediately
-      following the GET.
-
-      :Parameters:
-
-          **\*instruments** : instruments.communications.instrument
-              Positional arguments all calorimeter-python instrument objects.
-
-      :Returns:
-
-          float
-              Clock time at do_after_group_trigger() time. Should be very close to GET signal.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:method:: close()
-
-      
-      Close the instrument.
-
-
-
-
-
 
 
 

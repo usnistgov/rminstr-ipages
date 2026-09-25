@@ -37,12 +37,12 @@ Module Contents
        **functionality** : str
            Name of measurement functionality to import.
 
+
+
    :Returns:
 
        type
            Instrument class of given model/functionality.
-
-
 
 
 
@@ -65,6 +65,8 @@ Module Contents
 
 
 
+
+
    :Yields:
 
        namedtuple
@@ -73,8 +75,6 @@ Module Contents
            Field `impl` is the class object of a measurment functionality implementation.
            Field `abc` is the measurement functionality abstraction class object.
            Fiel `statemodel` is the statemodel definition the functionality abstraction uses.
-
-
 
 
 

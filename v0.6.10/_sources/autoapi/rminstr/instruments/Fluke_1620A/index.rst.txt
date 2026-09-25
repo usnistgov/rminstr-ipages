@@ -38,12 +38,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -69,12 +69,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -110,12 +110,12 @@ Package Contents
               downloaded from data record always include both sensors.
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -211,6 +211,8 @@ Package Contents
               For since/until data fetches. Size of chunks (in bytes) to download
               data-record file in. The default is 256.
 
+
+
       :Returns:
 
           dict
@@ -240,8 +242,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -253,12 +253,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -305,12 +305,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Result of an error query on the insturment.
-
-
 
 
 
@@ -333,6 +333,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -345,8 +347,6 @@ Package Contents
 
           InstrumentError
               Error associated with an instrument.
-
-
 
 
 
@@ -373,12 +373,12 @@ Package Contents
           **verbose** : bool, optional
               If True, prints info about parsing. The default is False.
 
+
+
       :Returns:
 
           dict:
               Dictionary of data parsed from the logger.
-
-
 
 
 

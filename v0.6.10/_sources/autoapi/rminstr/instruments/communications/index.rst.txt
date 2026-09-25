@@ -61,12 +61,12 @@ Package Contents
        **visa_resource** : visa.Resources
            The pyvisa resource.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -101,12 +101,12 @@ Package Contents
           **txt** : str
               Text to write.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -134,12 +134,12 @@ Package Contents
               Number of attempts for reading the status bit if there is an error.
               The default is 3.
 
+
+
       :Returns:
 
           str
               The status_byte.
-
-
 
 
 
@@ -162,12 +162,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.read().
-
-
 
 
 
@@ -194,12 +194,12 @@ Package Contents
           **txt** : str
               The text to query.
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.query().
-
-
 
 
 
@@ -226,12 +226,12 @@ Package Contents
           **n** : int
               Number of bytes to read
 
+
+
       :Returns:
 
           str
               Result of self.visa_resource.read_bytes(n)
-
-
 
 
 
@@ -260,12 +260,12 @@ Package Contents
               if None, use the result of time.time().
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -288,12 +288,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -318,12 +318,12 @@ Package Contents
       time.time() - time_zero.
 
 
+
+
       :Returns:
 
           float
               Time relative to self.time_zero
-
-
 
 
 
@@ -346,13 +346,13 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           dict
               Keys: ex. "GPIB address"
               Values: ex. 11
-
-
 
 
 
@@ -379,12 +379,12 @@ Package Contents
       Abstract method.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -411,12 +411,12 @@ Package Contents
       Abstract method.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -447,12 +447,12 @@ Package Contents
            A power of 2: 1, 2, 4, 8, 16, 32, 64, 128
            I.E. the 5th bit would be 2^5 = 32
 
+
+
    :Returns:
 
        True if the bit is 1, False otherwise
            ..
-
-
 
 
 
@@ -571,12 +571,12 @@ Package Contents
        **visa_resource** : visa.Resource
            Pyvisa resource that is the tsp enabled instrument.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -635,12 +635,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           dict
               instrument information.
-
-
 
 
 
@@ -667,6 +667,8 @@ Package Contents
       an error, telling you to check the instrument.
 
 
+
+
       :Returns:
 
           None
@@ -679,8 +681,6 @@ Package Contents
 
           InstrumentError
               Error if the error bit is high.
-
-
 
 
 
@@ -703,12 +703,12 @@ Package Contents
           **bit** : int
               Bit placement you want to check.
 
+
+
       :Returns:
 
           bool
               Returns True if bit is high. False otherwise.
-
-
 
 
 
@@ -731,12 +731,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -766,12 +766,12 @@ Package Contents
           **showGarbage** : bool, optional
               If true, logs information about the method. The default is False.
 
+
+
       :Returns:
 
           bool
               True if busy, False if not.
-
-
 
 
 
@@ -794,6 +794,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -806,8 +808,6 @@ Package Contents
 
           StatusByteError
               Error if the error bit in the status byte is high.
-
-
 
 
 
@@ -830,6 +830,8 @@ Package Contents
           **timeout** : float
               Time to wait before raising an error.
 
+
+
       :Returns:
 
           None.
@@ -849,8 +851,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -862,12 +862,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -890,6 +890,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -902,8 +904,6 @@ Package Contents
 
           Exception
               Error if the SMU shows an error in its events.
-
-
 
 
 
@@ -933,12 +933,12 @@ Package Contents
           **val** : float or int
               The value to assign.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -965,12 +965,12 @@ Package Contents
           **varname** : str
               String of tsp namespace variable.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -997,12 +997,12 @@ Package Contents
           **msg** : str
               String of message type to have it print.
 
+
+
       :Returns:
 
           str
               Message query.
-
-
 
 
 
@@ -1032,6 +1032,8 @@ Package Contents
           **force** : bool, optional
               If true, will by-pass the busy checks. The default is False.
 
+
+
       :Returns:
 
           None.
@@ -1045,8 +1047,6 @@ Package Contents
           BusyError
               If force is False and instrument is busy while trying to be commanded,
               this will be raised.
-
-
 
 
 
@@ -1073,6 +1073,8 @@ Package Contents
               If true, read buffer will deallocate the buffer from the instruments
               memory after the data has been read. The default is True.
 
+
+
       :Returns:
 
           dict
@@ -1088,8 +1090,6 @@ Package Contents
 
           SMUTimeoutError
               If instrument isn't busy, but a timeout occured while trying to download the data.
-
-
 
 
 
@@ -1119,12 +1119,12 @@ Package Contents
               List of files in the project, in order to be loaded onto the tsp
               instrument.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1153,12 +1153,12 @@ Package Contents
        **\*instruments** : instruments.communications.instrument
            List of instruments to perform the post triggering commands on.
 
+
+
    :Returns:
 
        float
            Trigger time, from time.time() at the beginning of this method.
-
-
 
 
 
@@ -1184,12 +1184,12 @@ Package Contents
        **\*instruments**
            List of instruments to perform the external trigger on.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -1230,12 +1230,12 @@ Package Contents
            Resource manager to instantiate interface with. If none provided,
            a manager will be instantiated. The default is None
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -1276,12 +1276,12 @@ Package Contents
           **\*instruments** : instruments.communications.instrument
               Positional arguments all calorimeter-python instrument objects.
 
+
+
       :Returns:
 
           float
               Clock time at do_after_group_trigger() time. Should be very close to GET signal.
-
-
 
 
 

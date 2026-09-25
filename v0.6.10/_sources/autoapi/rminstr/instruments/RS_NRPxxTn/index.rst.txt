@@ -32,12 +32,12 @@ Package Contents
        **visa_resource** : visa.Resources
            The pyvisa resource.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -84,12 +84,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -112,12 +112,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -140,12 +140,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -189,12 +189,12 @@ Package Contents
               take the measurement. 0.1 to
               5.0 or 'auto'/'AUTO'. Default is 'auto'.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -224,12 +224,12 @@ Package Contents
           **trigger_source** : str, optional
               how the instrument will be triggered. The default is "BUS".
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -252,12 +252,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -288,12 +288,12 @@ Package Contents
           **v_column_name** : str, optional
               alias for p_column_name.
 
+
+
       :Returns:
 
           dict
               dictionary with give names as keys.
-
-
 
 
 
@@ -340,12 +340,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Instrument state.
-
-
 
 
 

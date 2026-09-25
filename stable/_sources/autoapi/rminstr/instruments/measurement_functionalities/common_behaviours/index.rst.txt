@@ -26,7 +26,7 @@ Functions
 Module Contents
 ---------------
 
-.. py:function:: log_arguments(name: str, path: str, function: Callable) -> Callable
+.. py:function:: log_arguments(name: str, path: str, function: collections.abc.Callable) -> collections.abc.Callable
 
    
    Make function save keyword arguments to a log file.
@@ -43,12 +43,12 @@ Module Contents
        **function** : Callable
            Function being wrapped.
 
+
+
    :Returns:
 
        Callable
            Wrapped function.
-
-
 
 
 

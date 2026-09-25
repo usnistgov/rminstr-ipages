@@ -1,0 +1,58 @@
+rminstr.utilities.graphics
+==========================
+
+.. py:module:: rminstr.utilities.graphics
+
+.. autoapi-nested-parse::
+
+   Module for storing classes/functions that produce simple graphics.
+
+   ..
+       !! processed by numpydoc !!
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rminstr.utilities.graphics.progressbar
+
+
+Module Contents
+---------------
+
+.. py:function:: progressbar(msg: str, total: int, progress: int)
+
+   
+   Display a progress bar.
+
+   Call at the end of a loops iteration, re-prints on same line.
+
+   :Parameters:
+
+       **msg** : str
+           Message to print out.
+
+       **total** : int
+           Total number of iterations expected. Start at 0.
+
+       **progress** : int
+           Current iteration.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+

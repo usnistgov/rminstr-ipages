@@ -44,12 +44,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -84,12 +84,12 @@ Package Contents
               list of strings, commands to be sent directly to machine.
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -128,12 +128,12 @@ Package Contents
           **other_commands** : list, optional
               List of other command not covered by keyword arguments. Written directly to instrument. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -156,12 +156,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -184,12 +184,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -212,12 +212,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Instruments error message
-
-
 
 
 
@@ -291,12 +291,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -329,12 +329,12 @@ Package Contents
           **\*\*kwargs**
               Optional keyword arguments. These will be sent to the setup function.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -357,12 +357,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -387,12 +387,12 @@ Package Contents
       this method does nothing.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -415,6 +415,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           dict
@@ -422,8 +424,6 @@ Package Contents
               a 1-d array of floats. Each param is a 1d array
               of complex data. Params keys are the parameters passed in setup (e.g.
               a11, b11, etc...).
-
-
 
 
 
@@ -477,6 +477,8 @@ Package Contents
           **IFBW** : bool, optional
               Intermediate frequency bandwidth in Hz. The default is None.
 
+
+
       :Returns:
 
           None.
@@ -496,8 +498,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -509,12 +509,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           **state** : str
               Current state of the instrument.
-
-
 
 
 
@@ -537,12 +537,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -566,6 +566,8 @@ Package Contents
       If there are errors, raise them as Python errors.
 
 
+
+
       :Returns:
 
           None.
@@ -585,8 +587,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -598,12 +598,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Error message
-
-
 
 
 

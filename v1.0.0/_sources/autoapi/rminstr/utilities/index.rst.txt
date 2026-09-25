@@ -1,0 +1,18 @@
+rminstr.utilities
+=================
+
+.. py:module:: rminstr.utilities
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/rminstr/utilities/graphics/index
+   /autoapi/rminstr/utilities/importer/index
+   /autoapi/rminstr/utilities/path/index
+   /autoapi/rminstr/utilities/timing/index
+
+

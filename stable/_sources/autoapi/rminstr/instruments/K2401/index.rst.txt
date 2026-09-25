@@ -47,12 +47,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -112,6 +112,8 @@ Package Contents
           **panel** : str, optional
               Either 'rear' or 'front'. The default is None.
 
+
+
       :Returns:
 
           None.
@@ -124,8 +126,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 
@@ -210,6 +210,8 @@ Package Contents
               than allocated for by buffer_size. The default is 'fill_once'.
               'fill_once' will fill the buffer then stop, 'continuous' will overwrite previous readings.
 
+
+
       :Returns:
 
           None.
@@ -229,8 +231,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -242,12 +242,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -270,12 +270,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -305,13 +305,13 @@ Package Contents
           **meas_start_time** : float, optional
               If provided, will be used as timestamp for time of trigger. The default is None.
 
+
+
       :Returns:
 
           dict
               Dictionary of measurements. Columns are automatically named based on how the
               instrument was initalized.
-
-
 
 
 
@@ -334,12 +334,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           **state** : str
               Current state of the instrument.
-
-
 
 
 
@@ -362,12 +362,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           **errors** : str
               Error message on device
-
-
 
 
 
@@ -392,12 +392,12 @@ Package Contents
       Abstract method.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -420,12 +420,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 

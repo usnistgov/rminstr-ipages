@@ -98,12 +98,12 @@ Package Contents
        **repo_path: str, optional**
            path to the git repository. If none, use default path.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -496,12 +496,12 @@ Package Contents
               argument, the user is responsible for ensuring that these
               timestamps are ordered. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -534,12 +534,12 @@ Package Contents
           **timestamps** : iter
               Timestamps of values.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -576,12 +576,12 @@ Package Contents
               
               The default is False.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -614,12 +614,12 @@ Package Contents
           **timestamps** : float, optional
               Timestamps associated with values.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -642,12 +642,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -689,6 +689,8 @@ Package Contents
               does not interpolate, but rather uses the most recent past value.
               The default is None.
 
+
+
       :Returns:
 
           tuple[DataArray, DataArray]
@@ -708,8 +710,6 @@ Package Contents
           record_empty
               Raised if an index error occurs when self.timestamps[column][0]
               is accessed.
-
-
 
 
 
@@ -737,6 +737,8 @@ Package Contents
           **condition** : Callable[[Index, DataArray, DataArray], bool]
               If True, append data to output.
 
+
+
       :Returns:
 
           tuple[IndexArray, DataArray, DataArray]
@@ -750,8 +752,6 @@ Package Contents
               
               values : dict of numpy array of floats
                   values from column, indexed by column
-
-
 
 
 
@@ -780,17 +780,6 @@ Package Contents
    functionality usefil for time series data.
 
 
-
-
-
-
-
-
-
-
-
-
-
    :Attributes:
 
        **t** : np.ndarray
@@ -799,6 +788,17 @@ Package Contents
 
        **values: str**
            Values of timeseries data.
+
+
+
+
+
+
+
+
+
+
+
 
 
    ..
@@ -866,12 +866,12 @@ Package Contents
            Minimum length of record. If None, set to maxlen.
            The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -992,12 +992,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1020,12 +1020,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           bool
               True if the line was successfully read.
-
-
 
 
 
@@ -1056,12 +1056,12 @@ Package Contents
               either None (returns every column in record) or list of strings of
               columns to return. The default is None.
 
+
+
       :Returns:
 
           dict[str, tuple]
               {column: (timestamp,value)}
-
-
 
 
 
@@ -1153,12 +1153,12 @@ Package Contents
            
            The default is False.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -1318,12 +1318,12 @@ Package Contents
               
               The default is False.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1346,12 +1346,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           float
               current relative time
-
-
 
 
 
@@ -1379,12 +1379,12 @@ Package Contents
               Timestamp of time = 0. If None, use result of time.time().
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1419,12 +1419,12 @@ Package Contents
               
               The default is None
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1480,12 +1480,12 @@ Package Contents
       with key "file_x", where x is the current value of file_counter.
 
 
+
+
       :Returns:
 
           **file_name** : str
               name of next output file.
-
-
 
 
 
@@ -1513,12 +1513,12 @@ Package Contents
               If True, saves to local backup (~/rminstr/self.session_str).
               The default is False.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1541,12 +1541,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           list[Path]
               List of paths expected to be in target directory.
-
-
 
 
 
@@ -1572,12 +1572,12 @@ Package Contents
       will notify users trying to read data with this flag down the road.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1631,12 +1631,12 @@ Package Contents
            delimeter in input files
            The default is ','.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -1796,12 +1796,12 @@ Package Contents
           **data_file_path** : str
               full path to data file
 
+
+
       :Returns:
 
           list[str]
               List of column names.
-
-
 
 
 
@@ -1828,12 +1828,12 @@ Package Contents
           **file_name** : str
               Full path to data
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -1856,12 +1856,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           bool
               True if the line was successfully read.
-
-
 
 
 
@@ -1889,14 +1889,14 @@ Package Contents
        **v** : DataArray
            vector of voltage measurements
 
+
+
    :Returns:
 
        float
            kendall_p: A number between 0 and 1. Small numbers (less than 0.25)
            show a decreasing trend, while large numbers (greater than 0.75)
            show an increasing trend
-
-
 
 
 
@@ -1923,14 +1923,14 @@ Package Contents
        **v** : DataArray
            vector of voltage measurements
 
+
+
    :Returns:
 
        float
            Zscore based on number of "runs" (consecutive points with same trend)
            0 is the expected number of runs in random data, and small numbers mean
            long runs (not random)
-
-
 
 
 
@@ -2015,12 +2015,12 @@ Package Contents
            If None, first check config file. If that fails, assume everything
            is a float.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -2177,12 +2177,12 @@ Package Contents
           **config_files** : str or list(str)
               Path or a list of paths to the config files to load.
 
+
+
       :Returns:
 
           dict
               Dictionary of config files
-
-
 
 
 
@@ -2212,6 +2212,8 @@ Package Contents
           **header** : int, optional
               Number of lines to ignore at top of file. The default is 0.
 
+
+
       :Returns:
 
           None.
@@ -2224,8 +2226,6 @@ Package Contents
 
           ValueError
               If Run settings column is duplicated in config file.
-
-
 
 
 
@@ -2248,12 +2248,12 @@ Package Contents
           **file_name** : str
               Full path to file.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -2283,12 +2283,12 @@ Package Contents
           **output_format** : str, optional
               The format of the file. Options are CSV. The default is CSV.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -2315,12 +2315,12 @@ Package Contents
           **column** : str
               column to return
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -2343,12 +2343,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -2374,12 +2374,12 @@ Package Contents
       available.
 
 
+
+
       :Returns:
 
           bool
               True if complete
-
-
 
 
 

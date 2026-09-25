@@ -1,0 +1,17 @@
+rminstr
+=======
+
+.. py:module:: rminstr
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/rminstr/data_structures/index
+   /autoapi/rminstr/instruments/index
+   /autoapi/rminstr/utilities/index
+
+

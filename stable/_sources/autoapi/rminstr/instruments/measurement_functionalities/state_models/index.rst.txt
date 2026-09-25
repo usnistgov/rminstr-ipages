@@ -33,17 +33,6 @@ Module Contents
 
 
 
-
-
-
-
-
-
-
-
-
-
-
    :Attributes:
 
        **states** : list(str)
@@ -64,6 +53,17 @@ Module Contents
 
        **info_dict** : dict
            Dictionary of information about the instrument.
+
+
+
+
+
+
+
+
+
+
+
 
 
    ..
@@ -159,12 +159,12 @@ Module Contents
           **\*\*kwargs** : dict
               Any keyword arguments the instrument should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -199,12 +199,12 @@ Module Contents
           **\*\*kwargs** : dict
               Any keyword arguments the instrument should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -227,12 +227,12 @@ Module Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -258,17 +258,6 @@ Module Contents
 
 
 
-
-
-
-
-
-
-
-
-
-
-
    :Attributes:
 
        **arm_settings: dict**
@@ -282,6 +271,17 @@ Module Contents
 
        **meas_start_time: float**
            Absolute time used for calculating measurement start times
+
+
+
+
+
+
+
+
+
+
+
 
 
    ..
@@ -322,6 +322,8 @@ Module Contents
               settings for "timeout". If timeout is not in settings,
               default to 2 seconds.
 
+
+
       :Returns:
 
           None.
@@ -334,8 +336,6 @@ Module Contents
 
           InstrumentError
               If timeout occurs waiting for data.
-
-
 
 
 
@@ -365,12 +365,12 @@ Module Contents
           **\*\*kwargs** : dict
               Any keyword arguments the arm function should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -404,12 +404,12 @@ Module Contents
           **\*\*kwargs** : dict
               Any keyword arguments the arm trigger should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -440,12 +440,12 @@ Module Contents
           **\*\*kwargs** : dict
               Any keyword arguments the fetch_data function should have.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -470,12 +470,12 @@ Module Contents
       required for the specific instrument.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 

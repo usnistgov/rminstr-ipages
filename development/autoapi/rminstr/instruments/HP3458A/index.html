@@ -5,17 +5,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rminstr.instruments.HP3458A &#8212; Rocky Mountain Instruments 0.6.6a3.dev19+gaa97ed0 documentation</title>
+    <title>rminstr.instruments.HP3458A &#8212; Rocky Mountain Instruments 0.6.6a3.dev27+gcf983d8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../../_static/documentation_options.js?v=b4e39fc5"></script>
+    <script src="../../../../_static/documentation_options.js?v=d43d30ad"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/sg-tags.js?v=d80f6fa4"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
     <link rel="next" title="rminstr.instruments.HP437B" href="../HP437B/index.html" />
@@ -78,17 +79,237 @@ $(document).ready(function(){
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.HP3458A.Voltmeter" title="rminstr.instruments.HP3458A.Voltmeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Voltmeter</span></code></a></p></td>
-<td><p>Implementation the HP3458A as a Voltmeter.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.HP3458A.Ammeter" title="rminstr.instruments.HP3458A.Ammeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ammeter</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rminstr.instruments.HP3458A.Ammeter" title="rminstr.instruments.HP3458A.Ammeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Ammeter</span></code></a></p></td>
 <td><p>Implementation the HP3458A as an Ammeter.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rminstr.instruments.HP3458A.Voltmeter" title="rminstr.instruments.HP3458A.Voltmeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Voltmeter</span></code></a></p></td>
+<td><p>Implementation the HP3458A as a Voltmeter.</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.HP3458A.</span></span><span class="sig-name descname"><span class="pre">Ammeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../communications/index.html#rminstr.instruments.communications.Instrument" title="rminstr.instruments.communications.Instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.communications.Instrument</span></code></a>, <a class="reference internal" href="../measurement_functionalities/index.html#rminstr.instruments.measurement_functionalities.ABC_Ammeter" title="rminstr.instruments.measurement_functionalities.ABC_Ammeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.ABC_Ammeter</span></code></a></p>
+<p>Implementation the HP3458A as an Ammeter.</p>
+<p>Initialize the Ammeter class instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>visa_address</strong><span class="classifier">str</span></dt><dd><p>Visa address of instrument.</p>
+</dd>
+<dt><strong>resource_manager</strong><span class="classifier">visa.ResourceManager, optional</span></dt><dd><p>Pyvisa resource manager for opening visa resources. The default is None.</p>
+</dd>
+<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>If provided, will log at the specified path. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.default_setup_settings">
+<span class="sig-name descname"><span class="pre">default_setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.default_setup_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.initial_setup">
+<span class="sig-name descname"><span class="pre">initial_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.initial_setup" title="Link to this definition">¶</a></dt>
+<dd><p>Initiliaze the ammeter’s local settings to a safe state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Boolean to turn on the front display or not. The default is False.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.setup">
+<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nplc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_readings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_autozero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Change measurement settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>nplc</strong><span class="classifier">float, optional</span></dt><dd><p>Number of power line cycles to integrate over. The default is None.</p>
+</dd>
+<dt><strong>i_range</strong><span class="classifier">float, optional</span></dt><dd><p>Current measurement range. The default is None.</p>
+</dd>
+<dt><strong>num_readings</strong><span class="classifier">int, optional</span></dt><dd><p>Number of readings to take. The default is None.</p>
+</dd>
+<dt><strong>timer</strong><span class="classifier">float, optional</span></dt><dd><p>Timer between measurements. Needs to be long enough or there will be an error. The default is None.</p>
+</dd>
+<dt><strong>measure_autozero</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether or not to auto zero each measurement. If False it will auto zero once at the beginning.
+The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.arm">
+<span class="sig-name descname"><span class="pre">arm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'BUS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.arm" title="Link to this definition">¶</a></dt>
+<dd><p>Arm the machine.</p>
+<p>Currently just sets the machine to auto trigger, hold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>delay</strong><span class="classifier">float, optioanl</span></dt><dd><p>Delay between receiving a trigger command and taking the measurement. The default is 0.</p>
+</dd>
+<dt><strong>trigger_mode: str, optional</strong></dt><dd><p>BUS for triggering via GPIB, EXT for external triggering. The default is ‘BUS’.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.trigger">
+<span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Send trigger signal over GPIB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>instruments</strong><span class="classifier">list</span></dt><dd><p>List of positional arguments of instruments to trigger from the HP,
+if applicable.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.fetch_data">
+<span class="sig-name descname"><span class="pre">fetch_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'timestamp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Current</span> <span class="pre">(A)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.fetch_data" title="Link to this definition">¶</a></dt>
+<dd><p>Fetch data from the machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>time_column_name</strong><span class="classifier">str, optional</span></dt><dd><p>Name you want for timestamps key. The default is “timestamp”.</p>
+</dd>
+<dt><strong>i_column_name</strong><span class="classifier">str, optional</span></dt><dd><p>Name you want for current key. The default is “Current (A)”.</p>
+</dd>
+<dt><strong>meas_start_time</strong><span class="classifier">float, optional</span></dt><dd><p>If provided, will be used as timestamp for time of trigger. The default is None.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>Measurement data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.query_state">
+<span class="sig-name descname"><span class="pre">query_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.query_state" title="Link to this definition">¶</a></dt>
+<dd><p>Check the state of the machine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Current state of the instrument.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.special_read">
+<span class="sig-name descname"><span class="pre">special_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.special_read" title="Link to this definition">¶</a></dt>
+<dd><p>Read from HP3458A output buffer.</p>
+<p>The HP3458A is unusual, and pyvisa’s read() does not work.
+read_bytes works, but requires extra work to parse correctly.
+This funtion does that work for you.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Whatever happens to be on the HP3458A’s output buffer.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.raise_errors">
+<span class="sig-name descname"><span class="pre">raise_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.raise_errors" title="Link to this definition">¶</a></dt>
+<dd><p>If the HP3458A is in an error state, raise the errors as python errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.get_errors">
+<span class="sig-name descname"><span class="pre">get_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.get_errors" title="Link to this definition">¶</a></dt>
+<dd><p>Get any errors present on the instrument as a string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>Error string if one is there.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.do_after_group_trigger">
+<span class="sig-name descname"><span class="pre">do_after_group_trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.do_after_group_trigger" title="Link to this definition">¶</a></dt>
+<dd><p>Run post-trigger commands after an external trigger event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>None.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Voltmeter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.HP3458A.</span></span><span class="sig-name descname"><span class="pre">Voltmeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Voltmeter" title="Link to this definition">¶</a></dt>
@@ -318,226 +539,6 @@ This funtion does that work for you.</p>
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rminstr.instruments.HP3458A.</span></span><span class="sig-name descname"><span class="pre">Ammeter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">visa_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resource_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvisa.ResourceManager</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../communications/index.html#rminstr.instruments.communications.Instrument" title="rminstr.instruments.communications.Instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.communications.Instrument</span></code></a>, <a class="reference internal" href="../measurement_functionalities/index.html#rminstr.instruments.measurement_functionalities.ABC_Ammeter" title="rminstr.instruments.measurement_functionalities.ABC_Ammeter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rminstr.instruments.measurement_functionalities.ABC_Ammeter</span></code></a></p>
-<p>Implementation the HP3458A as an Ammeter.</p>
-<p>Initialize the Ammeter class instance.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>visa_address</strong><span class="classifier">str</span></dt><dd><p>Visa address of instrument.</p>
-</dd>
-<dt><strong>resource_manager</strong><span class="classifier">visa.ResourceManager, optional</span></dt><dd><p>Pyvisa resource manager for opening visa resources. The default is None.</p>
-</dd>
-<dt><strong>log_path</strong><span class="classifier">str, optional</span></dt><dd><p>If provided, will log at the specified path. The default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.default_setup_settings">
-<span class="sig-name descname"><span class="pre">default_setup_settings</span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.default_setup_settings" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.initial_setup">
-<span class="sig-name descname"><span class="pre">initial_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.initial_setup" title="Link to this definition">¶</a></dt>
-<dd><p>Initiliaze the ammeter’s local settings to a safe state.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>display</strong><span class="classifier">bool, optional</span></dt><dd><p>Boolean to turn on the front display or not. The default is False.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.setup">
-<span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nplc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_range</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_readings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">measure_autozero</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.setup" title="Link to this definition">¶</a></dt>
-<dd><p>Change measurement settings.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>nplc</strong><span class="classifier">float, optional</span></dt><dd><p>Number of power line cycles to integrate over. The default is None.</p>
-</dd>
-<dt><strong>i_range</strong><span class="classifier">float, optional</span></dt><dd><p>Current measurement range. The default is None.</p>
-</dd>
-<dt><strong>num_readings</strong><span class="classifier">int, optional</span></dt><dd><p>Number of readings to take. The default is None.</p>
-</dd>
-<dt><strong>timer</strong><span class="classifier">float, optional</span></dt><dd><p>Timer between measurements. Needs to be long enough or there will be an error. The default is None.</p>
-</dd>
-<dt><strong>measure_autozero</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether or not to auto zero each measurement. If False it will auto zero once at the beginning.
-The default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.arm">
-<span class="sig-name descname"><span class="pre">arm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trigger_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'BUS'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.arm" title="Link to this definition">¶</a></dt>
-<dd><p>Arm the machine.</p>
-<p>Currently just sets the machine to auto trigger, hold.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>delay</strong><span class="classifier">float, optioanl</span></dt><dd><p>Delay between receiving a trigger command and taking the measurement. The default is 0.</p>
-</dd>
-<dt><strong>trigger_mode: str, optional</strong></dt><dd><p>BUS for triggering via GPIB, EXT for external triggering. The default is ‘BUS’.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.trigger">
-<span class="sig-name descname"><span class="pre">trigger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">instruments</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.trigger" title="Link to this definition">¶</a></dt>
-<dd><p>Send trigger signal over GPIB.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>instruments</strong><span class="classifier">list</span></dt><dd><p>List of positional arguments of instruments to trigger from the HP,
-if applicable.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.fetch_data">
-<span class="sig-name descname"><span class="pre">fetch_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'timestamp'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_column_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Current</span> <span class="pre">(A)'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meas_start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.fetch_data" title="Link to this definition">¶</a></dt>
-<dd><p>Fetch data from the machine.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>time_column_name</strong><span class="classifier">str, optional</span></dt><dd><p>Name you want for timestamps key. The default is “timestamp”.</p>
-</dd>
-<dt><strong>i_column_name</strong><span class="classifier">str, optional</span></dt><dd><p>Name you want for current key. The default is “Current (A)”.</p>
-</dd>
-<dt><strong>meas_start_time</strong><span class="classifier">float, optional</span></dt><dd><p>If provided, will be used as timestamp for time of trigger. The default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict</dt><dd><p>Measurement data.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.query_state">
-<span class="sig-name descname"><span class="pre">query_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.query_state" title="Link to this definition">¶</a></dt>
-<dd><p>Check the state of the machine.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>str</dt><dd><p>Current state of the instrument.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.special_read">
-<span class="sig-name descname"><span class="pre">special_read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.special_read" title="Link to this definition">¶</a></dt>
-<dd><p>Read from HP3458A output buffer.</p>
-<p>The HP3458A is unusual, and pyvisa’s read() does not work.
-read_bytes works, but requires extra work to parse correctly.
-This funtion does that work for you.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>str</dt><dd><p>Whatever happens to be on the HP3458A’s output buffer.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.raise_errors">
-<span class="sig-name descname"><span class="pre">raise_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.raise_errors" title="Link to this definition">¶</a></dt>
-<dd><p>If the HP3458A is in an error state, raise the errors as python errors.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>InstrumentError</dt><dd><p>Instrument error if the instrument has errors or is in an error state.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.get_errors">
-<span class="sig-name descname"><span class="pre">get_errors</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.get_errors" title="Link to this definition">¶</a></dt>
-<dd><p>Get any errors present on the instrument as a string.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>str</dt><dd><p>Error string if one is there.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rminstr.instruments.HP3458A.Ammeter.do_after_group_trigger">
-<span class="sig-name descname"><span class="pre">do_after_group_trigger</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rminstr.instruments.HP3458A.Ammeter.do_after_group_trigger" title="Link to this definition">¶</a></dt>
-<dd><p>Run post-trigger commands after an external trigger event.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -587,6 +588,7 @@ This funtion does that work for you.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../../v0.6.10/index.html">v0.6.10</a></li>
+  <li><a href="../../../../../v1.0.0/index.html">v1.0.0</a></li>
   <li><a href="index.html">development</a></li>
   <li><a href="../../../../../stable/index.html">stable</a></li>
 </ul>
@@ -599,7 +601,7 @@ This funtion does that work for you.</p>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.7</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
       
       |

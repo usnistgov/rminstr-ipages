@@ -37,12 +37,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -75,12 +75,12 @@ Package Contents
           **other_commands** : list, optional
               list of strings, commands to be sent directly to machine. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -131,12 +131,12 @@ Package Contents
           **other_commands** : list, optional
               List of other command not covered by keyword arguments. Written directly to instrument. The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -159,12 +159,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -187,12 +187,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -215,12 +215,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -243,12 +243,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -271,6 +271,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -290,8 +292,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -303,12 +303,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Instruments error message.
-
-
 
 
 

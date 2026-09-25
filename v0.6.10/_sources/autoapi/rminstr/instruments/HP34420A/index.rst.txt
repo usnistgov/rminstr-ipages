@@ -37,12 +37,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -68,12 +68,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -114,12 +114,12 @@ Package Contents
               the null operation on the NVM. The default is None. NVM will
               subtract the NULL value from each measurement.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -149,12 +149,12 @@ Package Contents
           **trigger_source: str, optional**
               'BUS' or 'EXT', source of triggering. The default is 'BUS'.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -177,12 +177,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -215,12 +215,12 @@ Package Contents
           **meas_start_time** : float, optional
               If provided, will be used as timestamp for time of trigger. The default is None.
 
+
+
       :Returns:
 
           dict
               Measurement data.
-
-
 
 
 
@@ -243,12 +243,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -271,12 +271,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Error string if one is there.
-
-
 
 
 
@@ -299,6 +299,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -311,8 +313,6 @@ Package Contents
 
           InstrumentError
               Instrument error if the instrument has errors or is in an error state.
-
-
 
 
 

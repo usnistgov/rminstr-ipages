@@ -62,12 +62,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -93,12 +93,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -169,12 +169,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -205,6 +205,8 @@ Package Contents
           **source_level** : float, optional
               Voltage level to output. The default is None.
 
+
+
       :Returns:
 
           None.
@@ -217,8 +219,6 @@ Package Contents
 
           Exception
               On bad inputs.
-
-
 
 
 

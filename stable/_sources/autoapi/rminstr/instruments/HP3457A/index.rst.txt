@@ -37,12 +37,12 @@ Package Contents
        **log_path** : str, optional
            If provided, will log at the specified path. The default is None.
 
+
+
    :Returns:
 
        None.
            ..
-
-
 
 
 
@@ -72,12 +72,12 @@ Package Contents
           **display** : bool, optional
               Boolean to turn on the front display or not. The default is False.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -117,12 +117,12 @@ Package Contents
               Whether or not to auto zero each measurement. If False it will auto zero once at the beginning.
               The default is None.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -153,12 +153,12 @@ Package Contents
           **trigger_mode: str, optional**
               BUS for triggering via GPIB, EXT for external triggering. The default is 'BUS'.
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -182,12 +182,12 @@ Package Contents
       Currently just starts a measurement.
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
@@ -220,12 +220,12 @@ Package Contents
           **meas_start_time** : float, optional
               If provided, will be used as timestamp for time of trigger. The default is None.
 
+
+
       :Returns:
 
           dict
               Measurement data.
-
-
 
 
 
@@ -248,12 +248,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Current state of the instrument.
-
-
 
 
 
@@ -279,12 +279,12 @@ Package Contents
       This funtion does that work for you.
 
 
+
+
       :Returns:
 
           str
               Whatever happens to be on the HP3457A's output buffer.
-
-
 
 
 
@@ -307,6 +307,8 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
@@ -326,8 +328,6 @@ Package Contents
 
 
 
-
-
       ..
           !! processed by numpydoc !!
 
@@ -339,12 +339,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           str
               Error string if one is there.
-
-
 
 
 
@@ -367,12 +367,12 @@ Package Contents
 
 
 
+
+
       :Returns:
 
           None.
               ..
-
-
 
 
 
